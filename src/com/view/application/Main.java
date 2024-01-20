@@ -21,11 +21,11 @@ public class Main extends javax.swing.JFrame {
     private int previlege;
     
     private dashboardForm home;
-    private orderForm form1;
-    private importForm form2;
-    private productForm form3;
-    private customerForm form4;
-    private staffForm form5;
+    private orderForm ordForm;
+    private importForm impForm;
+    private productForm proForm;
+    private customerForm cusForm;
+    private staffForm staForm;
 
 //    public Login_account getAccount() {
 //        return account;
@@ -41,8 +41,8 @@ public class Main extends javax.swing.JFrame {
     }
     
     public void reset(){
-//        form2.setPrevilege(previlege);
-//        form3.setPrevilege(previlege);
+//        impForm.setPrevilege(previlege);
+//        proForm.setPrevilege(previlege);
 //        header2.setAccount(account);
 //        header2.UpdateAccountName();
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -53,24 +53,23 @@ public class Main extends javax.swing.JFrame {
                         home = new dashboardForm();
                         setForm(home);
                     } else if (index == 1) {
-                        form1 = new orderForm();
-                        setForm(form1);
+                        ordForm = new orderForm();
+                        setForm(ordForm);
 
                     } else if (index == 2) {
-                        form2 = new importForm();
-                        setForm(form2);
-
+                        impForm = new importForm();
+                        setForm(impForm);
                     } else if (index == 3) {
-                        form3 = new productForm();
-                        setForm(form3);
+                        proForm = new productForm();
+                        setForm(proForm);
 
                     } else if (index == 4){
-                        form4 = new customerForm();
-                        setForm(form4);
+                        cusForm = new customerForm();
+                        setForm(cusForm);
 
                     } else if (index == 5){
-                        form5 = new staffForm();
-                        setForm(form5);
+                        staForm = new staffForm();
+                        setForm(staForm);
 
                     }
                 }
@@ -85,14 +84,14 @@ public class Main extends javax.swing.JFrame {
         setBackground(new Color(0, 0, 0, 0));
         
         home = new dashboardForm();
-        form1 = new orderForm();
-        form2 = new importForm();
-        form3 = new productForm();
-        form4 = new customerForm();
-        form5 = new staffForm();
+        ordForm = new orderForm();
+        impForm = new importForm();
+        proForm = new productForm();
+        cusForm = new customerForm();
+        staForm = new staffForm();
         this.setMenuPrevilege(3);
         menu.initMoving(Main.this);
-        
+        reset();
     }
     
 
