@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 public class InvoiceItem {
     private int invoiceItemId;
     private int invoiceId;
-    private int productId;
+//    private int productId;
     private int importId;
     private BigDecimal unitPrice;
     private int quantity;
@@ -13,10 +13,10 @@ public class InvoiceItem {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public InvoiceItem(int invoiceItemId, int invoiceId, int productId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
+    public InvoiceItem(int invoiceItemId, int invoiceId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
         this.invoiceItemId = invoiceItemId;
         this.invoiceId = invoiceId;
-        this.productId = productId;
+//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -25,18 +25,20 @@ public class InvoiceItem {
         //this.createdAt = createdAt;
         //this.updatedAt = updatedAt;
     }
-    public InvoiceItem( int invoiceId, int productId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
+    // Add here 
+
+    public InvoiceItem( int invoiceId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
         this.invoiceId = invoiceId;
-        this.productId = productId;
+//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.profit = profit;
     }
-    public InvoiceItem( int invoiceId, int productId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit,int invoiceItemId) {
+    public InvoiceItem( int invoiceId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit,int invoiceItemId) {
         this.invoiceId = invoiceId;
-        this.productId = productId;
+//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -44,8 +46,8 @@ public class InvoiceItem {
         this.profit = profit;
         this.invoiceItemId = invoiceItemId;
     }
-    public InvoiceItem(int productId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
-        this.productId = productId;
+    public InvoiceItem( int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
+//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -62,9 +64,9 @@ public class InvoiceItem {
         return invoiceId;
     }
 
-    public int getProductId() {
-        return productId;
-    }
+//    public int getProductId() {
+//        return productId;
+//    }
 
     public int getImportId() {
         return importId;
@@ -102,9 +104,9 @@ public class InvoiceItem {
         this.invoiceId = invoiceId;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+//    public void setProductId(int productId) {
+//        this.productId = productId;
+//    }
 
     public void setImportId(int importId) {
         this.importId = importId;

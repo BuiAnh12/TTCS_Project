@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.controller;
 
 import com.model.InvoiceItem;
@@ -30,15 +27,15 @@ public class controller_InvoiceItem {
                 while(re.next()){
                     int invoiceitemId=re.getInt("InvoiceItemId");
                     int invoiceid=re.getInt("InvoiceId");               
-                    int productid=re.getInt("ProductId");
+//                    int productid=re.getInt("ProductId");
                     int importid=re.getInt("ImportId");
                     BigDecimal unitprice=re.getBigDecimal("UnitPrice");
                     int quanity=re.getInt("Quantity");
                     BigDecimal totalprice=re.getBigDecimal("TotalPrice");
-                    BigDecimal profit=re.getBigDecimal("Profit");
+                    BigDecimal profit=re.getBigDecimal("Profit");   
                      java.sql.Date createAt=re.getDate("CreatedAt");            
                     java.sql.Date updateAt=re.getDate("UpdatedAt");
-                     InvoiceItem invoiceitem=new InvoiceItem(invoiceitemId, invoiceid, productid, importid, unitprice, quanity, totalprice, profit);
+                     InvoiceItem invoiceitem=new InvoiceItem(invoiceitemId, invoiceid, importid, unitprice, quanity, totalprice, profit);
                     invoiceItems.add(invoiceitem);
                 }
                
@@ -50,11 +47,11 @@ public class controller_InvoiceItem {
       
        public void addInvoiceItem(InvoiceItem invoiceitem) throws SQLException{
         Connection cnn=ConnectionDB.getConnection();
-        String query="INSERT INTO Invoice_Items (InvoiceId, ProductId, ImportId, UnitPrice, Quantity, TotalPrice, Profit) VALUES(?,?,?,?,?,?,?)";
+        String query="INSERT INTO Invoice_Items (InvoiceId, ImportId, UnitPrice, Quantity, TotalPrice, Profit) VALUES(?,?,?,?,?,?)";
         try{
             PreparedStatement pre=cnn.prepareStatement(query);
             pre.setInt(1, invoiceitem.getInvoiceId());                    
-            pre.setInt(2, invoiceitem.getProductId());  
+//            pre.setInt(2, invoiceitem.getProductId());  
             pre.setInt(3, invoiceitem.getImportId());
             pre.setBigDecimal(4, invoiceitem.getUnitPrice());
             pre.setInt(5, invoiceitem.getQuantity());
@@ -77,11 +74,11 @@ public class controller_InvoiceItem {
      public void editInvoiceItem(InvoiceItem invoiceitem) throws SQLException{
         Connection cnn=ConnectionDB.getConnection();
 
-        String query="UPDATE Invoice_Items SET  InvoiceId=?, ProductId=?, ImportId=?, UnitPrice=?, Quantity=?, TotalPrice=?, Profit=? WHERE InvoiceItemId =?";
+        String query="UPDATE Invoice_Items SET  InvoiceId=?, ImportId=?, UnitPrice=?, Quantity=?, TotalPrice=?, Profit=? WHERE InvoiceItemId =?";
         try{
            PreparedStatement pre=cnn.prepareStatement(query);
             pre.setInt(1, invoiceitem.getInvoiceId());                    
-            pre.setInt(2, invoiceitem.getProductId());  
+//            pre.setInt(2, invoiceitem.getProductId());  
             pre.setInt(3, invoiceitem.getImportId());
             pre.setBigDecimal(4, invoiceitem.getUnitPrice());
             pre.setInt(5, invoiceitem.getQuantity());
