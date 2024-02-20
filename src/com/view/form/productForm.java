@@ -1,6 +1,8 @@
 
 package com.view.form;
 
+import com.controller.controller_Product;
+import com.model.Product;
 import com.view.modal.product.insertModal;
 import com.view.modal.product.updateModal;
 import com.view.swing.ScrollBar;
@@ -15,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
 public class productForm extends javax.swing.JPanel {
     private insertModal im = null;
     private updateModal um = null;
+    private List<Product> productList;
+    private int status = 1;
     public productForm() {
         initComponents();
         
@@ -31,6 +36,23 @@ public class productForm extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        refreshTable();
+    }
+    
+    public void refreshTable(){
+        try {
+            controller_Product controller = new controller_Product();
+            String searchTxt = this.txtSearch3.getText();
+            productList=controller.getAllproduct(status,searchTxt);
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for(Product tmp:productList){
+            table.addRow(new Object[]{tmp.getProductName(),tmp.getManufacturer(),tmp.getDescription(),tmp.getCategory()});
+        }
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
    

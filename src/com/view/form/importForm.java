@@ -1,5 +1,7 @@
 package com.view.form;
 
+import com.controller.controller_Import;
+import com.model.Import;
 import com.view.modal.imports.insertModal;
 import com.view.modal.imports.updateModal;
 import com.view.model.StatusType;
@@ -45,7 +47,8 @@ import javax.swing.JScrollPane;
 public class importForm extends javax.swing.JPanel {
     private insertModal im = null;
     private updateModal um = null;
-    
+    private List<Import> import_list;
+    private int status = 1;
     public void updateDetail(){
         
     }
@@ -94,6 +97,34 @@ public class importForm extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        refreshTable();
+        
+        
+        
+        
+    }
+    
+    public void refreshTable(){
+        try {
+            controller_Import controller = new controller_Import();
+            String searchTxt = this.txtSearch.getText();
+            import_list=controller.getAllImports(status,searchTxt);
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+//        CellStatus cellStatus=new CellStatus(StatusType.IN_STOCK);
+        for(Import tmp:import_list){
+            StatusType statusType = null;
+            if(tmp.getAvailableQuantity()!=0){
+                statusType=statusType.IN_STOCK;
+            }else if(tmp.getAvailableQuantity()==0){
+                statusType=statusType.OUT_OF_STOCK;
+            }
+            table.addRow(new Object[]{tmp.getProductName(),tmp.getImportQuantity(),tmp.getAvailableQuantity(),statusType});
+        }
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

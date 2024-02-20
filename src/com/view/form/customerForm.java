@@ -1,6 +1,8 @@
 
 package com.view.form;
 
+import com.model.Customer;
+import com.controller.controller_Customer;
 import com.view.modal.customer.insertModal;
 import com.view.modal.customer.updateModal;
 import com.view.swing.ScrollBar;
@@ -18,6 +20,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 
 
@@ -29,8 +32,8 @@ import javax.swing.JTextField;
 public class customerForm extends javax.swing.JPanel {
     private insertModal insertNewCustomer = null;
     private updateModal updateCustomer = null;
-    
-    
+    private List<Customer> customerList = new ArrayList<Customer>();
+    private int status = 1;
     public customerForm() {
         initComponents();
    
@@ -40,9 +43,26 @@ public class customerForm extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        refreshTable();
         
     }
-
+    
+    public void refreshTable(){
+        try {
+            controller_Customer controller = new controller_Customer();
+            String searchTxt = this.txtSearch3.getText();
+            customerList=controller.getAllCustomers(status,searchTxt);
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        for(Customer tmp:customerList){
+            table.addRow(new Object[]{tmp.getCustomerName(),tmp.getEmail(),tmp.getAddress(),decimalFormat.format(tmp.getTotalAmount()) +" VNĐ" });
+        }
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

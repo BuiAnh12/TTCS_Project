@@ -1,6 +1,8 @@
 
 package com.view.form;
 
+import com.controller.controller_Staff;
+import com.model.Staff;
 import com.view.modal.staff.insertModal;
 import com.view.modal.staff.updateModal;
 import com.view.swing.ScrollBar;
@@ -28,12 +30,26 @@ import javax.swing.table.DefaultTableModel;
 public class staffForm extends javax.swing.JPanel {
     private insertModal im = null;
     private updateModal um = null;
+    private List<Staff> staffList;
+    private int status = 1;
     public void updateDetail(){
         
     }
     
     public void refreshTable(){
-        
+        try {
+            controller_Staff controller = new controller_Staff();
+            String searchTxt = this.txtSearch.getText();
+            staffList=controller.getAllStaff(status,searchTxt);
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for(Staff tmp:staffList){
+            table.addRow(new Object[]{tmp.getName(),tmp.getEmail(),tmp.getAddress(),tmp.getPosition()});
+        }
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     
@@ -69,6 +85,8 @@ public class staffForm extends javax.swing.JPanel {
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshTable();
     }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
