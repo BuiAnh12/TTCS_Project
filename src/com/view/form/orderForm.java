@@ -2,6 +2,8 @@
 package com.view.form;
 
 
+import com.controller.controller_Invoice;
+import com.model.Invoice;
 import com.view.modal.order.insertModal;
 import com.view.modal.order.updateModal;
 import com.view.swing.ScrollBar;
@@ -51,7 +53,8 @@ import javax.swing.JFrame;
 public class orderForm extends javax.swing.JPanel {
     private insertModal im = null;
     private updateModal um = null;
- 
+    private List<Invoice> invoiceList;
+    private int status = 1;
     public orderForm() {
         initComponents();
         
@@ -61,8 +64,24 @@ public class orderForm extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+        refreshtable();
     }
-
+    public void refreshtable(){
+        try {
+            controller_Invoice controller = new controller_Invoice();
+            String searchTxt = this.txtSearch.getText();
+            invoiceList=controller.getAllInvoices(status,searchTxt);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+          DefaultTableModel model =(DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+       for (Invoice invoice : invoiceList) {
+            table.addRow(new Object[]{invoice.getCustomerName(), invoice.getStaffName(), invoice.getPurchaseDate(), decimalFormat.format(invoice.getTotalAmount()) +" VNĐ" });
+        }
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
