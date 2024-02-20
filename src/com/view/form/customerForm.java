@@ -1,6 +1,8 @@
 
 package com.view.form;
 
+import com.view.modal.customer.insertModal;
+import com.view.modal.customer.updateModal;
 import com.view.swing.ScrollBar;
 import java.awt.Color;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
@@ -23,8 +27,8 @@ import javax.swing.JTextField;
 
 
 public class customerForm extends javax.swing.JPanel {
-
-    
+    private insertModal insertNewCustomer = null;
+    private updateModal updateCustomer = null;
     
     
     public customerForm() {
@@ -648,7 +652,18 @@ public class customerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-   
+        if (insertNewCustomer==null) {
+            insertNewCustomer = new insertModal();
+            insertNewCustomer.setVisible(true);
+            insertNewCustomer.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        insertNewCustomer = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            insertNewCustomer.toFront();
+        }
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -661,7 +676,18 @@ public class customerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-  
+        if (updateCustomer==null) {
+            updateCustomer = new updateModal();
+            updateCustomer.setVisible(true);
+            updateCustomer.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        updateCustomer = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            updateCustomer.toFront();
+        }
      
     }//GEN-LAST:event_updateBtnActionPerformed
 

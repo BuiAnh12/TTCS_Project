@@ -1,12 +1,16 @@
 
 package com.view.form;
 
+import com.view.modal.staff.insertModal;
+import com.view.modal.staff.updateModal;
 import com.view.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +26,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class staffForm extends javax.swing.JPanel {
-    
+    private insertModal im = null;
+    private updateModal um = null;
     public void updateDetail(){
         
     }
@@ -772,11 +777,33 @@ public class staffForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-
+        if (um==null) {
+            um = new updateModal();
+            um.setVisible(true);
+            um.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        um = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            um.toFront();
+        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-        
+        if (im==null) {
+            im = new insertModal();
+            im.setVisible(true);
+            im.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            im.toFront();
+        }
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed

@@ -1,5 +1,7 @@
 package com.view.form;
 
+import com.view.modal.imports.insertModal;
+import com.view.modal.imports.updateModal;
 import com.view.model.StatusType;
 import com.view.swing.CellStatus;
 import com.view.swing.ScrollBar;
@@ -9,6 +11,8 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.security.Timestamp;
 import java.sql.SQLException;
@@ -39,7 +43,8 @@ import java.util.Date;
 import javax.swing.JScrollPane;
 
 public class importForm extends javax.swing.JPanel {
-    
+    private insertModal im = null;
+    private updateModal um = null;
     
     public void updateDetail(){
         
@@ -919,7 +924,18 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        
+        if (um==null) {
+            um = new updateModal();
+            um.setVisible(true);
+            um.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        um = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            um.toFront();
+        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -947,7 +963,18 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-       
+       if (im==null) {
+            im = new insertModal();
+            im.setVisible(true);
+            im.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            im.toFront();
+        }
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed

@@ -2,6 +2,8 @@
 package com.view.form;
 
 
+import com.view.modal.order.insertModal;
+import com.view.modal.order.updateModal;
 import com.view.swing.ScrollBar;
 import java.awt.Color;
 import java.awt.Component;
@@ -14,6 +16,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -45,7 +49,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JFrame;
 
 public class orderForm extends javax.swing.JPanel {
-
+    private insertModal im = null;
+    private updateModal um = null;
  
     public orderForm() {
         initComponents();
@@ -602,7 +607,18 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-
+        if (im==null) {
+            im = new insertModal();
+            im.setVisible(true);
+            im.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            im.toFront();
+        }
     
     }//GEN-LAST:event_insertBtnActionPerformed
 
@@ -632,7 +648,18 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-  
+        if (um==null) {
+            um = new updateModal();
+            um.setVisible(true);
+            um.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        um = null; //// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            um.toFront();
+        }
     }//GEN-LAST:event_updateBtnActionPerformed
 
 
