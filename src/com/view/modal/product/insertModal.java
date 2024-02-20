@@ -4,6 +4,8 @@
  */
 package com.view.modal.product;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author AnTran
@@ -15,6 +17,7 @@ public class insertModal extends javax.swing.JFrame {
      */
     public insertModal() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

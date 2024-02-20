@@ -5,6 +5,7 @@
 package com.view.modal.product;
 
 import com.view.modal.customer.*;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,6 +18,7 @@ public class updateModal extends javax.swing.JFrame {
      */
     public updateModal() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

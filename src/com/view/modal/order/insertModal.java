@@ -4,6 +4,8 @@
  */
 package com.view.modal.order;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author buivu
@@ -15,6 +17,7 @@ public class insertModal extends javax.swing.JFrame {
      */
     public insertModal() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
