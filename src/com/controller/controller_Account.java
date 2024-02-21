@@ -8,17 +8,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class controller_Account { 
+public class controller_Account {
+    private Staff account;
+
+    public Staff getAccount() {
+        return account;
+    }
+
+    public void setAccount(Staff account) {
+        this.account = account;
+    }
     
-//    private Login_account account;
-//
-//    public Login_account getAccount() {
-//        return account;
-//    }
     
-    
-    
-    private boolean checkCredentials(String username, String password) throws SQLException {
+        private boolean checkCredentials(String username, String password) throws SQLException {
         Connection cnn = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -54,11 +56,10 @@ public class controller_Account {
         return isValid;
     }
     
-    public int login(String username, String password) throws SQLException{
+    public Staff login(String username, String password) throws SQLException{
         Connection cnn = null;
         PreparedStatement preparedStatement = null;
         ResultSet re = null;
-        int userId = -1;
         
         if (this.checkCredentials(username, password)){
             try {
@@ -71,15 +72,13 @@ public class controller_Account {
                 re = preparedStatement.executeQuery();
                 if (re.next()) {
                     int id=re.getInt("StaffId");
-                    String name=re.getString("Name");
+                    String staffsname=re.getString("Name");
                     int age=re.getInt("Age");
                     String email=re.getString("Email");
                     String address=re.getString("Address");
                     int accountPrevilege = re.getInt("AccountPrevilege");
-                    Staff staff =new Staff(id, name, age, email, address,username, password, accountPrevilege);
-//                    account = new Login_account();
-//                    account.setUserAccount(staff);
-                    userId = id;
+                    this.account =new Staff(id, staffsname, age, email, address,username, password, accountPrevilege);
+
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -98,12 +97,12 @@ public class controller_Account {
 
 
         }
-        return userId;
+        return account;
     }
         
-//    public void logout(){
-//        account.freeUserAccount();
-//    }
+    public void logout(){
+        account = null;
+    }
     
     
 }

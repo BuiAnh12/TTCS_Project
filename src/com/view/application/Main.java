@@ -1,6 +1,7 @@
 package com.view.application;
 
 //import com.model.Login_account;
+import com.model.Staff;
 import com.view.event.EventMenuSelected;
 import com.view.form.customerForm;
 import com.view.form.dashboardForm;
@@ -18,7 +19,7 @@ import javax.swing.SwingUtilities;
 
 public class Main extends javax.swing.JFrame {
     
-    private int previlege;
+    private Staff account;
     
     private dashboardForm home;
     private orderForm ordForm;
@@ -27,54 +28,85 @@ public class Main extends javax.swing.JFrame {
     private customerForm cusForm;
     private staffForm staForm;
 
-//    public Login_account getAccount() {
-//        return account;
-//    }
+    public Staff getAccount() {
+        return account;
+    }
 
-//    public void setAccount(Login_account account) {
-//        this.account = account;
-//    }
+    public void setAccount(Staff account) {
+        this.account = account;
+    }
     
-    public void setMenuPrevilege(int previlege){
-        this.menu.setPrevilege(previlege);
+    
+    
+    public void setMenuPrevilege(){
+        this.menu.setPrevilege(this.account.getPrevilege());
         this.menu.reset();
     }
     
     public void reset(){
-//        impForm.setPrevilege(previlege);
-//        proForm.setPrevilege(previlege);
-//        header2.setAccount(account);
-//        header2.UpdateAccountName();
+        
+        header2.setAccount(account);
+        header2.UpdateAccountName();
         menu.addEventMenuSelected(new EventMenuSelected() {
                 @Override
                 public void selected(int index) {
+                    if (account.getPrevilege() == 3){
+                        if (index == 0) {
+                            home = new dashboardForm();
+                            setForm(home);
+                        } else if (index == 1) {
+                            ordForm = new orderForm();
+                            setForm(ordForm);
 
-                    if (index == 0) {
-                        home = new dashboardForm();
-                        setForm(home);
-                    } else if (index == 1) {
-                        ordForm = new orderForm();
-                        setForm(ordForm);
+                        } else if (index == 2) {
+                            impForm = new importForm();
+                            setForm(impForm);
+                        } else if (index == 3) {
+                            proForm = new productForm();
+                            setForm(proForm);
 
-                    } else if (index == 2) {
-                        impForm = new importForm();
-                        setForm(impForm);
-                    } else if (index == 3) {
-                        proForm = new productForm();
-                        setForm(proForm);
+                        } else if (index == 4){
+                            cusForm = new customerForm();
+                            setForm(cusForm);
 
-                    } else if (index == 4){
-                        cusForm = new customerForm();
-                        setForm(cusForm);
+                        } else if (index == 5){
+                            staForm = new staffForm();
+                            setForm(staForm);
 
-                    } else if (index == 5){
-                        staForm = new staffForm();
-                        setForm(staForm);
-
+                        }
                     }
+                    else if (account.getPrevilege() == 2){
+                        if (index == 0) {
+                            proForm = new productForm();
+                            setForm(proForm);
+                        } else if (index == 1) {
+                            impForm = new importForm();
+                            setForm(impForm);
+                        }
+                    } else if (account.getPrevilege() == 1){
+                       
+                        
+                        if (index == 0) {
+                            ordForm = new orderForm();
+                            setForm(ordForm);
+                        } else if (index == 1) {
+                            proForm = new productForm();
+                            setForm(proForm);
+                            proForm.setPrevilege(account.getPrevilege());
+                        } else if (index == 2) {
+                            impForm = new importForm();
+                            setForm(impForm);
+                            impForm.setPrevilege(account.getPrevilege());
+                        } else if (index == 3) {
+                            cusForm = new customerForm();
+                            setForm(cusForm);
+                        }
+                        
+                    }
+                    
                 }
             });
-            setForm(new dashboardForm());
+            
         
     }
     
@@ -89,9 +121,9 @@ public class Main extends javax.swing.JFrame {
         proForm = new productForm();
         cusForm = new customerForm();
         staForm = new staffForm();
-        this.setMenuPrevilege(3);
+//        this.setMenuPrevilege(3);
         menu.initMoving(Main.this);
-        reset();
+        
     }
     
 

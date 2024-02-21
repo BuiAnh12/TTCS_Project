@@ -49,8 +49,14 @@ public class importForm extends javax.swing.JPanel {
     private updateModal um = null;
     private List<Import> import_list;
     private int status = 1;
-    public void updateDetail(){
-        
+    private int previlege;
+
+    public int getPrevilege() {
+        return previlege;
+    }
+
+    public void setPrevilege(int previlege) {
+        this.previlege = previlege;
     }
     
     
@@ -955,6 +961,12 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        if(this.previlege == 1){
+            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if (um==null) {
             um = new updateModal();
             um.setVisible(true);
@@ -995,6 +1007,11 @@ public class importForm extends javax.swing.JPanel {
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
        if (im==null) {
+           if(this.previlege == 1){
+                JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+                "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             im = new insertModal();
             im.setVisible(true);
             im.addWindowListener(new WindowAdapter() {
@@ -1009,7 +1026,11 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        
+        if(this.previlege == 1){
+            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
     }//GEN-LAST:event_deleteBtnActionPerformed
 

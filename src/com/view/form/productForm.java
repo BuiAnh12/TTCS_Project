@@ -27,6 +27,18 @@ public class productForm extends javax.swing.JPanel {
     private updateModal um = null;
     private List<Product> productList;
     private int status = 1;
+    private int previlege;
+
+    public int getPrevilege() {
+        return previlege;
+    }
+
+    public void setPrevilege(int previlege) {
+        this.previlege = previlege;
+    }
+    
+    
+    
     public productForm() {
         initComponents();
         
@@ -500,6 +512,12 @@ public class productForm extends javax.swing.JPanel {
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
+        if(this.previlege == 1){
+            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if (im==null) {
             im = new insertModal();
             im.setVisible(true);
@@ -524,10 +542,19 @@ public class productForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-       
+        if(this.previlege == 1){
+            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        if(this.previlege == 1){
+            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         if (um==null) {
             um = new updateModal();
             um.setVisible(true);
