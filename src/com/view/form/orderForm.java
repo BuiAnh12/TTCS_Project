@@ -4,6 +4,7 @@ package com.view.form;
 
 import com.controller.controller_Invoice;
 import com.model.Invoice;
+import com.model.Staff;
 import com.view.modal.order.insertModal;
 import com.view.modal.order.updateModal;
 import com.view.swing.ScrollBar;
@@ -55,6 +56,16 @@ public class orderForm extends javax.swing.JPanel {
     private updateModal um = null;
     private List<Invoice> invoiceList;
     private int status = 1;
+    private Staff user;
+
+    public Staff getUser() {
+        return user;
+    }
+
+    public void setUser(Staff user) {
+        this.user = user;
+    }
+    
     public orderForm() {
         initComponents();
         
@@ -629,6 +640,7 @@ public class orderForm extends javax.swing.JPanel {
         if (im==null) {
             im = new insertModal();
             im.setVisible(true);
+            im.setUser(user);
             im.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
@@ -668,7 +680,9 @@ public class orderForm extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (um==null) {
-            um = new updateModal();
+            int selectedIndex = table.getSelectedRow();
+            
+            um = new updateModal(invoiceList.get(selectedIndex));
             um.setVisible(true);
             um.addWindowListener(new WindowAdapter() {
                     @Override

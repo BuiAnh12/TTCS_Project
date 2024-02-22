@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 
 public class Menu extends javax.swing.JPanel {
     
-    private int prevelege = 3;
+    private int prevelege;
 
     private EventMenuSelected event;
 

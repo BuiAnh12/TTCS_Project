@@ -208,11 +208,8 @@ public class controller_Invoice {
                 int importQuanity=re.getInt("ImportQuantity");
                 int avaiableQuanity=re.getInt("AvailableQuantity");
                 BigDecimal unitprice=re.getBigDecimal("UnitPrice");
-                BigDecimal sellprice=re.getBigDecimal("SellPrice");
                 int id=re.getInt("ImportId");
-                
-
-                Import importss =new Import(id, productid, manuDate, exDate, imDate, importQuanity, avaiableQuanity,unitprice, sellprice);
+                Import importss =new Import(id, productid, manuDate, exDate, imDate, importQuanity, avaiableQuanity,unitprice);
                 listImport.add(importss);
                 
             }

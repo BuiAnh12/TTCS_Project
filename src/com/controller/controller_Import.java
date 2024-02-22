@@ -77,7 +77,6 @@ public class controller_Import {
                 pre.setInt(5, importss.getImportQuantity());
                 pre.setInt(6, importss.getAvailableQuantity());
                 pre.setBigDecimal(7, importss.getUnitPrice());
-                pre.setBigDecimal(8, importss.getSellPrice());
                 int tmp=pre.executeUpdate();
             }
             catch (Exception ex) {
@@ -90,7 +89,7 @@ public class controller_Import {
 
         String query="UPDATE Imports  SET ProductId =?, ManufacturingDate =?, ExpiryDate =?,"
                 + "ImportDate = ?, ImportQuantity = ?, AvailableQuantity = ?,"
-                + "UnitPrice = ?, SellPrice = ? WHERE ImportId = ?";
+                + "UnitPrice = ? WHERE ImportId = ?";
         try{
             PreparedStatement pre=cnn.prepareStatement(query);
              pre.setInt(1, importss.getProductId());       
@@ -100,8 +99,7 @@ public class controller_Import {
              pre.setInt(5, importss.getImportQuantity());
              pre.setInt(6, importss.getAvailableQuantity());
              pre.setBigDecimal(7, importss.getUnitPrice());
-             pre.setBigDecimal(8, importss.getSellPrice());
-             pre.setInt(9, importss.getImportId());
+             pre.setInt(8, importss.getImportId());
              int tmp=pre.executeUpdate();
         }
         catch (Exception ex) {

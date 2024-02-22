@@ -3,6 +3,7 @@ package com.controller;
 import com.model.Product;
 
 import com.control.db.ConnectionDB;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,37 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 public class controller_Product {
+    public List<Product> getAllAvailableProduct() throws SQLException {
+        List<Product> products =new ArrayList<>();
+         Connection cnn=ConnectionDB.getConnection();
+         String query="select distinct p.*, sum(i.AvailableQuantity) as totalAmount" +
+                " from Products p" +
+                " join Imports i on p.ProductId = i.ProductId" +
+                " where i.AvailableQuantity > 0" +
+                " group by p.ProductId, p.Category, p.Description, p.Manufacturer, p.ProductName, p.Flag,p.SellPrice;";
+         try{
+                products.clear();
+                PreparedStatement statement = cnn.prepareStatement(query);
+                ResultSet re = statement.executeQuery();
+                
+                while(re.next()){
+                    String productName=re.getString("ProductName");
+                    String manufacturer=re.getString("Manufacturer");
+                    String description=re.getString("Description");
+                    String category=re.getString("Category");
+                    int id=re.getInt("ProductId");
+                    int quantity = re.getInt("totalAmount");
+                    BigDecimal sellPrice = re.getBigDecimal("SellPrice");
+                    Product product =new Product(id, productName, manufacturer, description, category, quantity,sellPrice);
+                    products.add(product);
+                }
+               
+         }   
+         catch(Exception ex){
+             ex.printStackTrace();
+         }   
+        return products;
+    }
     
      public List<Product> getAllproduct(int status,String name) throws SQLException{
          List<Product> products =new ArrayList<>();
@@ -126,4 +158,6 @@ public class controller_Product {
         }
         return products;
     }
+      
+    
 }

@@ -52,11 +52,11 @@ public class controller_InvoiceItem {
             PreparedStatement pre=cnn.prepareStatement(query);
             pre.setInt(1, invoiceitem.getInvoiceId());                    
 //            pre.setInt(2, invoiceitem.getProductId());  
-            pre.setInt(3, invoiceitem.getImportId());
-            pre.setBigDecimal(4, invoiceitem.getUnitPrice());
-            pre.setInt(5, invoiceitem.getQuantity());
-            pre.setBigDecimal(6, invoiceitem.getTotalPrice());
-            pre.setBigDecimal(7, invoiceitem.getProfit());
+            pre.setInt(2, invoiceitem.getImportId());
+            pre.setBigDecimal(3, invoiceitem.getUnitPrice());
+            pre.setInt(4, invoiceitem.getQuantity());
+            pre.setBigDecimal(5, invoiceitem.getTotalPrice());
+            pre.setBigDecimal(6, invoiceitem.getProfit());
             
             //Date createAt = Date.from(invoiceitem.getCreatedAt().atZone(ZoneId.systemDefault()).toInstant());
             //pre.setDate(8, (java.sql.Date) createAt);

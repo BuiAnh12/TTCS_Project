@@ -7,6 +7,7 @@ public class InvoiceItem {
 //    private int productId;
     private int importId;
     private BigDecimal unitPrice;
+    private BigDecimal sellPrice;
     private int quantity;
     private BigDecimal totalPrice;
     private BigDecimal profit;
@@ -54,6 +55,22 @@ public class InvoiceItem {
         this.totalPrice = totalPrice;
         this.profit = profit;
     }
+
+    public InvoiceItem(int invoiceId, BigDecimal sellPrice, int quantity) {
+        this.invoiceId = invoiceId;
+        this.sellPrice = sellPrice;
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+    
+    
     
 
     public int getInvoiceItemId() {

@@ -2,6 +2,8 @@ package com.view.component;
 
 //import com.model.Login_account;
 //import com.view.main.newLogin;
+import com.model.Staff;
+import com.view.login.Login;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,19 +11,19 @@ import java.awt.RenderingHints;
 
 public class Header extends javax.swing.JPanel {
     
-//    private Login_account account;
+    private Staff account;
 
-//    public Login_account getAccount() {
-//        return account;
-//    }
-//
-//    public void setAccount(Login_account account) {
-//        this.account = account;
-//    }
+    public Staff getAccount() {
+        return account;
+    }
+
+    public void setAccount(Staff account) {
+        this.account = account;
+    }
     
-//    public void UpdateAccountName(){
-//        this.jLabel3.setText(this.account.getUserAccount().getName());
-//    }
+    public void UpdateAccountName(){
+        this.jLabel3.setText(this.account.getName());
+    }
 
     public Header() {
         initComponents();
@@ -142,21 +144,18 @@ public class Header extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        // TODO add your handling code here:
-//        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
-//
-//        // Check if the parent is a JFrame and close it
-//        if (window instanceof java.awt.Frame) {
-//            java.awt.Frame frame = (java.awt.Frame) window;
-//            frame.dispose(); // Close the frame
-//        }
-//        newLogin log = new newLogin();
-//        log.setVisible(true);
+
+        java.awt.Window window = javax.swing.SwingUtilities.getWindowAncestor(this);
+
+        // Check if the parent is a JFrame and close it
+        if (window instanceof java.awt.Frame) {
+            java.awt.Frame frame = (java.awt.Frame) window;
+            frame.dispose(); // Close the frame
+        }
+        Login log = new Login();
+        log.setVisible(true);
     }//GEN-LAST:event_LogoutActionPerformed
 
-//    private void searchText1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchText1ActionPerformed
-//        performSearch();
-//    }// GEN-LAST:event_searchText1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel2MouseClicked
         System.out.println("Button click ");

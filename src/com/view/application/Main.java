@@ -57,6 +57,7 @@ public class Main extends javax.swing.JFrame {
                         } else if (index == 1) {
                             ordForm = new orderForm();
                             setForm(ordForm);
+                            ordForm.setUser(account);
 
                         } else if (index == 2) {
                             impForm = new importForm();
@@ -89,6 +90,7 @@ public class Main extends javax.swing.JFrame {
                         if (index == 0) {
                             ordForm = new orderForm();
                             setForm(ordForm);
+                            ordForm.setUser(account);
                         } else if (index == 1) {
                             proForm = new productForm();
                             setForm(proForm);

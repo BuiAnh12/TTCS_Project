@@ -1,11 +1,38 @@
 package com.model;
 
+import java.math.BigDecimal;
+
 public class Product {
     private int productId;
     private String productName;
     private String manufacturer;
     private String description;
     private String category;
+    private int availability;
+    private BigDecimal sellPrice;
+
+    public Product(int productId, String productName, String manufacturer, String description, String category, int availability, BigDecimal sellPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.manufacturer = manufacturer;
+        this.description = description;
+        this.category = category;
+        this.availability = availability;
+        this.sellPrice = sellPrice;
+    }
+    
+    
+    
+    public Product(int productId, String productName, String manufacturer, String description, String category, int availability) {
+        this.productId = productId;
+        this.productName = productName;
+        this.manufacturer = manufacturer;
+        this.description = description;
+        this.category = category;
+        this.availability = availability;
+    }
+    
+    
 
     public Product(int productId, String productName, String manufacturer, String description, String category) {
         this.productId = productId;
@@ -14,6 +41,26 @@ public class Product {
         this.description = description;
         this.category = category;
     }
+
+    public BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    
+    
+    public int getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
+    
+    
 
     public int getProductId() {
         return productId;

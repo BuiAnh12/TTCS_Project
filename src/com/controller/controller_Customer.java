@@ -69,7 +69,37 @@ public class controller_Customer {
         }
                 return customers;
     }
-    //
+    
+      public Customer getCustomer(int id) throws SQLException{
+         Connection cnn=ConnectionDB.getConnection();
+         String query="SELECT * FROM CUSTOMERS";
+         
+         try{
+
+                PreparedStatement statement = cnn.prepareStatement(query);
+                ResultSet re = statement.executeQuery();
+                
+                while(re.next()){
+                    int cusomterId=re.getInt("CustomerId");  
+                    String customername=re.getString("CustomerName");
+                    String email=re.getString("Email");
+                    String address=re.getString("Address");
+                    int totalAmount = re.getInt("TotalAmount");
+                    Customer customer =new Customer(cusomterId, customername, email, address,totalAmount);
+                    return customer;
+                }
+              
+         }   
+         catch (SQLException ex) {
+         ex.printStackTrace();
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+        }
+        return null;
+                
+    }
+      
     public void addCustomer(Customer customer) throws SQLException{
         Connection cnn=ConnectionDB.getConnection();
         String query="INSERT INTO Customers (CustomerName, Email, Address) VALUES(?,?,?)";
