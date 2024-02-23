@@ -2,7 +2,7 @@
 package com.controller;
 
 import com.control.db.ConnectionDB;
-import com.model.ListChart;
+import com.model.List_Chart;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -71,8 +71,8 @@ public class controller_Dashboard {
         return monthNames[month-1];
     }
     
-    public List<ListChart> getMonthlyrevenue() throws SQLException{
-        List<ListChart> chart =new ArrayList<>();
+    public List<List_Chart> getMonthlyrevenue() throws SQLException{
+        List<List_Chart> chart =new ArrayList<>();
         
         int[] myArray = new int[12];
         for (int i = 0; i < 12; i++) {
@@ -80,7 +80,7 @@ public class controller_Dashboard {
         }
          
          for(int i=0;i<12;i++){   
-             ListChart basic=new  ListChart(convertToMonthName(myArray[i]),BigDecimal.ZERO);
+             List_Chart basic=new  List_Chart(convertToMonthName(myArray[i]),BigDecimal.ZERO);
              chart.add(i, basic);
          }
          
@@ -92,7 +92,7 @@ public class controller_Dashboard {
                 while(re.next()){
                       String month=convertToMonthName(re.getInt("Month"));
                       BigDecimal total=re.getBigDecimal("Total");
-                      ListChart tmp=new ListChart(month, total);
+                      List_Chart tmp=new List_Chart(month, total);
                       chart.set(re.getInt("Month")-1, tmp);
                 }
               
