@@ -1,6 +1,7 @@
 
 package com.view.form;
 
+import com.controller.controller_Dashboard;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,12 +17,45 @@ import com.view.swing.ScrollBar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 
 public class dashboardForm extends javax.swing.JPanel {
-
- 
+    
+    private Form_chart formchart;
+    
+    public void resetChart() throws SQLException{
+            this.formchart.dispose();
+            this.formchart = new Form_chart();
+            this.formchart.refreshGraph();
+        }
+    
     public dashboardForm() {
         initComponents();
+        controller_Dashboard controller_dashDashboard =new controller_Dashboard();
+        List<BigDecimal>money=controller_dashDashboard.getRevenue();
+        
+        try {
+            formchart=new Form_chart();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+                DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/stock.png")), "Quanity",String.valueOf(controller_dashDashboard.getSoldQuanity())));
+                Object moneyValue = money.get(2);
+                card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/3.png")), "Profit", "0"));
+//                card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/3.png")), "Profit","0"," "));
+                if (moneyValue instanceof Number) {
+                    card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/3.png")), "Profit", String.valueOf(decimalFormat.format((Number) moneyValue)) + " VNĐ"));
+                } 
+                card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/Customer1.png")), "Customer", String.valueOf(controller_dashDashboard.getTotalCustomer())));
+            //  add row table
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        Chart_panel.add(formchart.getContentPane());
+        setVisible(true);
+        
     }
 
 
@@ -65,16 +99,16 @@ public class dashboardForm extends javax.swing.JPanel {
         );
         Chart_panelLayout.setVerticalGroup(
             Chart_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Chart_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
@@ -84,30 +118,26 @@ public class dashboardForm extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Chart_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
