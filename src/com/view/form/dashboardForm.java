@@ -16,6 +16,8 @@ import com.view.model.StatusType;
 import com.view.swing.ScrollBar;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
@@ -23,10 +25,12 @@ public class dashboardForm extends javax.swing.JPanel {
     
     private Form_chart formchart;
     
-    public void resetChart() throws SQLException{
-            this.formchart.dispose();
-            this.formchart = new Form_chart();
-            this.formchart.refreshGraph();
+    public void resetChart(int index) throws SQLException{
+            this.Chart_panel.removeAll();
+            this.Chart_panel.revalidate();
+            this.Chart_panel.repaint();
+            this.Chart_panel.add(new Form_chart(index).getContentPane());
+            
         }
     
     public dashboardForm() {
@@ -35,10 +39,39 @@ public class dashboardForm extends javax.swing.JPanel {
         List<BigDecimal>money=controller_dashDashboard.getRevenue();
         
         try {
-            formchart=new Form_chart();
+            formchart=new Form_chart(1);
+            resetChart(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        sortComboBox.addActionListener(new ActionListener() {
+            @Override
+            
+            public void actionPerformed(ActionEvent e) {
+                // Lấy giá trị được chọn khi có sự kiện thay đổi
+                String selectedValue = sortComboBox.getSelectedItem().toString(); 
+                
+                if (selectedValue.equals("Year")){
+                   
+                    try {
+                        resetChart(0);
+                        System.out.println("0");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                else if(selectedValue.equals("Month")){
+                    
+                    try {
+                        resetChart(1);
+                        System.out.println(1);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+  
+            }
+        });
         try {
                 DecimalFormat decimalFormat = new DecimalFormat("#,###");
                 card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/stock.png")), "Quanity",String.valueOf(controller_dashDashboard.getSoldQuanity())));
@@ -69,6 +102,7 @@ public class dashboardForm extends javax.swing.JPanel {
         card2 = new com.view.component.Card();
         card3 = new com.view.component.Card();
         Chart_panel = new javax.swing.JPanel();
+        sortComboBox = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
@@ -102,22 +136,39 @@ public class dashboardForm extends javax.swing.JPanel {
             .addGap(0, 392, Short.MAX_VALUE)
         );
 
+        sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
+        sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Month", "Year" }));
+        sortComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Chart_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Chart_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE))))
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sortComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Chart_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(130, Short.MAX_VALUE))
@@ -141,6 +192,10 @@ public class dashboardForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
+
+    }//GEN-LAST:event_sortComboBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Chart_panel;
     private com.view.component.Card card1;
@@ -148,5 +203,6 @@ public class dashboardForm extends javax.swing.JPanel {
     private com.view.component.Card card3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLayeredPane panel;
+    private javax.swing.JComboBox<String> sortComboBox;
     // End of variables declaration//GEN-END:variables
 }

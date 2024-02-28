@@ -2,6 +2,7 @@
 package com.view.form;
 
 import com.controller.controller_Dashboard;
+import com.model.ListChartYear;
 import com.model.List_Chart;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -30,8 +31,9 @@ import org.jfree.chart.renderer.category.StandardBarPainter;
 
 
 public class Form_chart extends javax.swing.JFrame {
-
-    private CategoryDataset createDataset() throws SQLException {
+    
+    
+    private CategoryDataset createDatasetMonth() throws SQLException {
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         controller_Dashboard dashboard=new controller_Dashboard();
@@ -44,21 +46,36 @@ public class Form_chart extends javax.swing.JFrame {
         return dataset;
     }
     
-    public void refreshGraph() throws SQLException{
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    private CategoryDataset createDatasetYear() throws SQLException {
+         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         controller_Dashboard dashboard=new controller_Dashboard();
-        List<List_Chart>listchart=new ArrayList<>();
-        listchart=dashboard.getMonthlyrevenue();
-        for(int i=0;i<listchart.size();i++){
-            dataset.addValue(listchart.get(i).getIncome(),"Income Line",listchart.get(i).getMonth());
+        List<ListChartYear> lischChartYears=new ArrayList<>();
+        lischChartYears=dashboard.getYearRevenue();
+        for(int i=0;i<lischChartYears.size();i++){
+            dataset.addValue(lischChartYears.get(i).getIncome(), "Income Line",lischChartYears.get(i).getYear());
         }
         
-        JFreeChart chart = ChartFactory.createLineChart(
+        return dataset;
+    }
+    
+    public void refreshGraph(int index) throws SQLException{      
+        JFreeChart chart=null;
+        if(index==0){
+              chart = ChartFactory.createLineChart(
+                "Year Revenue", // Tiêu đề
+                "Year", // Label trục X
+                "Income(VNĐ)", // Label trục Y
+                createDatasetYear()
+        );
+        }else{
+              chart = ChartFactory.createLineChart(
                 "Monthly Revenue", // Tiêu đề
                 "Month", // Label trục X
                 "Income(VNĐ)", // Label trục Y
-                dataset
+                createDatasetMonth()
         );
+        }
+        
         chart.getTitle().setPaint(Color.WHITE);
         //Màu nền của line chart 
         chart.setBackgroundPaint(Color.decode("#696969"));
@@ -92,51 +109,10 @@ public class Form_chart extends javax.swing.JFrame {
         setContentPane(chartPanel);
         
     }
-    public Form_chart() throws SQLException {
+    
+    public Form_chart(int index ) throws SQLException {
        initComponents();
-        // Tạo dữ liệu mẫu
-        CategoryDataset dataset = createDataset();
-
-        // Tạo biểu đồ đường
-        JFreeChart chart = ChartFactory.createLineChart(
-                "Monthly Revenue", // Tiêu đề
-                "Month", // Label trục X
-                "Income(VNĐ)", // Label trục Y
-                dataset
-        );
-        
-        chart.getTitle().setPaint(Color.WHITE);
-        //Màu nền của line chart 
-        chart.setBackgroundPaint(Color.decode("#696969"));
-        //Set màu nền của Linechart 
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
-        // Màu sắc nền linechart 
-        plot.setBackgroundPaint(Color.decode("#5f9ea0"));
-        // Tùy chỉnh màu sắc của đường trong biểu đồ  
-        plot.getRenderer().setSeriesPaint(0, Color.WHITE);  
-        // Màu sắc đường lưới 
-         plot.setDomainGridlinePaint(Color.BLUE); // Màu sắc đường lưới trục đứng
-        plot.setRangeGridlinePaint(Color.BLUE); // Màu sắc đường lưới trục ngang 
-        
-        //
-        CategoryAxis xAxis = plot.getDomainAxis();
-        NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
-        xAxis.setLabelPaint(Color.GREEN); // Màu sắc của "Month"
-        yAxis.setLabelPaint(Color.WHITE);  // Màu sắc của "Income(VNĐ)"
-        xAxis.setTickLabelPaint(Color.GREEN); // Màu sắc của label cột tháng
-        yAxis.setTickLabelPaint(Color.decode("#f0ffff")); // Màu sắc của label cột doanh thu 
-        
-        // Assuming you are working with a CategoryPlot
-        CategoryPlot categoryPlot = (CategoryPlot) chart.getPlot();
-        // Set the line thickness for the renderer in a CategoryPlot
-        CategoryItemRenderer renderer = categoryPlot.getRenderer();
-        renderer.setSeriesStroke(0, new BasicStroke(3.0f));
-
-        // Hiển thị biểu đồ trong JFrame
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(1200, 600));
-        setContentPane(chartPanel);
-        
+       refreshGraph(index );     
     }
 
     @SuppressWarnings("unchecked")
@@ -179,7 +155,7 @@ public class Form_chart extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Form_chart().setVisible(true);
+                    new Form_chart(1).setVisible(true);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
