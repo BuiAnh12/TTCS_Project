@@ -133,26 +133,26 @@ public class controller_Invoice {
     }
 
 
-      public void editInvoice(Invoice invoice) throws SQLException{
-        Connection cnn=ConnectionDB.getConnection();
+    public void editInvoice(Invoice invoice) throws SQLException {
+        String query = "UPDATE Invoices SET CustomerId=?, StaffId=?, PurchaseDate=? WHERE InvoiceId=?";
 
-        String query="UPDATE Invoices SET  CustomerId =?,StaffId =?,PurchaseDate =? WHERE InvoiceId =?";
-        try{
-            PreparedStatement pre=cnn.prepareStatement(query);
+        try (Connection cnn = ConnectionDB.getConnection();
+             PreparedStatement pre = cnn.prepareStatement(query)) {
+
             pre.setInt(1, invoice.getCustomerId());
             pre.setInt(2, invoice.getStaffId());
-            pre.setDate(3, (java.sql.Date) invoice.getPurchaseDate());
-            //pre.setString(4,invoice.getCustomerName());
-           // pre.setString(5,invoice.getStaffName());
-           // pre.setInt(6,invoice.getTotalAmount());
-            pre.setInt(4,invoice.getInvoiceId());
+            pre.setDate(3, new java.sql.Date(invoice.getPurchaseDate().getTime())); 
+            pre.setInt(4, invoice.getInvoiceId());
 
             int re = pre.executeUpdate();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println(re);
+            // Consider handling the update result if necessary
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Log the exception or handle it appropriately
+            throw ex; // Re-throw the exception if necessary
         }
     }
+
       
       
 

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.view.modal.order;
 
 import com.controller.controller_Customer;
@@ -9,18 +5,29 @@ import com.controller.controller_Import;
 import com.controller.controller_Invoice;
 import com.controller.controller_InvoiceItem;
 import com.controller.controller_Product;
+import com.controller.controller_cartElement;
 import com.model.CartElement;
 import com.model.Customer;
 import com.model.DetailCustomer;
+import com.model.Import;
 import com.model.Invoice;
+import com.model.InvoiceItem;
 import com.model.Product;
 import com.model.Staff;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 
 public class updateModal extends javax.swing.JFrame {
@@ -28,7 +35,7 @@ public class updateModal extends javax.swing.JFrame {
     private List<Product> productList;
     private List<Customer> customerList;
     private List<CartElement> cartList = new ArrayList<CartElement>();
-    
+    private BigDecimal totalPrice;
     private Staff user;
     private Invoice currentInvoice;
     private controller_Product product_controller = new controller_Product();
@@ -37,6 +44,17 @@ public class updateModal extends javax.swing.JFrame {
     private controller_Import controller_import = new controller_Import();
     private controller_Invoice controller_invoice = new controller_Invoice();
     private controller_Customer controller_customer = new controller_Customer();
+    private controller_cartElement controller_cart = new controller_cartElement();
+
+    public Staff getUser() {
+        return user;
+    }
+
+    public void setUser(Staff user) {
+        this.user = user;
+    }
+    
+    
     
     public updateModal(Invoice selectedInvoice) {
         initComponents();
@@ -52,8 +70,49 @@ public class updateModal extends javax.swing.JFrame {
         fillCustomerData();
         fillProductData();
         showInfo(selectedInvoice);
+        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        model.addTableModelListener(new TableModelListener() {
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE && e.getColumn() == 1 && model.getRowCount() > 0) {
+                    int index = table.getSelectedRow();
+                    Product product = productList.get(cartList.get(index).getIndex());
+                    Integer newQuantity = Integer.parseInt((String)model.getValueAt(index, 1));
+                    int available = product.getAvailability();
+                    int increasingAmount = newQuantity - cartList.get(index).getQuantity();
+                    if (index != -1 ){
+                        if (available >= increasingAmount){
+                            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                            product.setAvailability(product.getAvailability() - increasingAmount);
+                            cartList.get(index).setQuantity(newQuantity);
+                            combProductActionPerformed(null);
+                            BigDecimal previousTotal = cartList.get(index).getTotalPrice();
+                            cartList.get(index).setTotalPrice(cartList.get(index).getSellPrice().multiply(BigDecimal.valueOf(newQuantity)));
+                            totalPrice = totalPrice.add(previousTotal.negate()).add(cartList.get(index).getTotalPrice());
+                            txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
+                        }
+                        else{
+                        JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                        model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                        return;                        }
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Please select items you want to changes!",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                        return;                    
+                    }
+
+                    
+                }
+                
+            }
+        });
+        
         this.combProductActionPerformed(null);
         this.combCustomerActionPerformed(null);
+        this.currentInvoice = selectedInvoice;
+        
         
     }
     
@@ -74,12 +133,27 @@ public class updateModal extends javax.swing.JFrame {
     }
     
     void showInfo(Invoice selectedInvoice){
+        this.totalPrice = new BigDecimal(0);
         this.combCustomer.setSelectedItem(selectedInvoice.getCustomerName());
         Date purchaseDate = selectedInvoice.getPurchaseDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = dateFormat.format(purchaseDate);
         this.txtDate.setText(formattedDate);
-        
+        try{
+            cartList = controller_cart.getAllCartElement(selectedInvoice.getInvoiceId());
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        for (CartElement cart : this.cartList) {
+            table.addRow(new Object[]{cart.getProductName(), cart.getQuantity(), decimalFormat.format(cart.getSellPrice()) + " VNĐ", decimalFormat.format(cart.getTotalPrice()) + " VNĐ" });
+            table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+            totalPrice = totalPrice.add(cart.getTotalPrice()); // Accumulate total price correctly
+            this.combProduct.setSelectedItem(cart.getProductName());
+            cart.setIndex(this.combProduct.getSelectedIndex());
+        }
+        this.txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
         
     }
 
@@ -342,6 +416,11 @@ public class updateModal extends javax.swing.JFrame {
 
         txtCancel.setForeground(new java.awt.Color(255, 255, 255));
         txtCancel.setText("Cancel");
+        txtCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCancelActionPerformed(evt);
+            }
+        });
 
         jPanel12.setBackground(new java.awt.Color(22, 23, 23));
 
@@ -352,7 +431,20 @@ public class updateModal extends javax.swing.JFrame {
             new String [] {
                 "Product Name", "Quantity", "Unit Price", "Price"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tableMouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -499,6 +591,11 @@ public class updateModal extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Quantity");
 
+        txtQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtQuantityFocusLost(evt);
+            }
+        });
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantityActionPerformed(evt);
@@ -563,9 +660,19 @@ public class updateModal extends javax.swing.JFrame {
 
         btnInsert.setForeground(new java.awt.Color(255, 255, 255));
         btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -681,8 +788,131 @@ public class updateModal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
-        // TODO add your handling code here:
+        int invoiceId = currentInvoice.getInvoiceId();
+        int customerIndex = this.combCustomer.getSelectedIndex();
+        Customer customer = customerList.get(customerIndex);
+        Date date = new Date();
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String dateString = this.txtDate.getText(); 
+            date = dateFormat.parse(dateString);
+
+        }catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        
+        try{
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            currentInvoice = new Invoice(invoiceId ,customer.getCustomerId(),user.getStaffId(),sqlDate);
+            controller_invoice.editInvoice(currentInvoice);
+            for (CartElement cart: cartList ){
+                if (cart.getInvoiceItemId() == -1){ // if it is a new Items
+                    int quantity = cart.getQuantity();
+                    InvoiceItem tmp = new InvoiceItem(invoiceId, cart.getSellPrice(),0); // setCartQuanitity deffault = 0
+                    List<Import> ListImport = controller_invoice.findAvailableId(cart.getProductId(), cart.getQuantity());
+                    for (Import imp : ListImport){
+                        tmp.setImportId(imp.getImportId());
+                        tmp.setProfit(cart.getTotalPrice().add(imp.getUnitPrice().negate().multiply(BigDecimal.valueOf(quantity))));
+                        tmp.setUnitPrice(imp.getUnitPrice());
+                        tmp.setTotalPrice(cart.getTotalPrice());
+                        if (imp.getAvailableQuantity() <= quantity){
+                            tmp.setQuantity(tmp.getQuantity() + imp.getAvailableQuantity());
+                            quantity -= tmp.getQuantity();
+                            imp.setAvailableQuantity(0);
+                        }
+                        else {
+                            tmp.setQuantity(tmp.getQuantity() + quantity);
+                            imp.setAvailableQuantity(imp.getAvailableQuantity() - quantity);
+                        }
+                        controller_import.editImport(imp);
+                        controller_invoiceItem.addInvoiceItem(tmp);
+                    }
+                    
+                }
+                else{ // if it an old items
+                    //invoiceId already have above
+                    int importId = cart.getImportId();
+                    BigDecimal unitPrice = cart.getUnitPrice();
+                    int quantity = cart.getQuantity();
+                    BigDecimal totalPrice = cart.getTotalPrice();
+                    BigDecimal profit = cart.getTotalPrice().add(unitPrice.negate().multiply(BigDecimal.valueOf(quantity)));
+                    int invoiceItemId = cart.getInvoiceItemId();
+                    InvoiceItem invoiceitem=new InvoiceItem(invoiceItemId, invoiceId, importId, unitPrice, quantity, totalPrice, profit);
+                    controller_invoiceItem.editInvoiceItem(invoiceitem);
+                    int quantityChanges = cart.getPreviousQuantity() - quantity;
+                    controller_import.editImport(importId,quantityChanges);
+
+                }
+                
+            }
+            this.dispose();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
     }//GEN-LAST:event_txtSubmitActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        int index = this.combProduct.getSelectedIndex();
+        Product tmp = productList.get(index);
+        int quantity = Integer.valueOf(this.txtQuantity.getText());
+        CartElement element = new CartElement(tmp.getProductId(),tmp.getProductName(),quantity,
+                tmp.getSellPrice(),tmp.getSellPrice().multiply(BigDecimal.valueOf(quantity)), index);
+        this.cartList.add(element);
+        
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        table.addRow(new Object[]{element.getProductName(),quantity, decimalFormat.format(element.getSellPrice()) +" VNĐ", decimalFormat.format(element.getTotalPrice()) +" VNĐ" });
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+        tmp.setAvailability(tmp.getAvailability() - quantity);
+        combProductActionPerformed(null);
+        totalPrice = totalPrice.add(element.getTotalPrice());
+        this.txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectRow = table.getSelectedRow();
+        if(cartList.get(selectRow).getInvoiceItemId() == -1){
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+            CartElement element =  cartList.get(selectRow);
+            int index = element.getIndex();
+            Product tmp = productList.get(index);
+            tmp.setAvailability(tmp.getAvailability() + element.getQuantity());
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.removeRow(selectRow);
+            cartList.remove(selectRow);
+            combProductActionPerformed(null);
+            table.repaint();
+            totalPrice = totalPrice.add(element.getTotalPrice().negate());
+            this.txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Cannot delete invoiceItem already exist!",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void txtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_txtCancelActionPerformed
+
+    private void tableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseEntered
+        
+    }//GEN-LAST:event_tableMouseEntered
+
+    private void txtQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantityFocusLost
+        int currentQuantity = Integer.valueOf(this.txtQuantity.getText());
+        int index = this.combProduct.getSelectedIndex();
+        Product tmp = productList.get(index);
+        if(currentQuantity > tmp.getAvailability()){
+            JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
+            return;
+        }
+    }//GEN-LAST:event_txtQuantityFocusLost
 
     /**
      * @param args the command line arguments

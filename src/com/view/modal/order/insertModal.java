@@ -743,7 +743,7 @@ public class insertModal extends javax.swing.JFrame {
                 List<Import> ListImport = controller_invoice.findAvailableId(cart.getProductId(), cart.getQuantity());
                 for (Import imp : ListImport){
                     tmp.setImportId(imp.getImportId());
-                    tmp.setProfit(cart.getTotalPrice().add(imp.getUnitPrice().negate()));
+                    tmp.setProfit(cart.getTotalPrice().add(imp.getUnitPrice().negate().multiply(BigDecimal.valueOf(quantity))));
                     tmp.setUnitPrice(imp.getUnitPrice());
                     tmp.setTotalPrice(cart.getTotalPrice());
                     if (imp.getAvailableQuantity() <= quantity){

@@ -158,5 +158,22 @@ public class controller_Import {
         }
         return importList;
     }
+    
+    public void editImport(int importId, int quantity) throws SQLException{
+        Connection cnn=ConnectionDB.getConnection();
+
+        String query="UPDATE Imports  SET AvailableQuantity = AvailableQuantity + ?"
+                + " WHERE ImportId = ?";
+        try{
+            PreparedStatement pre=cnn.prepareStatement(query);
+            pre.setInt(1, quantity);
+            pre.setInt(2, importId);
+            int tmp=pre.executeUpdate();
+            System.out.println("Update success");
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
 }

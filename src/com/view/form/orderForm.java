@@ -3,7 +3,12 @@ package com.view.form;
 
 
 import com.controller.controller_Invoice;
+import com.controller.controller_InvoiceItem;
+import com.controller.controller_cartElement;
+import com.model.CartElement;
 import com.model.Invoice;
+import com.model.InvoiceItem;
+import com.model.Product;
 import com.model.Staff;
 import com.view.modal.order.insertModal;
 import com.view.modal.order.updateModal;
@@ -69,7 +74,7 @@ public class orderForm extends javax.swing.JPanel {
     public orderForm() {
         initComponents();
         
-         spTable.setVerticalScrollBar(new ScrollBar());
+        spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
         JPanel p = new JPanel();
@@ -85,13 +90,42 @@ public class orderForm extends javax.swing.JPanel {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-          DefaultTableModel model =(DefaultTableModel) table.getModel();
+         DefaultTableModel model =(DefaultTableModel) table.getModel();
         model.setRowCount(0);
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-       for (Invoice invoice : invoiceList) {
+        for (Invoice invoice : invoiceList) {
             table.addRow(new Object[]{invoice.getCustomerName(), invoice.getStaffName(), invoice.getPurchaseDate(), decimalFormat.format(invoice.getTotalAmount()) +" VNĐ" });
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+    }
+    
+    public void updateDetail(Invoice selectedInvoice){
+        int selectedRow = table.getSelectedRow();
+        Invoice tmp = invoiceList.get(selectedRow);
+        this.txtCustomerName.setText(tmp.getCustomerName());
+        this.txtStaffName.setText(tmp.getStaffName());
+        this.txtDate.setText(String.valueOf(tmp.getPurchaseDate()));
+        this.totalAmountField.setValue(tmp.getTotalAmount());   
+        int invoice_id = tmp.getInvoiceId();  
+        DefaultTableModel model =(DefaultTableModel) tableDetail.getModel();
+        model.setRowCount(0);
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        List<CartElement> cartList = new ArrayList<>();
+        controller_cartElement controller_cart = new  controller_cartElement();
+        try{
+            cartList = controller_cart.getAllCartElement(selectedInvoice.getInvoiceId());
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        for (CartElement cart : cartList) {
+            tableDetail.addRow(new Object[]{cart.getProductName(), cart.getQuantity(), decimalFormat.format(cart.getTotalPrice()) + " VNĐ" });
+            tableDetail.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+        }
+         this.txtCustomerName.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14)); 
+         this.txtStaffName.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14)); 
+         this.txtDate.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14)); 
+         this.totalAmountField.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
     }
    
     @SuppressWarnings("unchecked")
@@ -201,6 +235,11 @@ public class orderForm extends javax.swing.JPanel {
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Customer", "Sort By Staff", "Sort By Total" }));
+        sortComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelFilterLayout = new javax.swing.GroupLayout(PanelFilter);
         PanelFilter.setLayout(PanelFilterLayout);
@@ -373,6 +412,7 @@ public class orderForm extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(36, 36, 36));
         jPanel6.setForeground(new java.awt.Color(36, 36, 36));
 
+        txtCustomerName.setEditable(false);
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtCustomerName.setForeground(new java.awt.Color(102, 102, 102));
         txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
@@ -381,9 +421,11 @@ public class orderForm extends javax.swing.JPanel {
             }
         });
 
+        txtStaffName.setEditable(false);
         txtStaffName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtStaffName.setForeground(new java.awt.Color(102, 102, 102));
 
+        txtDate.setEditable(false);
         txtDate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtDate.setForeground(new java.awt.Color(102, 102, 102));
 
@@ -432,6 +474,7 @@ public class orderForm extends javax.swing.JPanel {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        totalAmountField.setEditable(false);
         totalAmountField.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         totalAmountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -610,7 +653,7 @@ public class orderForm extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -629,7 +672,7 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
-       
+        this.refreshtable();
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -644,7 +687,8 @@ public class orderForm extends javax.swing.JPanel {
             im.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        im = null; //// Đặt lại thành null khi cửa sổ đóng
+                        im = null;
+                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
                     }
                 });
         } else {
@@ -654,7 +698,8 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-      
+        int index = this.table.getSelectedRow() ;
+        updateDetail(invoiceList.get(index));
 
     }//GEN-LAST:event_tableMouseClicked
 
@@ -684,16 +729,23 @@ public class orderForm extends javax.swing.JPanel {
             
             um = new updateModal(invoiceList.get(selectedIndex));
             um.setVisible(true);
+            um.setUser(user);
             um.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        um = null; //// Đặt lại thành null khi cửa sổ đóng
+                        um = null;
+                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
                     }
                 });
         } else {
             um.toFront();
         }
     }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
+        this.status = this.sortComboBox.getSelectedIndex() + 1;
+        this.refreshtable();
+    }//GEN-LAST:event_sortComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

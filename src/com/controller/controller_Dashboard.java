@@ -2,7 +2,8 @@
 package com.controller;
 
 import com.control.db.ConnectionDB;
-import com.model.ListChart;
+import com.model.ListChartYear;
+import com.model.List_Chart;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class controller_Dashboard {
@@ -71,8 +74,8 @@ public class controller_Dashboard {
         return monthNames[month-1];
     }
     
-    public List<ListChart> getMonthlyrevenue() throws SQLException{
-        List<ListChart> chart =new ArrayList<>();
+    public List<List_Chart> getMonthlyrevenue() throws SQLException{
+        List<List_Chart> chart =new ArrayList<>();
         
         int[] myArray = new int[12];
         for (int i = 0; i < 12; i++) {
@@ -80,7 +83,7 @@ public class controller_Dashboard {
         }
          
          for(int i=0;i<12;i++){   
-             ListChart basic=new  ListChart(convertToMonthName(myArray[i]),BigDecimal.ZERO);
+             List_Chart basic=new  List_Chart(convertToMonthName(myArray[i]),BigDecimal.ZERO);
              chart.add(i, basic);
          }
          
@@ -92,7 +95,7 @@ public class controller_Dashboard {
                 while(re.next()){
                       String month=convertToMonthName(re.getInt("Month"));
                       BigDecimal total=re.getBigDecimal("Total");
-                      ListChart tmp=new ListChart(month, total);
+                      List_Chart tmp=new List_Chart(month, total);
                       chart.set(re.getInt("Month")-1, tmp);
                 }
               
@@ -101,5 +104,34 @@ public class controller_Dashboard {
              ex.printStackTrace();
          }   
         return chart;
+    }
+    
+    public List<ListChartYear>getYearRevenue() throws SQLException{
+        List<ListChartYear>listChartYears=new ArrayList<>();
+        Connection cnn=ConnectionDB.getConnection();
+         Statement statement=cnn.createStatement();
+         String query="SELECT YEAR(Invoices.PurchaseDate) AS 'Year', SUM(Invoice_Items.TotalPrice) AS 'Total' FROM Invoice_Items JOIN Invoices ON Invoice_Items.InvoiceId = Invoices.InvoiceId GROUP BY YEAR(Invoices.PurchaseDate)";
+          try{
+                ResultSet re=statement.executeQuery(query);
+                while(re.next()){
+                      int year=re.getInt("Year");
+                      BigDecimal total=re.getBigDecimal("Total");
+                      ListChartYear tmp=new ListChartYear(year, total);
+                      listChartYears.add(tmp);
+                }
+              
+         }   
+         catch(Exception ex){
+             ex.printStackTrace();
+         } 
+         //Sort Array by year 
+         
+           Collections.sort(listChartYears, new Comparator<ListChartYear>() {
+            @Override
+            public int compare(ListChartYear obj1, ListChartYear obj2) {
+                return Integer.compare(obj1.getYear(), obj2.getYear());
+            }
+        });
+        return listChartYears;
     }
 }

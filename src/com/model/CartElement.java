@@ -10,6 +10,32 @@ public class CartElement {
     private BigDecimal sellPrice;
     private BigDecimal totalPrice;
     private int index;
+    private int InvoiceItemId = -1;
+    private int importId = -1;
+    private BigDecimal unitPrice = new BigDecimal(-1);
+    private int previousQuantity;
+
+    public CartElement(int productId, String productName, int quantity, BigDecimal sellPrice, BigDecimal totalPrice, int index, int InvoiceItemId, int importId, BigDecimal unitPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.sellPrice = sellPrice;
+        this.totalPrice = totalPrice;
+        this.index = index;
+        this.InvoiceItemId = InvoiceItemId;
+        this.importId = importId;
+        this.unitPrice = unitPrice;
+        this.previousQuantity = quantity;
+    }
+    
+    public CartElement(int productId, String productName, int quantity, BigDecimal sellPrice, BigDecimal totalPrice) {
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.sellPrice = sellPrice;
+        this.totalPrice = totalPrice;
+        this.previousQuantity = quantity;
+    }
 
     public CartElement(int productId, String productName, int quantity, BigDecimal sellPrice, BigDecimal totalPrice, int index) {
         this.productId = productId;
@@ -18,7 +44,46 @@ public class CartElement {
         this.sellPrice = sellPrice;
         this.totalPrice = totalPrice;
         this.index = index;
+        this.previousQuantity = quantity;
     }
+
+    
+
+    public int getImportId() {
+        return importId;
+    }
+
+    public void setImportId(int importId) {
+        this.importId = importId;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+    
+    
+    
+    public int getInvoiceItemId() {
+        return InvoiceItemId;
+    }
+
+    public void setInvoiceItemId(int InvoiceItemId) {
+        this.InvoiceItemId = InvoiceItemId;
+    }
+
+    public int getPreviousQuantity() {
+        return previousQuantity;
+    }
+
+    public void setPreviousQuantity(int previousQuantity) {
+        this.previousQuantity = previousQuantity;
+    }
+    
+    
     
     
     
