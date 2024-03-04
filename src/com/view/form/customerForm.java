@@ -1,8 +1,8 @@
-
 package com.view.form;
 
 import com.model.Customer;
 import com.controller.controller_Customer;
+import com.model.DetailCustomer;
 import com.view.modal.customer.insertModal;
 import com.view.modal.customer.updateModal;
 import com.view.swing.ScrollBar;
@@ -15,28 +15,33 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class customerForm extends javax.swing.JPanel {
+
     private insertModal insertNewCustomer = null;
     private updateModal updateCustomer = null;
     private List<Customer> customerList = new ArrayList<Customer>();
+    private List<DetailCustomer> detailCusList = new ArrayList<DetailCustomer>();
+    private Customer selectedCustomer = null;
     private int status = 1;
+
     public customerForm() {
         initComponents();
-   
+
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
@@ -44,27 +49,49 @@ public class customerForm extends javax.swing.JPanel {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshTable();
-        
+
     }
 
-    
-    public void refreshTable(){
+    public void refreshTable() {
         try {
             controller_Customer controller = new controller_Customer();
             String searchTxt = this.txtSearch3.getText();
-            customerList=controller.getAllCustomers(status,searchTxt);
+            customerList = controller.getAllCustomers(status, searchTxt);
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
-        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        for(Customer tmp:customerList){
-            table.addRow(new Object[]{tmp.getCustomerName(),tmp.getEmail(),tmp.getAddress(),decimalFormat.format(tmp.getTotalAmount()) +" VNĐ" });
+        for (Customer tmp : customerList) {
+            table.addRow(new Object[]{tmp.getCustomerName(), tmp.getEmail(), tmp.getAddress(), decimalFormat.format(tmp.getTotalAmount()) + " VNĐ"});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-   
+    
+    public void refreshDetail() {
+        txtCustomerName.setText("");
+        txtEmail.setText("");
+        txtAddress.setText("");
+        txtTotalAmount.setText("");
+       
+    }
+    
+    public void openUpdateForm() {
+        if (updateCustomer == null) {
+            updateCustomer = new updateModal();
+            updateCustomer.setVisible(true);
+            updateCustomer.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    updateCustomer = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
+        } else {
+            updateCustomer.toFront();
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -182,6 +209,11 @@ public class customerForm extends javax.swing.JPanel {
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Name", "Sort By Email", "Sort By Amount" }));
+        sortComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sortComboBoxItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelFilterLayout = new javax.swing.GroupLayout(PanelFilter);
         PanelFilter.setLayout(PanelFilterLayout);
@@ -665,76 +697,153 @@ public class customerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearch3ActionPerformed
 
     private void txtSearch3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearch3KeyTyped
+        Timer timer = new Timer(500, (ActionEvent e) -> {
+            refreshTable();
+        });
+        timer.setRepeats(false); // Đảm bảo rằng Timer chỉ thực hiện một lần
 
-        
+        // Thêm DocumentListener vào searchTextField
+        txtSearch3.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            public void restartTimer() {
+                if (timer.isRunning()) {
+                    timer.restart();
+                } else {
+                    timer.start();
+                }
+            }
+        });
+
     }//GEN-LAST:event_txtSearch3KeyTyped
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
- 
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-        if (insertNewCustomer==null) {
+        if (insertNewCustomer == null) {
             insertNewCustomer = new insertModal();
             insertNewCustomer.setVisible(true);
             insertNewCustomer.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        insertNewCustomer = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    insertNewCustomer = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
         } else {
             insertNewCustomer.toFront();
         }
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-      
-      
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        selectedCustomer = customerList.get(row);
+    
+        if (row >= 0) {
+            txtCustomerName.setText(model.getValueAt(row, 0).toString());
+            txtEmail.setText(model.getValueAt(row, 1).toString());
+            txtAddress.setText(model.getValueAt(row, 2).toString());
+            txtTotalAmount.setText(model.getValueAt(row, 3).toString());
+
+            DefaultTableModel detailModel = (DefaultTableModel) detail_table.getModel();
+            detailModel.setRowCount(0);
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
+            controller_Customer controller = new controller_Customer();
+            try {
+                detailCusList = controller.getDetail_Customers(selectedCustomer.getCustomerId());
+                System.out.println(selectedCustomer.getCustomerId());
+            } catch (SQLException ex) {
+                Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (DetailCustomer tmp : detailCusList) {
+                detailModel.addRow(
+                        new Object[]{
+                            tmp.getProductName(),
+                            tmp.getQuanity(),
+                            String.valueOf(decimalFormat.format(tmp.getPrice()) + " VNĐ"),
+                            String.valueOf(decimalFormat.format(tmp.getTotal()) + " VNĐ")
+                        }
+                );
+            }
+        }
+
     }//GEN-LAST:event_tableMouseClicked
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-      
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        Customer selectedCustomer = customerList.get(row);
+        controller_Customer controller = new controller_Customer();
+        try {
+            controller.deleteCustomer(selectedCustomer.getCustomerId());
+            refreshTable();
+            refreshDetail();
+            JOptionPane.showMessageDialog(null, "Delete success!");
+        } catch (SQLException ex) {
+            Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        if (updateCustomer==null) {
-            updateCustomer = new updateModal();
-            updateCustomer.setVisible(true);
-            updateCustomer.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        updateCustomer = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
-        } else {
-            updateCustomer.toFront();
-        }
-     
+        openUpdateForm();
+        updateCustomer.setDataCustomer(selectedCustomer);
     }//GEN-LAST:event_updateBtnActionPerformed
 
-
+    private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged
+        // TODO add your handling code here:
+        controller_Customer controller = new controller_Customer();
+        String searchTxt = this.txtSearch3.getText();
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                // Lấy phương thức sắp xếp được chọn
+                String selectedMethod = (String) evt.getItem();
+                switch (selectedMethod) {
+                    case "Sort By Name":
+                        status = 1;
+                        break;
+                    case "Sort By Email":
+                        status = 2;
+                        break;
+                    case "Sort By Amount":
+                        status = 3;
+                        break;
+                }
+                customerList = controller.getAllCustomers(status, searchTxt);
+                refreshTable();
+                System.out.println("SORTED");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sortComboBoxItemStateChanged
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel PanelButton;
-    private javax.swing.JPanel PanelButton1;
-    private javax.swing.JPanel PanelButton2;
     private javax.swing.JPanel PanelButton3;
     private javax.swing.JPanel PanelDUBtn;
     private javax.swing.JPanel PanelDetail;
     private javax.swing.JPanel PanelFilter;
     private javax.swing.JPanel PanelHeader;
     private javax.swing.JPanel PanelInsert;
-    private javax.swing.JPanel PanelLeft;
-    private javax.swing.JPanel PanelLeft1;
-    private javax.swing.JPanel PanelLeft2;
     private javax.swing.JPanel PanelLeft3;
     private javax.swing.JPanel PanelRight;
-    private javax.swing.JPanel PanelSearch;
-    private javax.swing.JPanel PanelSearch1;
-    private javax.swing.JPanel PanelSearch2;
     private javax.swing.JPanel PanelSearch3;
     private javax.swing.JPanel PanelTable;
     private javax.swing.JButton deleteBtn;
@@ -743,7 +852,6 @@ public class customerForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -757,11 +865,6 @@ public class customerForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lableAddress;
     private javax.swing.JLabel lableEmail;
@@ -774,9 +877,6 @@ public class customerForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtSearch1;
-    private javax.swing.JTextField txtSearch2;
     private javax.swing.JTextField txtSearch3;
     private javax.swing.JTextField txtTotalAmount;
     private javax.swing.JButton updateBtn;

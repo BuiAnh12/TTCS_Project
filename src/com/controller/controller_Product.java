@@ -70,7 +70,8 @@ public class controller_Product {
                     String description=re.getString("Description");
                     String category=re.getString("Category");
                     int id=re.getInt("ProductId");
-                    Product product =new Product(id, productName, manufacturer, description, category);
+                    BigDecimal sellPrice = re.getBigDecimal("SellPrice");
+                    Product product =new Product(id, productName, manufacturer, description, category, sellPrice);
                     products.add(product);
                 }
                
@@ -82,13 +83,14 @@ public class controller_Product {
     }
       public void addProduct(Product product) throws SQLException{
         Connection cnn=ConnectionDB.getConnection();
-        String query="INSERT INTO Products (ProductName, Manufacturer, Description, Category) VALUES(?,?,?,?)";
+        String query="INSERT INTO Products (ProductName, Manufacturer, Description, Category, SellPrice) VALUES(?,?,?,?,?)";
         try{
             PreparedStatement pre=cnn.prepareStatement(query);
             pre.setString(1, product.getProductName());       
             pre.setString(2, product.getManufacturer());
             pre.setString(3, product.getDescription());
             pre.setString(4, product.getCategory());
+            pre.setBigDecimal(5, product.getSellPrice());
             int tmp=pre.executeUpdate();
         }
         catch (Exception ex) {
@@ -99,14 +101,15 @@ public class controller_Product {
        public void editProduct(Product product) throws SQLException{
         Connection cnn=ConnectionDB.getConnection();
 
-        String query="UPDATE Products SET  ProductName =?,Manufacturer =?,Description =?,Category=? WHERE ProductId =?";
+        String query="UPDATE Products SET  ProductName =?,Manufacturer =?,Description =?,Category=?,SellPrice=? WHERE ProductId =?";
         try{
             PreparedStatement pre=cnn.prepareStatement(query);
             pre.setString(1, product.getProductName());       
             pre.setString(2, product.getManufacturer());
             pre.setString(3, product.getDescription());
             pre.setString(4, product.getCategory());
-            pre.setInt(5,product.getProductId());
+            pre.setBigDecimal(5, product.getSellPrice());
+            pre.setInt(6,product.getProductId());
             int tmp=pre.executeUpdate();
         }
         catch (Exception ex) {
@@ -146,7 +149,8 @@ public class controller_Product {
                 String manufacturer = re.getString("Manufacturer");
                 String description = re.getString("Description");
                 String category = re.getString("Category");
-                Product product = new Product(id, productName, manufacturer, description, category);
+                BigDecimal sellPrice = re.getBigDecimal("SellPrice");
+                Product product = new Product(id, productName, manufacturer, description, category, sellPrice);
                 products.add(product);
             }
 

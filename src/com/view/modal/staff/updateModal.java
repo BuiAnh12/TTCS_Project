@@ -4,7 +4,13 @@
  */
 package com.view.modal.staff;
 
+import com.controller.controller_Staff;
+import com.model.Staff;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +21,22 @@ public class updateModal extends javax.swing.JFrame {
     /**
      * Creates new form insertModal
      */
+    private int staffId;
     public updateModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
+    public void setDataStaff(Staff staff) {
+        jTextField1.setText(staff.getName());
+        jTextField2.setText(String.valueOf(staff.getAge()));
+        jTextField3.setText(staff.getEmail());
+        jTextField4.setText(staff.getAddress());
+        jTextField5.setText(staff.getUsername());
+        jTextField6.setText(staff.getPassword());
+        jTextField7.setText(String.valueOf(staff.getPrevilege()));
+        
+        staffId = staff.getStaffId();
     }
 
     /**
@@ -154,9 +173,19 @@ public class updateModal extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("SUMBIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,6 +231,35 @@ public class updateModal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String name = jTextField1.getText();
+        int age = Integer.parseInt(jTextField2.getText());
+        String email = jTextField3.getText();
+        String address = jTextField4.getText();
+        String username = jTextField5.getText();
+        String password = jTextField6.getText();
+        int accpre = Integer.parseInt(jTextField7.getText());
+        Staff staff = new Staff(staffId, name, age, email, address, username, password, accpre);
+
+       
+            controller_Staff controller = new controller_Staff();
+        try {
+            controller.editStaff(staff);
+            JOptionPane.showMessageDialog(null, "Update success!");
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -9,6 +9,7 @@ import com.view.form.importForm;
 import com.view.form.orderForm;
 import com.view.form.productForm;
 import com.view.form.staffForm;
+import com.view.login.Login;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -235,11 +236,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Main().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Login().setVisible(true);
             }
         });
     }

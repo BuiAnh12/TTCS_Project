@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.math.BigDecimal;
@@ -43,13 +44,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 import javax.swing.JScrollPane;
+import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class importForm extends javax.swing.JPanel {
+
     private insertModal im = null;
     private updateModal um = null;
     private List<Import> import_list;
     private int status = 1;
     private int previlege;
+    private Import selectedImport;
+    private controller_Import controller = new controller_Import();
 
     public int getPrevilege() {
         return previlege;
@@ -58,12 +65,9 @@ public class importForm extends javax.swing.JPanel {
     public void setPrevilege(int previlege) {
         this.previlege = previlege;
     }
-    
-    
-    
-    
-    public  java.sql.Date convertStringtoDate(String date){
-         // Chuỗi đại diện cho ngày
+
+    public java.sql.Date convertStringtoDate(String date) {
+        // Chuỗi đại diện cho ngày
         String dateString = "2023-12-07";
         java.sql.Date sqlDate = new java.sql.Date(0);
         try {
@@ -74,27 +78,24 @@ public class importForm extends javax.swing.JPanel {
             Date utilDate = dateFormat.parse(date);
 
             // Chuyển đổi java.util.Date thành java.sql.Date
-             sqlDate = new java.sql.Date(utilDate.getTime());
+            sqlDate = new java.sql.Date(utilDate.getTime());
 
-            
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return sqlDate;
     }
-    
+
     public importForm() {
 //        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         initComponents();
-        
-        
-        
+
         sortComboBox.addActionListener(new ActionListener() {
             @Override
-            
+
             public void actionPerformed(ActionEvent e) {
                 // Lấy giá trị được chọn khi có sự kiện thay đổi
-                
+
             }
         });
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -104,33 +105,64 @@ public class importForm extends javax.swing.JPanel {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshTable();
-        
-        
-        
-        
+
     }
-    
-    public void refreshTable(){
+
+    public void refreshTable() {
         try {
             controller_Import controller = new controller_Import();
             String searchTxt = this.txtSearch.getText();
-            import_list=controller.getAllImports(status,searchTxt);
+            import_list = controller.getAllImports(status, searchTxt);
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
-        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 //        CellStatus cellStatus=new CellStatus(StatusType.IN_STOCK);
-        for(Import tmp:import_list){
+        for (Import tmp : import_list) {
             StatusType statusType = null;
-            if(tmp.getAvailableQuantity()!=0){
-                statusType=statusType.IN_STOCK;
-            }else if(tmp.getAvailableQuantity()==0){
-                statusType=statusType.OUT_OF_STOCK;
+            if (tmp.getAvailableQuantity() != 0) {
+                statusType = statusType.IN_STOCK;
+            } else if (tmp.getAvailableQuantity() == 0) {
+                statusType = statusType.OUT_OF_STOCK;
             }
-            table.addRow(new Object[]{tmp.getProductName(),tmp.getImportQuantity(),tmp.getAvailableQuantity(),statusType});
+            table.addRow(new Object[]{tmp.getProductName(), tmp.getImportQuantity(), tmp.getAvailableQuantity(), statusType});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    public void openUpdateForm() {
+        if (this.previlege == 1) {
+            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (um == null) {
+            um = new updateModal();
+            um.setVisible(true);
+            um.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    um = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
+        } else {
+            um.toFront();
+        }
+    }
+
+    public void refreshDetail() {
+        txtName.setText("");
+        txtQuantity.setText("");
+        txtStock.setText("");
+        txtCategory.setText("");
+        txtImpDate.setText("");
+        txtManuDate.setText("");
+        txtExpDate.setText("");
+        txtUnitPrice.setText("");
+        txtTotal.setText("");
     }
 
     /**
@@ -193,8 +225,6 @@ public class importForm extends javax.swing.JPanel {
         txtUnitPrice = new javax.swing.JTextField();
         jPanel19 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        txtSellPrice = new javax.swing.JTextField();
         jPanel23 = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -283,6 +313,11 @@ public class importForm extends javax.swing.JPanel {
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Name", "Sort By Quantity", "Sort By Status" }));
+        sortComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sortComboBoxItemStateChanged(evt);
+            }
+        });
         sortComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortComboBoxActionPerformed(evt);
@@ -743,22 +778,15 @@ public class importForm extends javax.swing.JPanel {
 
         jPanel20.setBackground(new java.awt.Color(36, 36, 36));
 
-        jLabel22.setBackground(new java.awt.Color(36, 36, 36));
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Sell Price");
-
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 133, Short.MAX_VALUE)
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addGap(0, 31, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -766,15 +794,14 @@ public class importForm extends javax.swing.JPanel {
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSellPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(txtSellPrice)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel23.setBackground(new java.awt.Color(36, 36, 36));
@@ -906,7 +933,7 @@ public class importForm extends javax.swing.JPanel {
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         PanelRight.add(PanelDetail, java.awt.BorderLayout.CENTER);
@@ -961,24 +988,9 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        if(this.previlege == 1){
-            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-            "Unauthorize", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        if (um==null) {
-            um = new updateModal();
-            um.setVisible(true);
-            um.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        um = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
-        } else {
-            um.toFront();
-        }
+        openUpdateForm();
+        um.setDataImport(selectedImport);
+//        refreshDetail();
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -986,7 +998,25 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-       
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        selectedImport = import_list.get(row);
+
+        if (row >= 0) {
+            txtName.setText(model.getValueAt(row, 0).toString());
+            txtQuantity.setText(model.getValueAt(row, 1).toString());
+            txtStock.setText(model.getValueAt(row, 2).toString());
+            txtCategory.setText(selectedImport.getCategory());
+            txtImpDate.setText(selectedImport.getImportDate().toString());
+            txtManuDate.setText(selectedImport.getManufacturingDate().toString());
+            txtExpDate.setText(selectedImport.getExpiryDate().toString());
+            txtUnitPrice.setText(selectedImport.getUnitPrice().toString());
+            // Chuyển đổi kiểu int sang BigDecimal và thực hiện phép nhân
+            BigDecimal total = BigDecimal.valueOf(selectedImport.getImportQuantity()).multiply(selectedImport.getUnitPrice());
+            txtTotal.setText(total.toString());
+
+        }
+
     }//GEN-LAST:event_tableMouseClicked
 
     private void txtImpDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpDateActionPerformed
@@ -998,7 +1028,7 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtExpDateActionPerformed
 
     private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
-        
+
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
     private void txtCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoryActionPerformed
@@ -1006,32 +1036,41 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-       if (im==null) {
-           if(this.previlege == 1){
+        if (im == null) {
+            if (this.previlege == 1) {
                 JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                        "Unauthorize", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             im = new insertModal();
             im.setVisible(true);
             im.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        im = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
         } else {
             im.toFront();
         }
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        if(this.previlege == 1){
+        if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+        try {
+            controller.deleteImport(selectedImport.getImportId());
+            refreshTable();
+            refreshDetail();
+            JOptionPane.showMessageDialog(null, "Delete success!");
+        } catch (SQLException ex) {
+            Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -1039,9 +1078,64 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
+        Timer timer = new Timer(500, (ActionEvent e) -> {
+            refreshTable();
+        });
+        timer.setRepeats(false); // Đảm bảo rằng Timer chỉ thực hiện một lần
 
+        // Thêm DocumentListener vào searchTextField
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            public void restartTimer() {
+                if (timer.isRunning()) {
+                    timer.restart();
+                } else {
+                    timer.start();
+                }
+            }
+        });
     }//GEN-LAST:event_txtSearchKeyTyped
 
+    private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged
+        // TODO add your handling code here:
+        String searchTxt = this.txtSearch.getText();
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                // Lấy phương thức sắp xếp được chọn
+                String selectedMethod = (String) evt.getItem();
+                switch (selectedMethod) {
+                    case "Sort By Name":
+                        status = 1;
+                        break;
+                    case "Sort By Quantity":
+                        status = 2;
+                        break;
+                    case "Sort By Status":
+                        status = 3;
+                        break;
+                }
+                import_list = controller.getAllImports(status, searchTxt);
+                refreshTable();
+                System.out.println("SORTED");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sortComboBoxItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1067,7 +1161,6 @@ public class importForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
@@ -1105,7 +1198,6 @@ public class importForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtSellPrice;
     private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtUnitPrice;

@@ -1,4 +1,3 @@
-
 package com.view.form;
 
 import com.controller.controller_Staff;
@@ -11,6 +10,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -25,37 +25,68 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 public class staffForm extends javax.swing.JPanel {
+
     private insertModal im = null;
     private updateModal um = null;
     private List<Staff> staffList;
     private int status = 1;
-    public void updateDetail(){
-        
+    private Staff selectedStaff;
+
+    public void updateDetail() {
+
     }
-    
-    public void refreshTable(){
+
+    public void refreshTable() {
         try {
             controller_Staff controller = new controller_Staff();
             String searchTxt = this.txtSearch.getText();
-            staffList=controller.getAllStaff(status,searchTxt);
+            staffList = controller.getAllStaff(status, searchTxt);
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
-        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-        for(Staff tmp:staffList){
-            table.addRow(new Object[]{tmp.getName(),tmp.getEmail(),tmp.getAddress(),tmp.getPosition()});
+        for (Staff tmp : staffList) {
+            table.addRow(new Object[]{tmp.getName(), tmp.getEmail(), tmp.getAddress(), tmp.getPosition()});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
-    
+    public void refreshDetail() {
+        txtCustomerName.setText("");
+        txtEmail.setText("");
+        txtAge.setText("");
+        txtAddress.setText("");
+        txtPosition.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+    }
+
+    public void openUpdateForm() {
+        if (um == null) {
+            um = new updateModal();
+            um.setVisible(true);
+            um.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    um = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
+        } else {
+            um.toFront();
+        }
+    }
+
     public staffForm() {
         initComponents();
-        
+
         sortComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,9 +105,9 @@ public class staffForm extends javax.swing.JPanel {
 //                    refreshTable();
 //                }
 //               
-               }
+            }
         });
-        
+
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
@@ -85,8 +116,7 @@ public class staffForm extends javax.swing.JPanel {
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshTable();
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -206,6 +236,11 @@ public class staffForm extends javax.swing.JPanel {
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Name", "Sort By Email", "Sort By Position" }));
+        sortComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sortComboBoxItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelFilterLayout = new javax.swing.GroupLayout(PanelFilter);
         PanelFilter.setLayout(PanelFilterLayout);
@@ -319,7 +354,7 @@ public class staffForm extends javax.swing.JPanel {
         PanelLeft.setLayout(PanelLeftLayout);
         PanelLeftLayout.setHorizontalGroup(
             PanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(PanelLeftLayout.createSequentialGroup()
                 .addGroup(PanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -795,41 +830,52 @@ public class staffForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        if (um==null) {
-            um = new updateModal();
-            um.setVisible(true);
-            um.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        um = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
-        } else {
-            um.toFront();
-        }
+        openUpdateForm();
+        um.setDataStaff(selectedStaff);
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-        if (im==null) {
+        if (im == null) {
             im = new insertModal();
             im.setVisible(true);
             im.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        im = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
         } else {
             im.toFront();
         }
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        
+        controller_Staff controller = new controller_Staff();
+        try {
+            controller.deleteStaff(selectedStaff.getStaffId());
+            refreshTable();
+            JOptionPane.showMessageDialog(null, "Delete success!");
+            refreshDetail();
+        } catch (SQLException ex) {
+            Logger.getLogger(staffForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        selectedStaff = staffList.get(row);
+
+        if (row >= 0) {
+            txtCustomerName.setText(selectedStaff.getName());
+            txtEmail.setText(selectedStaff.getEmail());
+            txtAge.setText(String.valueOf(selectedStaff.getAge()));
+            txtAddress.setText(selectedStaff.getAddress());
+            txtPosition.setText(String.valueOf(selectedStaff.getPrevilege()));
+            txtUsername.setText(selectedStaff.getUsername());
+            txtPassword.setText(selectedStaff.getPassword());
+        }
 
     }//GEN-LAST:event_tableMouseClicked
 
@@ -838,12 +884,73 @@ public class staffForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
+        Timer timer = new Timer(500, (ActionEvent e) -> {
+            refreshTable();
+        });
+        timer.setRepeats(false); // Đảm bảo rằng Timer chỉ thực hiện một lần
 
+        // Thêm DocumentListener vào searchTextField
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            public void restartTimer() {
+                if (timer.isRunning()) {
+                    timer.restart();
+                } else {
+                    timer.start();
+                }
+            }
+        });
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPositionActionPerformed
+
+    private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged
+        // TODO add your handling code here:
+        controller_Staff controller = new controller_Staff();
+        String searchTxt = this.txtSearch.getText();
+
+
+
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                // Lấy phương thức sắp xếp được chọn
+                String selectedMethod = (String) evt.getItem();
+                switch (selectedMethod) {
+                    case "Sort By Name":
+                        status = 1;
+                        break;
+                    case "Sort By Email":
+                        status = 2;
+                        break;
+                    case "Sort By Position":
+                        status = 3;
+                        break;
+                }
+                System.out.println(status);
+                staffList = controller.getAllStaff(status, searchTxt);
+                refreshTable();
+                System.out.println("SORTED");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sortComboBoxItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

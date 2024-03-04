@@ -4,7 +4,15 @@
  */
 package com.view.modal.staff;
 
+import com.controller.controller_Staff;
+import com.model.Staff;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +23,8 @@ public class insertModal extends javax.swing.JFrame {
     /**
      * Creates new form insertModal
      */
+    private List<Staff> staffList = new ArrayList<>();
+
     public insertModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -154,9 +164,19 @@ public class insertModal extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("SUMBIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,6 +222,55 @@ public class insertModal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm khách hàng này?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            String name = jTextField1.getText();
+            int age = Integer.parseInt(jTextField2.getText());
+            String email = jTextField3.getText();
+            String address = jTextField4.getText();
+            String username = jTextField5.getText();
+            String password = jTextField6.getText();
+            int accpre = Integer.parseInt(jTextField7.getText());
+            // Kiểm tra ràng buộc không được để trống
+            if (name.isEmpty() || age == -1 || email.isEmpty() || address.isEmpty() || username.isEmpty() || password.isEmpty() || accpre == -1) {
+                JOptionPane.showMessageDialog(null, "Not left blank !", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
+            Staff newStaff = new Staff(staffList.size() + 1, name, age, email, address, username, password, accpre);
+
+            // Thêm vào danh sách khách hàng và cập nhật bảng
+            staffList.add(newStaff);
+
+            // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
+            // saveToDatabase(newCustomer);
+            controller_Staff controller = new controller_Staff();
+
+            
+            try {
+                controller.addStaff(newStaff);
+                JOptionPane.showMessageDialog(null, "Add new staff success");
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                jTextField7.setText("");
+            } catch (SQLException ex) {
+                Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

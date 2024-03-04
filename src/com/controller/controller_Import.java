@@ -67,7 +67,7 @@ public class controller_Import {
 
      public void addImport(Import importss) throws SQLException{
             Connection cnn=ConnectionDB.getConnection();
-            String query="INSERT INTO Imports (ProductId, ManufacturingDate, ExpiryDate, ImportDate, ImportQuantity, AvailableQuantity, UnitPrice, SellPrice) VALUES(?,?,?,?,?,?,?,?)";
+            String query="INSERT INTO Imports (ProductId, ManufacturingDate, ExpiryDate, ImportDate, ImportQuantity, AvailableQuantity, UnitPrice) VALUES(?,?,?,?,?,?,?)";
             try{
                 PreparedStatement pre=cnn.prepareStatement(query);
                 pre.setInt(1, importss.getProductId());       

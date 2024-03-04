@@ -4,7 +4,13 @@
  */
 package com.view.modal.customer;
 
+import com.controller.controller_Customer;
+import com.model.Customer;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +21,8 @@ public class insertModal extends javax.swing.JFrame {
     /**
      * Creates new form insertModal
      */
+    private List<Customer> customerList = new ArrayList<>();
+    
     public insertModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -105,9 +113,19 @@ public class insertModal extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("SUMBIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("CANCEL");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,6 +171,46 @@ public class insertModal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm khách hàng này?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            String customerName = jTextField1.getText();
+            String customerEmail = jTextField2.getText();
+            String customerAddress = jTextField3.getText();
+            // Kiểm tra ràng buộc không được để trống
+            if (customerName.isEmpty() || customerEmail.isEmpty() || customerAddress.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Not left blank !", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+            // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
+            Customer newCustomer = new Customer(customerList.size() + 1, customerName, customerEmail, customerAddress, 0);
+
+            // Thêm vào danh sách khách hàng và cập nhật bảng
+            customerList.add(newCustomer);
+
+            // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
+            // saveToDatabase(newCustomer);
+            controller_Customer controller = new controller_Customer();
+            try {
+                controller.addCustomer(newCustomer);
+                JOptionPane.showMessageDialog(null, "Add new customer success");
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

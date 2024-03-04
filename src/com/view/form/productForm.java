@@ -1,4 +1,3 @@
-
 package com.view.form;
 
 import com.controller.controller_Product;
@@ -15,19 +14,25 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-
 public class productForm extends javax.swing.JPanel {
+
     private insertModal im = null;
     private updateModal um = null;
     private List<Product> productList;
     private int status = 1;
     private int previlege;
+    private Product selectedProduct;
 
     public int getPrevilege() {
         return previlege;
@@ -36,12 +41,10 @@ public class productForm extends javax.swing.JPanel {
     public void setPrevilege(int previlege) {
         this.previlege = previlege;
     }
-    
-    
-    
+
     public productForm() {
         initComponents();
-        
+
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
@@ -50,24 +53,48 @@ public class productForm extends javax.swing.JPanel {
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshTable();
     }
-    
-    public void refreshTable(){
+
+    public void refreshTable() {
         try {
             controller_Product controller = new controller_Product();
             String searchTxt = this.txtSearch3.getText();
-            productList=controller.getAllproduct(status,searchTxt);
+            productList = controller.getAllproduct(status, searchTxt);
         } catch (SQLException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
-        DefaultTableModel model =(DefaultTableModel) table.getModel();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-        for(Product tmp:productList){
-            table.addRow(new Object[]{tmp.getProductName(),tmp.getManufacturer(),tmp.getDescription(),tmp.getCategory()});
+        for (Product tmp : productList) {
+            table.addRow(new Object[]{tmp.getProductName(), tmp.getManufacturer(), tmp.getSellPrice(), tmp.getCategory()});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-   
+    public void refreshDetail() {
+        txtName.setText("");
+        txtManufacture.setText("");
+        txtCategory.setText("");
+        descriptionTxt.setText("");
+        txtSellPrice.setText("");
+    }
+
+    public void openUpdateForm() {
+        if (um == null) {
+            um = new updateModal();
+            um.setVisible(true);
+            um.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    um = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+//                        refreshDetail();
+                }
+            });
+        } else {
+            um.toFront();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,6 +128,8 @@ public class productForm extends javax.swing.JPanel {
         txtDescription = new javax.swing.JScrollPane();
         descriptionTxt = new javax.swing.JTextArea();
         txtCategory = new javax.swing.JTextField();
+        labelSellPrice = new javax.swing.JLabel();
+        txtSellPrice = new javax.swing.JTextField();
         PanelDUBtn = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         deleteBtn = new javax.swing.JButton();
@@ -168,6 +197,11 @@ public class productForm extends javax.swing.JPanel {
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort by Name", "Sort by Manufacture", "Sort by Category", "" }));
         sortComboBox.setToolTipText("");
+        sortComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sortComboBoxItemStateChanged(evt);
+            }
+        });
         sortComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortComboBoxActionPerformed(evt);
@@ -227,7 +261,7 @@ public class productForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Manufacture", "Description", "Category"
+                "Name", "Manufacture", "Sell Price", "Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -375,6 +409,12 @@ public class productForm extends javax.swing.JPanel {
         descriptionTxt.setRows(5);
         txtDescription.setViewportView(descriptionTxt);
 
+        labelSellPrice.setBackground(new java.awt.Color(255, 255, 255));
+        labelSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelSellPrice.setForeground(new java.awt.Color(255, 255, 255));
+        labelSellPrice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelSellPrice.setText("Sell Price:");
+
         javax.swing.GroupLayout PanelDetailLayout = new javax.swing.GroupLayout(PanelDetail);
         PanelDetail.setLayout(PanelDetailLayout);
         PanelDetailLayout.setHorizontalGroup(
@@ -388,12 +428,15 @@ public class productForm extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelDetailLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtManufacture)
-                            .addComponent(txtName)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                            .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 20, Short.MAX_VALUE))
+                        .addGroup(PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtManufacture)
+                                .addComponent(txtName)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                                .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         PanelDetailLayout.setVerticalGroup(
             PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,8 +456,12 @@ public class productForm extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addGap(12, 12, 12)
-                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelSellPrice)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         PanelRight.add(PanelDetail, java.awt.BorderLayout.CENTER);
@@ -497,13 +544,41 @@ public class productForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearch3ActionPerformed
 
     private void txtSearch3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearch3KeyTyped
+        Timer timer = new Timer(500, (ActionEvent e) -> {
+            refreshTable();
+        });
+        timer.setRepeats(false); // Đảm bảo rằng Timer chỉ thực hiện một lần
 
-      
+        // Thêm DocumentListener vào searchTextField
+        txtSearch3.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                restartTimer();
+            }
+
+            public void restartTimer() {
+                if (timer.isRunning()) {
+                    timer.restart();
+                } else {
+                    timer.start();
+                }
+            }
+        });
 //        refreshTable();
     }//GEN-LAST:event_txtSearch3KeyTyped
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-      
+
 //        refreshTable();
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -512,29 +587,40 @@ public class productForm extends javax.swing.JPanel {
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-        if(this.previlege == 1){
+        if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        if (im==null) {
+
+        if (im == null) {
             im = new insertModal();
             im.setVisible(true);
             im.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        im = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
         } else {
             im.toFront();
         }
-    
+
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        selectedProduct = productList.get(row);
+
+        if (row >= 0) {
+            txtName.setText(model.getValueAt(row, 0).toString());
+            txtManufacture.setText(model.getValueAt(row, 1).toString());
+            txtSellPrice.setText(selectedProduct.getSellPrice().toString());
+            txtCategory.setText(model.getValueAt(row, 3).toString());
+            descriptionTxt.setText(selectedProduct.getDescription());
+        }
     }//GEN-LAST:event_tableMouseClicked
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -542,33 +628,66 @@ public class productForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        if(this.previlege == 1){
+        if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int row = table.getSelectedRow();
+        Product selectedProduct = productList.get(row);
+        controller_Product controller = new controller_Product();
+
+        try {
+            controller.deleteProduct(selectedProduct.getProductId());
+        } catch (SQLException ex) {
+            Logger.getLogger(productForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        refreshTable();
+        JOptionPane.showMessageDialog(null, "Delete success!");
+        refreshDetail();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        if(this.previlege == 1){
+        if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (um==null) {
-            um = new updateModal();
-            um.setVisible(true);
-            um.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        um = null; //// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
-        } else {
-            um.toFront();
-        }
 
+        openUpdateForm();
+        um.setDataProduct(selectedProduct);
     }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged
+        // TODO add your handling code here:
+        controller_Product controller = new controller_Product();
+        String searchTxt = this.txtSearch3.getText();
+
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+                // Lấy phương thức sắp xếp được chọn
+                String selectedMethod = (String) evt.getItem();
+                switch (selectedMethod) {
+                    case "Sort by Name":
+                        status = 1;
+                        break;
+                    case "Sort by Manufacture":
+                        status = 2;
+                        break;
+                    case "Sort by Category":
+                        status = 3;
+                        break;
+                }
+                System.out.println(status);
+                productList = controller.getAllproduct(status, searchTxt);
+                refreshTable();
+                System.out.println("SORTED");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_sortComboBoxItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -596,6 +715,7 @@ public class productForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel labelSellPrice;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;
     private com.view.swing.Table table;
@@ -604,6 +724,7 @@ public class productForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtManufacture;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtSearch3;
+    private javax.swing.JTextField txtSellPrice;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }
