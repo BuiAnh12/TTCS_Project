@@ -2,6 +2,7 @@
 package com.view.form;
 
 
+import com.controller.controller_Import;
 import com.controller.controller_Invoice;
 import com.controller.controller_InvoiceItem;
 import com.controller.controller_cartElement;
@@ -81,6 +82,9 @@ public class orderForm extends javax.swing.JPanel {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshtable();
+        this.returnBtn.setEnabled(false);
+        this.updateBtn.setEnabled(false);
+        this.deleteBtn.setEnabled(false);
     }
     public void refreshtable(){
         try {
@@ -680,6 +684,7 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
+
         if (im==null) {
             im = new insertModal();
             im.setVisible(true);
@@ -700,7 +705,9 @@ public class orderForm extends javax.swing.JPanel {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         int index = this.table.getSelectedRow() ;
         updateDetail(invoiceList.get(index));
-
+        this.returnBtn.setEnabled(true);
+        this.updateBtn.setEnabled(true);
+        this.deleteBtn.setEnabled(true);
     }//GEN-LAST:event_tableMouseClicked
 
     private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerNameActionPerformed
@@ -716,11 +723,60 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableDetailMouseClicked
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
-    
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn trả hàng của hóa đơn này?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            int selectedIndex = table.getSelectedRow();
+            Invoice tmp = invoiceList.get(selectedIndex);
+            controller_cartElement controller_cart = new controller_cartElement();
+            List<CartElement> cartList = new ArrayList<CartElement>();
+            try{
+                cartList = controller_cart.getAllCartElement(tmp.getInvoiceId());
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            for (CartElement cart: cartList ){
+                int importId = cart.getImportId();
+                int quantity = cart.getQuantity();
+                controller_Import controller_import = new controller_Import();
+                try{
+                    controller_import.editImport(importId, quantity);
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            controller_Invoice controller_invoice = new controller_Invoice();
+            controller_InvoiceItem controller_item = new controller_InvoiceItem();
+            try{
+                controller_item.deleteInvoiceItemId(tmp.getInvoiceId());
+                controller_invoice.deleteInvoice(tmp.getInvoiceId());
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        refreshtable();
     }//GEN-LAST:event_returnBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-     
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa hóa đơn này?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            int selectedIndex = table.getSelectedRow();
+            Invoice tmp = invoiceList.get(selectedIndex);
+            controller_Invoice controller = new controller_Invoice();
+            controller_InvoiceItem controller_item = new controller_InvoiceItem();
+            try{
+                controller_item.deleteInvoiceItemId(tmp.getInvoiceId());
+                controller.deleteInvoice(tmp.getInvoiceId());
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            refreshtable();
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed

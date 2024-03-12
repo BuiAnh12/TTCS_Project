@@ -360,6 +360,12 @@ public class updateModal extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Date");
 
+        txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDateFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -788,70 +794,73 @@ public class updateModal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
-        int invoiceId = currentInvoice.getInvoiceId();
-        int customerIndex = this.combCustomer.getSelectedIndex();
-        Customer customer = customerList.get(customerIndex);
-        Date date = new Date();
-        try{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            String dateString = this.txtDate.getText(); 
-            date = dateFormat.parse(dateString);
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn chỉnh sửa hóa đơn này?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            int invoiceId = currentInvoice.getInvoiceId();
+            int customerIndex = this.combCustomer.getSelectedIndex();
+            Customer customer = customerList.get(customerIndex);
+            Date date = new Date();
+            try{
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                String dateString = this.txtDate.getText(); 
+                date = dateFormat.parse(dateString);
 
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
-        
-        
-        try{
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            currentInvoice = new Invoice(invoiceId ,customer.getCustomerId(),user.getStaffId(),sqlDate);
-            controller_invoice.editInvoice(currentInvoice);
-            for (CartElement cart: cartList ){
-                if (cart.getInvoiceItemId() == -1){ // if it is a new Items
-                    int quantity = cart.getQuantity();
-                    InvoiceItem tmp = new InvoiceItem(invoiceId, cart.getSellPrice(),0); // setCartQuanitity deffault = 0
-                    List<Import> ListImport = controller_invoice.findAvailableId(cart.getProductId(), cart.getQuantity());
-                    for (Import imp : ListImport){
-                        tmp.setImportId(imp.getImportId());
-                        tmp.setProfit(cart.getTotalPrice().add(imp.getUnitPrice().negate().multiply(BigDecimal.valueOf(quantity))));
-                        tmp.setUnitPrice(imp.getUnitPrice());
-                        tmp.setTotalPrice(cart.getTotalPrice());
-                        if (imp.getAvailableQuantity() <= quantity){
-                            tmp.setQuantity(tmp.getQuantity() + imp.getAvailableQuantity());
-                            quantity -= tmp.getQuantity();
-                            imp.setAvailableQuantity(0);
-                        }
-                        else {
-                            tmp.setQuantity(tmp.getQuantity() + quantity);
-                            imp.setAvailableQuantity(imp.getAvailableQuantity() - quantity);
-                        }
-                        controller_import.editImport(imp);
-                        controller_invoiceItem.addInvoiceItem(tmp);
-                    }
-                    
-                }
-                else{ // if it an old items
-                    //invoiceId already have above
-                    int importId = cart.getImportId();
-                    BigDecimal unitPrice = cart.getUnitPrice();
-                    int quantity = cart.getQuantity();
-                    BigDecimal totalPrice = cart.getTotalPrice();
-                    BigDecimal profit = cart.getTotalPrice().add(unitPrice.negate().multiply(BigDecimal.valueOf(quantity)));
-                    int invoiceItemId = cart.getInvoiceItemId();
-                    InvoiceItem invoiceitem=new InvoiceItem(invoiceItemId, invoiceId, importId, unitPrice, quantity, totalPrice, profit);
-                    controller_invoiceItem.editInvoiceItem(invoiceitem);
-                    int quantityChanges = cart.getPreviousQuantity() - quantity;
-                    controller_import.editImport(importId,quantityChanges);
-
-                }
-                
+            }catch (ParseException e) {
+                e.printStackTrace();
             }
-            this.dispose();
+
+
+            try{
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                currentInvoice = new Invoice(invoiceId ,customer.getCustomerId(),user.getStaffId(),sqlDate);
+                controller_invoice.editInvoice(currentInvoice);
+                for (CartElement cart: cartList ){
+                    if (cart.getInvoiceItemId() == -1){ // if it is a new Items
+                        int quantity = cart.getQuantity();
+                        InvoiceItem tmp = new InvoiceItem(invoiceId, cart.getSellPrice(),0); // setCartQuanitity deffault = 0
+                        List<Import> ListImport = controller_invoice.findAvailableId(cart.getProductId(), cart.getQuantity());
+                        for (Import imp : ListImport){
+                            tmp.setImportId(imp.getImportId());
+                            tmp.setProfit(cart.getTotalPrice().add(imp.getUnitPrice().negate().multiply(BigDecimal.valueOf(quantity))));
+                            tmp.setUnitPrice(imp.getUnitPrice());
+                            tmp.setTotalPrice(cart.getTotalPrice());
+                            if (imp.getAvailableQuantity() <= quantity){
+                                tmp.setQuantity(tmp.getQuantity() + imp.getAvailableQuantity());
+                                quantity -= tmp.getQuantity();
+                                imp.setAvailableQuantity(0);
+                            }
+                            else {
+                                tmp.setQuantity(tmp.getQuantity() + quantity);
+                                imp.setAvailableQuantity(imp.getAvailableQuantity() - quantity);
+                            }
+                            controller_import.editImport(imp);
+                            controller_invoiceItem.addInvoiceItem(tmp);
+                        }
+
+                    }
+                    else{ // if it an old items
+                        //invoiceId already have above
+                        int importId = cart.getImportId();
+                        BigDecimal unitPrice = cart.getUnitPrice();
+                        int quantity = cart.getQuantity();
+                        BigDecimal totalPrice = cart.getTotalPrice();
+                        BigDecimal profit = cart.getTotalPrice().add(unitPrice.negate().multiply(BigDecimal.valueOf(quantity)));
+                        int invoiceItemId = cart.getInvoiceItemId();
+                        InvoiceItem invoiceitem=new InvoiceItem(invoiceItemId, invoiceId, importId, unitPrice, quantity, totalPrice, profit);
+                        controller_invoiceItem.editInvoiceItem(invoiceitem);
+                        int quantityChanges = cart.getPreviousQuantity() - quantity;
+                        controller_import.editImport(importId,quantityChanges);
+
+                    }
+
+                }
+                this.dispose();
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        
     }//GEN-LAST:event_txtSubmitActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
@@ -913,6 +922,29 @@ public class updateModal extends javax.swing.JFrame {
             return;
         }
     }//GEN-LAST:event_txtQuantityFocusLost
+
+    private void txtDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusLost
+        String date = txtDate.getText();
+        if (date == "" ){
+            return;
+        }
+        // Define the expected date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setLenient(false); // Set lenient to false to enforce strict date parsing
+
+        try {
+            // Attempt to parse the date
+            Date parsedDate = dateFormat.parse(date);
+
+            // Date format is correct
+        } catch (ParseException ex) {
+            // Date format is incorrect
+            JOptionPane.showMessageDialog(this, "Please enter the date in the format dd-MM-yyyy", "Invalid Date Format", JOptionPane.ERROR_MESSAGE);
+
+            // Refocus to the txtDate field
+            txtDate.requestFocus();
+        }
+    }//GEN-LAST:event_txtDateFocusLost
 
     /**
      * @param args the command line arguments
