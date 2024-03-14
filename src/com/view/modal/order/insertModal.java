@@ -1,6 +1,6 @@
 
 package com.view.modal.order;
-
+import com.view.modal.customer.insertModalCustomer;
 import com.controller.controller_Customer;
 import com.controller.controller_Import;
 import com.controller.controller_Invoice;
@@ -96,6 +96,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         combCustomer = new javax.swing.JComboBox<>();
         btnCustomerInsert = new javax.swing.JButton();
+        btnCustomerReload = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
@@ -141,14 +142,14 @@ public class insertModal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Name");
 
+        txtCustomerName.setEditable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(txtCustomerName, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,14 +167,14 @@ public class insertModal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText(" Email");
 
+        txtCustomerEmail.setEditable(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtCustomerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(txtCustomerEmail, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,14 +192,14 @@ public class insertModal extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText(" Address");
 
+        txtCustomerAddress.setEditable(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(txtCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(txtCustomerAddress, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,16 +231,24 @@ public class insertModal extends javax.swing.JFrame {
             }
         });
 
+        btnCustomerReload.setText("Reload");
+        btnCustomerReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerReloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(combCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(combCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCustomerInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCustomerInsert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnCustomerReload, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +257,9 @@ public class insertModal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(combCustomer)
-                    .addComponent(btnCustomerInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCustomerInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                        .addComponent(btnCustomerReload, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -284,6 +295,12 @@ public class insertModal extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Date");
+
+        txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDateFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -321,6 +338,8 @@ public class insertModal extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Total Price");
 
+        txtTotalPrice.setEditable(false);
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -356,7 +375,15 @@ public class insertModal extends javax.swing.JFrame {
             new String [] {
                 "Product Name", "Quantity", "Unit Price", "Price"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -383,6 +410,8 @@ public class insertModal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Name");
+
+        txtProductName.setEditable(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -412,6 +441,8 @@ public class insertModal extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Manufacture");
 
+        txtManufacture.setEditable(false);
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -439,6 +470,8 @@ public class insertModal extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Decscription");
+
+        txtDescription.setEditable(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -772,6 +805,12 @@ public class insertModal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnCustomerInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerInsertActionPerformed
+        insertModalCustomer subForm = new insertModalCustomer();
+        subForm.setVisible(true);
+        
+        
+        
+
         
     }//GEN-LAST:event_btnCustomerInsertActionPerformed
 
@@ -828,6 +867,40 @@ public class insertModal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void btnCustomerReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerReloadActionPerformed
+        try{
+        customerList = customer_controller.getAllCustomers(1, "");
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        fillCustomerData();
+    }//GEN-LAST:event_btnCustomerReloadActionPerformed
+
+    private void txtDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusLost
+        String date = txtDate.getText();
+        if (date == "" ){
+            return;
+        }
+        // Define the expected date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setLenient(false); // Set lenient to false to enforce strict date parsing
+
+        try {
+            // Attempt to parse the date
+            Date parsedDate = dateFormat.parse(date);
+
+            // Date format is correct
+        } catch (ParseException ex) {
+            // Date format is incorrect
+            JOptionPane.showMessageDialog(this, "Please enter the date in the format dd-MM-yyyy", "Invalid Date Format", JOptionPane.ERROR_MESSAGE);
+
+            // Refocus to the txtDate field
+            txtDate.requestFocus();
+    }
+
+    }//GEN-LAST:event_txtDateFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -877,6 +950,7 @@ public class insertModal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCustomerInsert;
+    private javax.swing.JButton btnCustomerReload;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnSubmit;
