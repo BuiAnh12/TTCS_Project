@@ -235,6 +235,7 @@ public class importForm extends javax.swing.JPanel {
         txtCategory = new javax.swing.JTextField();
         PanelDUBtn = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        resetBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
 
@@ -512,6 +513,7 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtName.setEditable(false);
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -556,6 +558,8 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtQuantity.setEditable(false);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -593,6 +597,8 @@ public class importForm extends javax.swing.JPanel {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
+
+        txtStock.setEditable(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -632,6 +638,7 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtImpDate.setEditable(false);
         txtImpDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtImpDateActionPerformed(evt);
@@ -676,6 +683,8 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtManuDate.setEditable(false);
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -714,6 +723,7 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtExpDate.setEditable(false);
         txtExpDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtExpDateActionPerformed(evt);
@@ -757,6 +767,8 @@ public class importForm extends javax.swing.JPanel {
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
+
+        txtUnitPrice.setEditable(false);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -826,6 +838,8 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtTotal.setEditable(false);
+
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -864,6 +878,7 @@ public class importForm extends javax.swing.JPanel {
             .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
+        txtCategory.setEditable(false);
         txtCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCategoryActionPerformed(evt);
@@ -933,7 +948,7 @@ public class importForm extends javax.swing.JPanel {
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         PanelRight.add(PanelDetail, java.awt.BorderLayout.CENTER);
@@ -947,14 +962,24 @@ public class importForm extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 316, Short.MAX_VALUE)
+            .addGap(0, 244, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+            .addGap(0, 29, Short.MAX_VALUE)
         );
 
         PanelDUBtn.add(jPanel3);
+
+        resetBtn.setBackground(new java.awt.Color(36, 36, 36));
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetBtn.setText("RESET");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+        PanelDUBtn.add(resetBtn);
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -988,8 +1013,13 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        openUpdateForm();
-        um.setDataImport(selectedImport);
+        if (table.getSelectedRow() > -1) {
+            openUpdateForm();
+            um.setDataImport(selectedImport);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a product to update!");
+        }
+
 //        refreshDetail();
     }//GEN-LAST:event_updateBtnActionPerformed
 
@@ -1014,7 +1044,6 @@ public class importForm extends javax.swing.JPanel {
             // Chuyển đổi kiểu int sang BigDecimal và thực hiện phép nhân
             BigDecimal total = BigDecimal.valueOf(selectedImport.getImportQuantity()).multiply(selectedImport.getUnitPrice());
             txtTotal.setText(total.toString());
-
         }
 
     }//GEN-LAST:event_tableMouseClicked
@@ -1062,14 +1091,24 @@ public class importForm extends javax.swing.JPanel {
                     "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        try {
-            controller.deleteImport(selectedImport.getImportId());
-            refreshTable();
-            refreshDetail();
-            JOptionPane.showMessageDialog(null, "Delete success!");
-        } catch (SQLException ex) {
-            Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a import to delete!");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this import?", "Alert",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    controller.deleteImport(selectedImport.getImportId());
+                    refreshTable();
+                    refreshDetail();
+                    JOptionPane.showMessageDialog(null, "Delete success!");
+                } catch (SQLException ex) {
+                    Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
+
 
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -1137,6 +1176,12 @@ public class importForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_sortComboBoxItemStateChanged
 
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        // TODO add your handling code here:
+        refreshTable();
+        refreshDetail();
+    }//GEN-LAST:event_resetBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButton;
@@ -1188,6 +1233,7 @@ public class importForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;
     private com.view.swing.Table table;

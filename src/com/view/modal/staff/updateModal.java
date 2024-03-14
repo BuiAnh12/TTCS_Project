@@ -22,6 +22,7 @@ public class updateModal extends javax.swing.JFrame {
      * Creates new form insertModal
      */
     private int staffId;
+
     public updateModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -34,8 +35,8 @@ public class updateModal extends javax.swing.JFrame {
         jTextField4.setText(staff.getAddress());
         jTextField5.setText(staff.getUsername());
         jTextField6.setText(staff.getPassword());
-        jTextField7.setText(String.valueOf(staff.getPrevilege()));
-        
+        combAccPre.setSelectedIndex(staff.getPrevilege() - 1);
+
         staffId = staff.getStaffId();
     }
 
@@ -64,7 +65,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        combAccPre = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -109,6 +110,8 @@ public class updateModal extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Account Previlege");
 
+        combAccPre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sale", "Stock", "Admin" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -131,7 +134,7 @@ public class updateModal extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField5)
                     .addComponent(jTextField6)
-                    .addComponent(jTextField7))
+                    .addComponent(combAccPre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -161,9 +164,9 @@ public class updateModal extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(combAccPre)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,26 +237,42 @@ public class updateModal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField1.getText();
-        int age = Integer.parseInt(jTextField2.getText());
-        String email = jTextField3.getText();
-        String address = jTextField4.getText();
-        String username = jTextField5.getText();
-        String password = jTextField6.getText();
-        int accpre = Integer.parseInt(jTextField7.getText());
-        Staff staff = new Staff(staffId, name, age, email, address, username, password, accpre);
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to update this staff?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            String name = jTextField1.getText();
+            int age = Integer.parseInt(jTextField2.getText());
+            String email = jTextField3.getText();
+            String address = jTextField4.getText();
+            String username = jTextField5.getText();
+            String password = jTextField6.getText();
+            String accpre = (String) combAccPre.getSelectedItem();
+            int accpreNum = 1;
+            switch (accpre) {
+                case "Sale":
+                    accpreNum = 1;
+                    break;
+                case "Stock":
+                    accpreNum = 2;
+                    break;
+                case "Admin":
+                    accpreNum = 3;
+                    break;
+                default:
+                    throw new AssertionError();
+            }
 
-       
+            Staff staff = new Staff(staffId, name, age, email, address, username, password, accpreNum);
+
             controller_Staff controller = new controller_Staff();
-        try {
-            controller.editStaff(staff);
-            JOptionPane.showMessageDialog(null, "Update success!");
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                controller.editStaff(staff);
+                JOptionPane.showMessageDialog(null, "Update success!");
+                dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-            
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -300,6 +319,7 @@ public class updateModal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combAccPre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -318,6 +338,5 @@ public class updateModal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

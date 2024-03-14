@@ -57,7 +57,7 @@ public class staffForm extends javax.swing.JPanel {
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    
+
     public void refreshDetail() {
         txtCustomerName.setText("");
         txtEmail.setText("");
@@ -171,6 +171,7 @@ public class staffForm extends javax.swing.JPanel {
         lablAge = new javax.swing.JLabel();
         PanelDUBtn = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        resetBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
 
@@ -758,7 +759,7 @@ public class staffForm extends javax.swing.JPanel {
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelDetailLayout = new javax.swing.GroupLayout(PanelDetail);
@@ -789,14 +790,24 @@ public class staffForm extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 316, Short.MAX_VALUE)
+            .addGap(0, 244, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+            .addGap(0, 29, Short.MAX_VALUE)
         );
 
         PanelDUBtn.add(jPanel3);
+
+        resetBtn.setBackground(new java.awt.Color(36, 36, 36));
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetBtn.setText("RESET");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+        PanelDUBtn.add(resetBtn);
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -830,8 +841,13 @@ public class staffForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        openUpdateForm();
-        um.setDataStaff(selectedStaff);
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a customer to update!");
+        } else {
+            openUpdateForm();
+            um.setDataStaff(selectedStaff);
+        }
+
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
@@ -851,15 +867,20 @@ public class staffForm extends javax.swing.JPanel {
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        controller_Staff controller = new controller_Staff();
-        try {
-            controller.deleteStaff(selectedStaff.getStaffId());
-            refreshTable();
-            JOptionPane.showMessageDialog(null, "Delete success!");
-            refreshDetail();
-        } catch (SQLException ex) {
-            Logger.getLogger(staffForm.class.getName()).log(Level.SEVERE, null, ex);
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a staff to delete!");
+        } else {
+            controller_Staff controller = new controller_Staff();
+            try {
+                controller.deleteStaff(selectedStaff.getStaffId());
+                refreshTable();
+                JOptionPane.showMessageDialog(null, "Delete success!");
+                refreshDetail();
+            } catch (SQLException ex) {
+                Logger.getLogger(staffForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -925,8 +946,6 @@ public class staffForm extends javax.swing.JPanel {
         controller_Staff controller = new controller_Staff();
         String searchTxt = this.txtSearch.getText();
 
-
-
         try {
             if (evt.getStateChange() == ItemEvent.SELECTED) {
                 // Lấy phương thức sắp xếp được chọn
@@ -951,6 +970,12 @@ public class staffForm extends javax.swing.JPanel {
             Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_sortComboBoxItemStateChanged
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        // TODO add your handling code here:
+        refreshDetail();
+        refreshTable();
+    }//GEN-LAST:event_resetBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -994,6 +1019,7 @@ public class staffForm extends javax.swing.JPanel {
     private javax.swing.JLabel lablePosition;
     private javax.swing.JLabel lablePosition1;
     private javax.swing.JLabel lablePosition2;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;
     private com.view.swing.Table table;

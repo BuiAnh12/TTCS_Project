@@ -6,6 +6,7 @@ package com.view.modal.customer;
 
 import com.controller.controller_Customer;
 import com.model.Customer;
+import com.util.Util;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class insertModal extends javax.swing.JFrame {
      * Creates new form insertModal
      */
     private List<Customer> customerList = new ArrayList<>();
-    
+
     public insertModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -180,11 +181,7 @@ public class insertModal extends javax.swing.JFrame {
             String customerName = jTextField1.getText();
             String customerEmail = jTextField2.getText();
             String customerAddress = jTextField3.getText();
-            // Kiểm tra ràng buộc không được để trống
-            if (customerName.isEmpty() || customerEmail.isEmpty() || customerAddress.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Not left blank !", "Error", JOptionPane.ERROR_MESSAGE);
 
-            }
             // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
             Customer newCustomer = new Customer(customerList.size() + 1, customerName, customerEmail, customerAddress, 0);
 
@@ -194,15 +191,18 @@ public class insertModal extends javax.swing.JFrame {
             // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
             // saveToDatabase(newCustomer);
             controller_Customer controller = new controller_Customer();
-            try {
-                controller.addCustomer(newCustomer);
-                JOptionPane.showMessageDialog(null, "Add new customer success");
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            if (Util.validateCustomerInput(customerName, customerEmail, customerAddress)) {
+                try {
+                    controller.addCustomer(newCustomer);
+                    JOptionPane.showMessageDialog(null, "Add new customer success");
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
+
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

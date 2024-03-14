@@ -6,6 +6,7 @@ package com.view.modal.customer;
 
 import com.controller.controller_Customer;
 import com.model.Customer;
+import com.util.Util;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,15 +18,16 @@ import javax.swing.JOptionPane;
  * @author AnTran
  */
 public class updateModal extends javax.swing.JFrame {
+
     private int idCus;
     private int totalAmount;
     private controller_Customer controller = new controller_Customer();
-    
+
     public updateModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    
+
     public void setDataCustomer(Customer customer) {
         jTextField1.setText(customer.getCustomerName());
         jTextField2.setText(customer.getEmail());
@@ -33,6 +35,7 @@ public class updateModal extends javax.swing.JFrame {
         idCus = customer.getCustomerId();
         totalAmount = customer.getTotalAmount();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -183,13 +186,16 @@ public class updateModal extends javax.swing.JFrame {
         String email = jTextField2.getText();
         String address = jTextField3.getText();
         Customer cus = new Customer(idCus, name, email, address, totalAmount);
-        try {
-            controller.editCustomer(cus);
-            JOptionPane.showMessageDialog(null, "Update success!");
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+        if (Util.validateCustomerInput(name, email, address)) {
+            try {
+                controller.editCustomer(cus);
+                JOptionPane.showMessageDialog(null, "Update success!");
+                dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

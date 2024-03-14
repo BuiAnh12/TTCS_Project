@@ -6,6 +6,7 @@ package com.view.modal.product;
 
 import com.controller.controller_Product;
 import com.model.Product;
+import com.util.Util;
 import com.view.modal.customer.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -26,6 +27,7 @@ public class updateModal extends javax.swing.JFrame {
      */
     private int productId;
     private controller_Product controller = new controller_Product();
+
     public updateModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -318,36 +320,42 @@ public class updateModal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField7.getText();
-        String manu = jTextField8.getText();
-        String desc = jTextArea1.getText();
-        String category = jTextField4.getText();
-        BigDecimal sellPrice = new BigDecimal(jTextField5.getText());
-        Product product = new Product(productId, name, manu, desc, category, sellPrice);
-        
-        try {
-            controller.editProduct(product);
-            JOptionPane.showMessageDialog(null, "Update success!");
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to update this product?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            String name = jTextField7.getText();
+            String manu = jTextField8.getText();
+            String desc = jTextArea1.getText();
+            String category = jTextField4.getText();
+            BigDecimal sellPrice = new BigDecimal(jTextField5.getText());
+            if (Util.validateProductInput(name, manu, desc, category, sellPrice)) {
+                Product product = new Product(productId, name, manu, desc, category, sellPrice);
+
+                try {
+                    controller.editProduct(product);
+                    JOptionPane.showMessageDialog(null, "Update success!");
+                    dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
     public void setDataProduct(Product product) {
         jTextField7.setText(product.getProductName());
         jTextField8.setText(product.getManufacturer());
         jTextArea1.setText(product.getDescription());
         jTextField4.setText(product.getCategory());
         jTextField5.setText(product.getSellPrice().toString());
-        
+
         productId = product.getProductId();
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

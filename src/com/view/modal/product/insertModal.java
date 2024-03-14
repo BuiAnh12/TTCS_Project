@@ -6,6 +6,7 @@ package com.view.modal.product;
 
 import com.controller.controller_Product;
 import com.model.Product;
+import com.util.Util;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public class insertModal extends javax.swing.JFrame {
     /**
      * Creates new form insertModal
      */
-        private List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
+
     public insertModal() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -204,7 +206,7 @@ public class insertModal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm khách hàng này?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to add new this product?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             String productName = jTextField1.getText();
@@ -214,31 +216,30 @@ public class insertModal extends javax.swing.JFrame {
             String sellPriceTxt = jTextField5.getText();
             BigDecimal sellPrice = new BigDecimal(sellPriceTxt);
             // Kiểm tra ràng buộc không được để trống
-            if (sellPrice==null || productName.isEmpty() || manufacturer.isEmpty() || description.isEmpty() || category.isEmpty() ) {
-                JOptionPane.showMessageDialog(null, "Not left blank !", "Error", JOptionPane.ERROR_MESSAGE);
+            if (Util.validateProductInput(productName, manufacturer, description, category, sellPrice)) {
+                // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
+                Product newProduct = new Product(productList.size() + 1, productName, manufacturer, description, category, sellPrice);
 
+                // Thêm vào danh sách khách hàng và cập nhật bảng
+                productList.add(newProduct);
+
+                // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
+                // saveToDatabase(newCustomer);
+                controller_Product controller = new controller_Product();
+
+                try {
+                    controller.addProduct(newProduct);
+                    JOptionPane.showMessageDialog(null, "Add new product success");
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextArea1.setText("");
+                    jTextField4.setText("");
+                    jTextField5.setText("");
+                } catch (SQLException ex) {
+                    Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
-            Product newProduct = new Product(productList.size() + 1, productName, manufacturer, description, category, sellPrice);
 
-            // Thêm vào danh sách khách hàng và cập nhật bảng
-            productList.add(newProduct);
-
-            // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
-            // saveToDatabase(newCustomer);
-            controller_Product controller = new controller_Product();
-            
-            try {
-                controller.addProduct(newProduct);
-                JOptionPane.showMessageDialog(null, "Add new product success");
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextArea1.setText("");
-                jTextField4.setText("");
-                jTextField5.setText("");
-            } catch (SQLException ex) {
-                Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

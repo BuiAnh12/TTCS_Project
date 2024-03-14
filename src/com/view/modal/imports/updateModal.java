@@ -6,11 +6,13 @@ package com.view.modal.imports;
 
 import com.controller.controller_Import;
 import com.model.Import;
+import com.util.Util;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -23,9 +25,10 @@ import javax.swing.JOptionPane;
 public class updateModal extends javax.swing.JFrame {
 
     private int idImport;
-    private String productName;
     private String category;
+    private int productId;
     private controller_Import controller = new controller_Import();
+    private List<Import> importList;
 
     /**
      * Creates new form insertModal
@@ -36,7 +39,13 @@ public class updateModal extends javax.swing.JFrame {
     }
 
     public void setDataImport(Import importData) {
-        jTextField1.setText(String.valueOf(importData.getProductId()));
+        try {
+            importList = controller.getAllImports(1, "");
+        } catch (SQLException ex) {
+            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        fillProductName();
+        combProduct.setSelectedItem(importData.getProductName());
         jTextField2.setText(importData.getManufacturingDate().toString());
         jTextField3.setText(importData.getExpiryDate().toString());
         jTextField4.setText(importData.getImportDate().toString());
@@ -45,8 +54,15 @@ public class updateModal extends javax.swing.JFrame {
         jTextField7.setText(String.valueOf(importData.getUnitPrice()));
 
         idImport = importData.getImportId();
-        productName = importData.getProductName();
         category = importData.getCategory();
+        productId = importData.getProductId();
+    }
+
+    public void fillProductName() {
+        this.combProduct.removeAllItems();
+        for (Import imp : importList) {
+            combProduct.addItem(imp.getProductName());
+        }
     }
 
     /**
@@ -62,7 +78,6 @@ public class updateModal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -75,6 +90,7 @@ public class updateModal extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
+        combProduct = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -119,6 +135,8 @@ public class updateModal extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Unit Price");
 
+        combProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -132,8 +150,8 @@ public class updateModal extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(combProduct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
@@ -152,9 +170,9 @@ public class updateModal extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(combProduct))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -249,42 +267,52 @@ public class updateModal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int idProduct = Integer.parseInt(jTextField1.getText());
-        Date utilManuDate = null;
-        Date utilExpiryDate = null;
-        Date utilImportDate = null;
-        
-        java.sql.Date manuDate = null;
-        java.sql.Date expiryDate = null;
-        java.sql.Date importDate = null;
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            utilManuDate = dateFormat.parse(jTextField2.getText());
-            manuDate = new java.sql.Date(utilManuDate.getTime());
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to update this import?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+//            int index = this.combProduct.getSelectedIndex();
+//            if (index <= 0) {
+//                index = 0;
+//            }
+//            int idProduct = Integer.parseInt((String) combProduct.getSelectedItem());
+            Date utilManuDate = null;
+            Date utilExpiryDate = null;
+            Date utilImportDate = null;
 
-            utilExpiryDate = dateFormat.parse(jTextField3.getText());
-            expiryDate = new java.sql.Date(utilExpiryDate.getTime());
+            java.sql.Date manuDate = null;
+            java.sql.Date expiryDate = null;
+            java.sql.Date importDate = null;
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                utilManuDate = dateFormat.parse(jTextField2.getText());
+                manuDate = new java.sql.Date(utilManuDate.getTime());
 
-            utilImportDate = dateFormat.parse(jTextField4.getText());
-            importDate = new java.sql.Date(utilImportDate.getTime());
-        } catch (ParseException ex) {
-            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                utilExpiryDate = dateFormat.parse(jTextField3.getText());
+                expiryDate = new java.sql.Date(utilExpiryDate.getTime());
 
-        int quantities = Integer.parseInt(jTextField5.getText());
-        int avaiQuantities = Integer.parseInt(jTextField6.getText());
-        BigDecimal unitPrice = new BigDecimal(jTextField7.getText());
+                utilImportDate = dateFormat.parse(jTextField4.getText());
+                importDate = new java.sql.Date(utilImportDate.getTime());
+            } catch (ParseException ex) {
+                Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        Import importData = new Import(idImport, idProduct, manuDate, expiryDate, importDate,
-                quantities, avaiQuantities, unitPrice);
+            int quantities = Integer.parseInt(jTextField5.getText());
+            int avaiQuantities = Integer.parseInt(jTextField6.getText());
+            BigDecimal unitPrice = new BigDecimal(jTextField7.getText());
 
-        try {
-            controller.editImport(importData);
-            JOptionPane.showMessageDialog(null, "Update success!");
-            dispose();
-            System.out.println("Update success");
-        } catch (SQLException ex) {
-            Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+            if (Util.validateImportInput(manuDate, expiryDate, importDate, quantities, avaiQuantities, unitPrice)) {
+                Import importData = new Import(idImport, productId, manuDate, expiryDate, importDate,
+                        quantities, avaiQuantities, unitPrice);
+
+                try {
+                    controller.editImport(importData);
+                    JOptionPane.showMessageDialog(null, "Update success!");
+                    dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -327,6 +355,7 @@ public class updateModal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combProduct;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -339,7 +368,6 @@ public class updateModal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

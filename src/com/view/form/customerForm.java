@@ -38,6 +38,7 @@ public class customerForm extends javax.swing.JPanel {
     private List<DetailCustomer> detailCusList = new ArrayList<DetailCustomer>();
     private Customer selectedCustomer = null;
     private int status = 1;
+    DefaultTableModel detailModel;
 
     public customerForm() {
         initComponents();
@@ -67,16 +68,19 @@ public class customerForm extends javax.swing.JPanel {
             table.addRow(new Object[]{tmp.getCustomerName(), tmp.getEmail(), tmp.getAddress(), decimalFormat.format(tmp.getTotalAmount()) + " VNĐ"});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
     }
-    
+
     public void refreshDetail() {
         txtCustomerName.setText("");
         txtEmail.setText("");
         txtAddress.setText("");
         txtTotalAmount.setText("");
-       
+        while (detailModel.getRowCount() > 0) {
+            detailModel.removeRow(0);
+        }
     }
-    
+
     public void openUpdateForm() {
         if (updateCustomer == null) {
             updateCustomer = new updateModal();
@@ -139,6 +143,7 @@ public class customerForm extends javax.swing.JPanel {
         detail_table = new com.view.swing.Table();
         PanelDUBtn = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        resetBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
 
@@ -385,6 +390,8 @@ public class customerForm extends javax.swing.JPanel {
 
         jPanel12.setBackground(new java.awt.Color(36, 36, 36));
 
+        txtCustomerName.setEditable(false);
+
         jPanel13.setBackground(new java.awt.Color(36, 36, 36));
 
         lableName.setBackground(new java.awt.Color(255, 255, 255));
@@ -427,6 +434,8 @@ public class customerForm extends javax.swing.JPanel {
         );
 
         jPanel14.setBackground(new java.awt.Color(36, 36, 36));
+
+        txtEmail.setEditable(false);
 
         jPanel15.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -473,6 +482,8 @@ public class customerForm extends javax.swing.JPanel {
 
         jPanel16.setBackground(new java.awt.Color(36, 36, 36));
 
+        txtAddress.setEditable(false);
+
         jPanel17.setBackground(new java.awt.Color(36, 36, 36));
 
         lableAddress.setBackground(new java.awt.Color(255, 255, 255));
@@ -517,6 +528,8 @@ public class customerForm extends javax.swing.JPanel {
         );
 
         jPanel18.setBackground(new java.awt.Color(36, 36, 36));
+
+        txtTotalAmount.setEditable(false);
 
         jPanel19.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -654,7 +667,7 @@ public class customerForm extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
+            .addGap(0, 252, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -662,6 +675,16 @@ public class customerForm extends javax.swing.JPanel {
         );
 
         PanelDUBtn.add(jPanel3);
+
+        resetBtn.setBackground(new java.awt.Color(36, 36, 36));
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetBtn.setText("RESET");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+        PanelDUBtn.add(resetBtn);
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -754,20 +777,19 @@ public class customerForm extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int row = table.getSelectedRow();
         selectedCustomer = customerList.get(row);
-    
+
         if (row >= 0) {
             txtCustomerName.setText(model.getValueAt(row, 0).toString());
             txtEmail.setText(model.getValueAt(row, 1).toString());
             txtAddress.setText(model.getValueAt(row, 2).toString());
             txtTotalAmount.setText(model.getValueAt(row, 3).toString());
 
-            DefaultTableModel detailModel = (DefaultTableModel) detail_table.getModel();
+            detailModel = (DefaultTableModel) detail_table.getModel();
             detailModel.setRowCount(0);
             DecimalFormat decimalFormat = new DecimalFormat("#,###");
             controller_Customer controller = new controller_Customer();
             try {
                 detailCusList = controller.getDetail_Customers(selectedCustomer.getCustomerId());
-                System.out.println(selectedCustomer.getCustomerId());
             } catch (SQLException ex) {
                 Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -786,23 +808,37 @@ public class customerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableMouseClicked
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int row = table.getSelectedRow();
-        Customer selectedCustomer = customerList.get(row);
-        controller_Customer controller = new controller_Customer();
-        try {
-            controller.deleteCustomer(selectedCustomer.getCustomerId());
-            refreshTable();
-            refreshDetail();
-            JOptionPane.showMessageDialog(null, "Delete success!");
-        } catch (SQLException ex) {
-            Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a customer to delete!");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this customer?", "Alert",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                int row = table.getSelectedRow();
+                Customer selectedCustomer = customerList.get(row);
+                controller_Customer controller = new controller_Customer();
+                try {
+                    controller.deleteCustomer(selectedCustomer.getCustomerId());
+                    refreshTable();
+                    refreshDetail();
+                    JOptionPane.showMessageDialog(null, "Delete success!");
+                } catch (SQLException ex) {
+                    Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
         }
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        openUpdateForm();
+        if(table.getSelectedRow()>-1) {
+            openUpdateForm();
         updateCustomer.setDataCustomer(selectedCustomer);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a customer to update!");
+        }
+        
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged
@@ -832,8 +868,13 @@ public class customerForm extends javax.swing.JPanel {
             Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_sortComboBoxItemStateChanged
-    
-    
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        // TODO add your handling code here:
+        refreshDetail();
+        refreshTable();
+    }//GEN-LAST:event_resetBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButton3;
@@ -870,6 +911,7 @@ public class customerForm extends javax.swing.JPanel {
     private javax.swing.JLabel lableEmail;
     private javax.swing.JLabel lableName;
     private javax.swing.JLabel lableTotalAmount;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;
     private javax.swing.JScrollPane spTable1;

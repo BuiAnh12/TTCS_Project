@@ -134,6 +134,7 @@ public class productForm extends javax.swing.JPanel {
         jPanel10 = new javax.swing.JPanel();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        resetBtn = new javax.swing.JButton();
 
         jPanel7.setBackground(new java.awt.Color(22, 23, 23));
         jPanel7.setForeground(new java.awt.Color(22, 23, 23));
@@ -381,6 +382,7 @@ public class productForm extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Name");
 
+        txtName.setEditable(false);
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -392,6 +394,8 @@ public class productForm extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Manufacture");
+
+        txtManufacture.setEditable(false);
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -405,15 +409,20 @@ public class productForm extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Decscription");
 
+        descriptionTxt.setEditable(false);
         descriptionTxt.setColumns(20);
         descriptionTxt.setRows(5);
         txtDescription.setViewportView(descriptionTxt);
+
+        txtCategory.setEditable(false);
 
         labelSellPrice.setBackground(new java.awt.Color(255, 255, 255));
         labelSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelSellPrice.setForeground(new java.awt.Color(255, 255, 255));
         labelSellPrice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelSellPrice.setText("Sell Price:");
+
+        txtSellPrice.setEditable(false);
 
         javax.swing.GroupLayout PanelDetailLayout = new javax.swing.GroupLayout(PanelDetail);
         PanelDetail.setLayout(PanelDetailLayout);
@@ -489,12 +498,23 @@ public class productForm extends javax.swing.JPanel {
             }
         });
 
+        resetBtn.setBackground(new java.awt.Color(36, 36, 36));
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetBtn.setText("RESET");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(227, Short.MAX_VALUE)
+                .addContainerGap(149, Short.MAX_VALUE)
+                .addComponent(resetBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateBtn)
@@ -505,7 +525,8 @@ public class productForm extends javax.swing.JPanel {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteBtn)
-                    .addComponent(updateBtn))
+                    .addComponent(updateBtn)
+                    .addComponent(resetBtn))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -633,19 +654,24 @@ public class productForm extends javax.swing.JPanel {
                     "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int row = table.getSelectedRow();
-        Product selectedProduct = productList.get(row);
-        controller_Product controller = new controller_Product();
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a product to delete!");
+        } else {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            int row = table.getSelectedRow();
+            Product selectedProduct = productList.get(row);
+            controller_Product controller = new controller_Product();
 
-        try {
-            controller.deleteProduct(selectedProduct.getProductId());
-        } catch (SQLException ex) {
-            Logger.getLogger(productForm.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                controller.deleteProduct(selectedProduct.getProductId());
+            } catch (SQLException ex) {
+                Logger.getLogger(productForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            refreshTable();
+            JOptionPane.showMessageDialog(null, "Delete success!");
+            refreshDetail();
         }
-        refreshTable();
-        JOptionPane.showMessageDialog(null, "Delete success!");
-        refreshDetail();
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
@@ -654,9 +680,13 @@ public class productForm extends javax.swing.JPanel {
                     "Unauthorize", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if (table.getSelectedRow() > -1) {
+            openUpdateForm();
+            um.setDataProduct(selectedProduct);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a product to update!");
+        }
 
-        openUpdateForm();
-        um.setDataProduct(selectedProduct);
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged
@@ -689,6 +719,12 @@ public class productForm extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_sortComboBoxItemStateChanged
 
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        // TODO add your handling code here:
+        refreshDetail();
+        refreshTable();
+    }//GEN-LAST:event_resetBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButton3;
@@ -716,6 +752,7 @@ public class productForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel labelSellPrice;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;
     private com.view.swing.Table table;
