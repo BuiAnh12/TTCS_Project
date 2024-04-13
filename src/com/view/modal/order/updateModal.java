@@ -1,5 +1,6 @@
 package com.view.modal.order;
 
+import com.control.validate.CommonValidation;
 import com.controller.controller_Customer;
 import com.controller.controller_Import;
 import com.controller.controller_Invoice;
@@ -37,6 +38,9 @@ public class updateModal extends javax.swing.JFrame {
     private List<CartElement> cartList = new ArrayList<CartElement>();
     private BigDecimal totalPrice;
     private Staff user;
+    
+    CommonValidation validator = new CommonValidation();
+    
     private Invoice currentInvoice;
     private controller_Product product_controller = new controller_Product();
     private controller_Customer customer_controller = new controller_Customer();
@@ -794,6 +798,17 @@ public class updateModal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
+        if (validator.isDate(this.txtDate.getText()) == false){
+            JOptionPane.showMessageDialog(null, "Date is missing! ",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if ( table.getRowCount() <= 0){
+            JOptionPane.showMessageDialog(null, "You can not create empty order",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn chỉnh sửa hóa đơn này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
@@ -864,6 +879,11 @@ public class updateModal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSubmitActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        if (this.txtQuantity.getText().equals("0")){
+            JOptionPane.showMessageDialog(null, "That product is out of stock",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int index = this.combProduct.getSelectedIndex();
         Product tmp = productList.get(index);
         int quantity = Integer.valueOf(this.txtQuantity.getText());
@@ -912,20 +932,28 @@ public class updateModal extends javax.swing.JFrame {
     }//GEN-LAST:event_tableMouseEntered
 
     private void txtQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantityFocusLost
-        int currentQuantity = Integer.valueOf(this.txtQuantity.getText());
-        int index = this.combProduct.getSelectedIndex();
-        Product tmp = productList.get(index);
-        if(currentQuantity > tmp.getAvailability()){
-            JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+        if(validator.isNumber(this.txtQuantity.getText())){
+            int currentQuantity = Integer.valueOf(this.txtQuantity.getText());
+            int index = this.combProduct.getSelectedIndex();
+            Product tmp = productList.get(index);
+            if(currentQuantity > tmp.getAvailability()){
+                JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+                "Error", JOptionPane.WARNING_MESSAGE);
+                this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
+                return;
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "This is not a number! Please retype!",
             "Error", JOptionPane.WARNING_MESSAGE);
-            this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
-            return;
+            this.txtQuantity.requestFocusInWindow();
+            this.txtQuantity.selectAll();
         }
     }//GEN-LAST:event_txtQuantityFocusLost
 
     private void txtDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusLost
         String date = txtDate.getText();
-        if (date == "" ){
+        if (validator.strip(date).equals("")) {
             return;
         }
         // Define the expected date format

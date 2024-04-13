@@ -26,7 +26,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
+import com.control.validate.CommonValidation;
 public class insertModal extends javax.swing.JFrame {
     // Modal variable
     private List<Product> productList;
@@ -40,7 +40,7 @@ public class insertModal extends javax.swing.JFrame {
     private controller_Import controller_import = new controller_Import();
     private controller_Invoice controller_invoice = new controller_Invoice();
     
-    
+    CommonValidation validator = new CommonValidation();
     
     private BigDecimal totalPrice = new BigDecimal(0);
     // Modal contructor
@@ -299,6 +299,11 @@ public class insertModal extends javax.swing.JFrame {
         txtDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDateFocusLost(evt);
+            }
+        });
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
             }
         });
 
@@ -748,8 +753,16 @@ public class insertModal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        
-        
+        if (validator.isDate(this.txtDate.getText()) == false){
+            JOptionPane.showMessageDialog(null, "Date is missing! ",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if ( table.getRowCount() <= 0){
+            JOptionPane.showMessageDialog(null, "You can not create empty order",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         // Create Invoice
         int customerIndex = this.combCustomer.getSelectedIndex();
         Customer customer = customerList.get(customerIndex);
@@ -819,18 +832,32 @@ public class insertModal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantityKeyTyped
 
     private void txtQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantityFocusLost
-        int currentQuantity = Integer.valueOf(this.txtQuantity.getText());
-        int index = this.combProduct.getSelectedIndex();
-        Product tmp = productList.get(index);
-        if(currentQuantity > tmp.getAvailability()){
-            JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
-            "Error", JOptionPane.WARNING_MESSAGE);
-            this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
-            return;
+        if(validator.isNumber(this.txtQuantity.getText())){
+            int currentQuantity = Integer.valueOf(this.txtQuantity.getText());
+            int index = this.combProduct.getSelectedIndex();
+            Product tmp = productList.get(index);
+            if(currentQuantity > tmp.getAvailability()){
+                JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+                "Error", JOptionPane.WARNING_MESSAGE);
+                this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
+                return;
+            }
         }
+        else{
+            JOptionPane.showMessageDialog(null, "This is not a number! Please retype!",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            this.txtQuantity.requestFocusInWindow();
+            this.txtQuantity.selectAll();
+        }
+        
     }//GEN-LAST:event_txtQuantityFocusLost
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        if (this.txtQuantity.getText().equals("0")){
+            JOptionPane.showMessageDialog(null, "That product is out of stock",
+            "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int index = this.combProduct.getSelectedIndex();
         Product tmp = productList.get(index);
         int quantity = Integer.valueOf(this.txtQuantity.getText());
@@ -879,7 +906,7 @@ public class insertModal extends javax.swing.JFrame {
 
     private void txtDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDateFocusLost
         String date = txtDate.getText();
-        if (date == "" ){
+        if (validator.strip(date).equals("")) {
             return;
         }
         // Define the expected date format
@@ -900,6 +927,10 @@ public class insertModal extends javax.swing.JFrame {
     }
 
     }//GEN-LAST:event_txtDateFocusLost
+
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
 
     /**
      * @param args the command line arguments
