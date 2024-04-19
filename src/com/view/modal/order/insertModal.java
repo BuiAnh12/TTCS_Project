@@ -27,6 +27,8 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import com.control.validate.CommonValidation;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 public class insertModal extends javax.swing.JFrame {
     // Modal variable
     private List<Product> productList;
@@ -44,8 +46,20 @@ public class insertModal extends javax.swing.JFrame {
     
     private BigDecimal totalPrice = new BigDecimal(0);
     // Modal contructor
+     private void centerFrameOnScreen() {
+        // Get the dimension of the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Calculate the coordinates for the top-left corner of the frame
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+
+        // Set the location of the frame
+        setLocation(x, y);
+    }
     public insertModal() {
         initComponents();
+        centerFrameOnScreen();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         try{
             productList = product_controller.getAllAvailableProduct();

@@ -4,6 +4,7 @@ import com.model.Import;
 
 import com.control.db.ConnectionDB;
 import java.math.BigDecimal;
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +20,13 @@ public class controller_Import {
 
         List<Import> imports = new ArrayList<>();
         Connection cnn = ConnectionDB.getConnection();
-        String query = "";
-        if (status == 1) {
-            query = "SELECT * FROM Products JOIN Imports ON Products.ProductId = Imports.ProductId WHERE ProductName LIKE ? ORDER BY ProductName;";
-        } else if (status == 2) {
-            query = "SELECT * FROM Products JOIN Imports ON Products.ProductId = Imports.ProductId WHERE ProductName LIKE ? ORDER BY ImportQuantity;";
-        } else if (status == 3) {
-            query = "SELECT * FROM Products JOIN Imports ON Products.ProductId = Imports.ProductId WHERE ProductName LIKE ? ORDER BY AvailableQuantity;";
-        }
-
+        String storedProcedure = "GetImportByStatusAndSearchKey(?,?)";
         String searchTerm = "%" + name + "%";
-
         try {
             imports.clear();
-            PreparedStatement statement = cnn.prepareStatement(query);
-            statement.setString(1, searchTerm);
-
+            CallableStatement statement = cnn.prepareCall("{call " + storedProcedure + "}");
+            statement.setInt(1, status);
+            statement.setString(2, searchTerm);
             ResultSet re = statement.executeQuery();
             while (re.next()) {
                 int productid = re.getInt("ProductId");
@@ -60,9 +52,10 @@ public class controller_Import {
 
     public void addImport(Import importss) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String query = "INSERT INTO Imports (ProductId, ManufacturingDate, ExpiryDate, ImportDate, ImportQuantity, AvailableQuantity, UnitPrice) VALUES(?,?,?,?,?,?,?)";
+        String storedProcedure = "{call InsertImport(?,?,?,?,?,?,?)}";
+        
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
+            PreparedStatement pre = cnn.prepareStatement(storedProcedure);
             pre.setInt(1, importss.getProductId());
             pre.setDate(2, (java.sql.Date) importss.getManufacturingDate());
             pre.setDate(3, (java.sql.Date) importss.getExpiryDate());
@@ -78,20 +71,18 @@ public class controller_Import {
 
     public void editImport(Import importss) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-
-        String query = "UPDATE Imports  SET ProductId =?, ManufacturingDate =?, ExpiryDate =?,"
-                + "ImportDate = ?, ImportQuantity = ?, AvailableQuantity = ?,"
-                + "UnitPrice = ? WHERE ImportId = ?";
+        String storedProcedure = "{call UpdateImport(?,?,?,?,?,?,?,?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
-            pre.setInt(1, importss.getProductId());
-            pre.setDate(2, (java.sql.Date) importss.getManufacturingDate());
-            pre.setDate(3, (java.sql.Date) importss.getExpiryDate());
-            pre.setDate(4, (java.sql.Date) importss.getImportDate());
-            pre.setInt(5, importss.getImportQuantity());
-            pre.setInt(6, importss.getAvailableQuantity());
-            pre.setBigDecimal(7, importss.getUnitPrice());
-            pre.setInt(8, importss.getImportId());
+            PreparedStatement pre = cnn.prepareStatement(storedProcedure);
+            pre.setInt(2, importss.getProductId());
+            pre.setDate(3, (java.sql.Date) importss.getManufacturingDate());
+            pre.setDate(4, (java.sql.Date) importss.getExpiryDate());
+            pre.setDate(5, (java.sql.Date) importss.getImportDate());
+            pre.setInt(6, importss.getImportQuantity());
+            pre.setInt(7, importss.getAvailableQuantity());
+            pre.setBigDecimal(8, importss.getUnitPrice());
+            pre.setInt(1, importss.getImportId());
+            
             int tmp = pre.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -101,11 +92,11 @@ public class controller_Import {
     public void deleteImport(int id) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
         Statement statement = cnn.createStatement();
-        String query = "DELETE FROM Imports WHERE ImportId =?";
+        String storedProcedure = "{call DeleteImport(?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
+            CallableStatement  pre = cnn.prepareCall(storedProcedure);
             pre.setInt(1, id);
-            int tmp = pre.executeUpdate();
+            boolean tmp = pre.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -115,14 +106,13 @@ public class controller_Import {
         List<Import> importList = new ArrayList<>();
         Connection cnn = ConnectionDB.getConnection();
 
-        String query = "SELECT * FROM Products JOIN Imports ON Products.ProductId = Imports.ProductId WHERE ProductName LIKE ?";
+        String storedProcedure = "{call SelectProductsByProductName(?)}";
         String searchTerm = "%" + name + "%";
 
         try {
             importList.clear();
-            PreparedStatement statement = cnn.prepareStatement(query);
+            CallableStatement statement = cnn.prepareCall(storedProcedure);
             statement.setString(1, searchTerm);
-
             ResultSet re = statement.executeQuery();
 
             while (re.next()) {
@@ -153,14 +143,14 @@ public class controller_Import {
 
     public void editImport(int importId, int quantity) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
+        
+        String storedProcedure =" {call UpdateImportByImportIdandQuatity(?,?)}";
 
-        String query = "UPDATE Imports  SET AvailableQuantity = AvailableQuantity + ?"
-                + " WHERE ImportId = ?";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
+            CallableStatement pre = cnn.prepareCall(storedProcedure);
             pre.setInt(1, quantity);
             pre.setInt(2, importId);
-            int tmp = pre.executeUpdate();
+            boolean tmp = pre.execute();
             System.out.println("Update success");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -170,10 +160,9 @@ public class controller_Import {
     public static List<String> getProductName() throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
         List<String> productName = new ArrayList<>();
-        String query = "select ProductName from Products p join Imports i on p.ProductId=i.ProductId";
+        String storedProcedure =" {call SelectProductName}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
-
+            CallableStatement pre = cnn.prepareCall(storedProcedure);
             ResultSet re = pre.executeQuery();
             while (re.next()) {
                 productName.add(re.getString("ProductName"));
@@ -186,20 +175,18 @@ public class controller_Import {
 
     public static int getProductId(String name) throws SQLException {
         int productId = 0;
-
         Connection cnn = ConnectionDB.getConnection();
-        String query = """
-                       select distinct p.ProductId 
-                       from Products p 
-                       join Imports i 
-                       on p.ProductId=i.ProductId
-                       where p.ProductName = ?""";
-        PreparedStatement pre = cnn.prepareStatement(query);
+        String storedProcedure =" {call SelectDistinctProductIdByProductName(?)}";
+       try{
+        CallableStatement pre = cnn.prepareCall(storedProcedure);
         pre.setString(1, name);
         ResultSet re = pre.executeQuery();
         while (re.next()) {
             productId = re.getInt("ProductId");
         }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
         return productId;
     }
 }

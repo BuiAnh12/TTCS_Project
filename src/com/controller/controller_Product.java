@@ -10,20 +10,23 @@ import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
+
 
 public class controller_Product {
     public List<Product> getAllAvailableProduct() throws SQLException {
         List<Product> products =new ArrayList<>();
-         Connection cnn=ConnectionDB.getConnection();
-         String query="select distinct p.*, sum(i.AvailableQuantity) as totalAmount" +
-                " from Products p" +
-                " join Imports i on p.ProductId = i.ProductId" +
-                " where i.AvailableQuantity > 0" +
-                " group by p.ProductId, p.Category, p.Description, p.Manufacturer, p.ProductName, p.Flag,p.SellPrice;";
+        
+//         String query="select distinct p.*, sum(i.AvailableQuantity) as totalAmount" +
+//                " from Products p" +
+//                " join Imports i on p.ProductId = i.ProductId" +
+//                " where i.AvailableQuantity > 0" +
+//                " group by p.ProductId, p.Category, p.Description, p.Manufacturer, p.ProductName, p.Flag,p.SellPrice;";
          try{
+                Connection cnn=ConnectionDB.getConnection();
+                CallableStatement  statement = cnn.prepareCall("{call getAllAvailableProduct}");
                 products.clear();
-                PreparedStatement statement = cnn.prepareStatement(query);
                 ResultSet re = statement.executeQuery();
                 
                 while(re.next()){
@@ -47,22 +50,16 @@ public class controller_Product {
     
      public List<Product> getAllproduct(int status,String name) throws SQLException{
          List<Product> products =new ArrayList<>();
-         Connection cnn=ConnectionDB.getConnection();
          String query="";
          
-         if(status ==1){
-             query="SELECT * FROM Products WHERE ProductName LIKE ? ORDER BY ProductName ";
-         }else if(status ==2){
-             query="SELECT * FROM Products WHERE ProductName LIKE ? ORDER BY Manufacturer ";
-         }else if(status==3){
-             query="SELECT * FROM Products WHERE ProductName LIKE ? ORDER BY Category ";
-         }
          String searchTerm = "%" + name + "%";
          try{
+                Connection cnn=ConnectionDB.getConnection();
                 products.clear();
-                PreparedStatement statement = cnn.prepareStatement(query);
-                statement.setString(1, searchTerm);
-                ResultSet re = statement.executeQuery();
+                CallableStatement stmt = cnn.prepareCall("{call getAllProduct(?, ?)}");
+                stmt.setInt(1, status);
+                stmt.setString(2, searchTerm);
+                ResultSet re = stmt.executeQuery();
                 
                 while(re.next()){
                     String productName=re.getString("ProductName");
@@ -82,48 +79,47 @@ public class controller_Product {
         return products;
     }
       public void addProduct(Product product) throws SQLException{
-        Connection cnn=ConnectionDB.getConnection();
-        String query="INSERT INTO Products (ProductName, Manufacturer, Description, Category, SellPrice) VALUES(?,?,?,?,?)";
+      
         try{
-            PreparedStatement pre=cnn.prepareStatement(query);
-            pre.setString(1, product.getProductName());       
-            pre.setString(2, product.getManufacturer());
-            pre.setString(3, product.getDescription());
-            pre.setString(4, product.getCategory());
-            pre.setBigDecimal(5, product.getSellPrice());
-            int tmp=pre.executeUpdate();
+             Connection cnn=ConnectionDB.getConnection();
+            CallableStatement stmt = cnn.prepareCall("{call addProduct(?, ?, ?, ?, ?)}");
+            stmt.setString(1, product.getProductName());       
+            stmt.setString(2, product.getManufacturer());
+            stmt.setString(3, product.getDescription());
+            stmt.setString(4, product.getCategory());
+            stmt.setBigDecimal(5, product.getSellPrice());
+            int tmp=stmt.executeUpdate();
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     //
-       public void editProduct(Product product) throws SQLException{
-        Connection cnn=ConnectionDB.getConnection();
-
-        String query="UPDATE Products SET  ProductName =?,Manufacturer =?,Description =?,Category=?,SellPrice=? WHERE ProductId =?";
+    public void editProduct(Product product) throws SQLException{
+           
         try{
-            PreparedStatement pre=cnn.prepareStatement(query);
-            pre.setString(1, product.getProductName());       
-            pre.setString(2, product.getManufacturer());
-            pre.setString(3, product.getDescription());
-            pre.setString(4, product.getCategory());
-            pre.setBigDecimal(5, product.getSellPrice());
-            pre.setInt(6,product.getProductId());
-            int tmp=pre.executeUpdate();
+            Connection cnn=ConnectionDB.getConnection();
+            CallableStatement stmt = cnn.prepareCall("{call editProduct(?, ?, ?, ?, ?, ?)}");
+               
+            stmt.setString(2, product.getProductName());       
+            stmt.setString(3, product.getManufacturer());
+            stmt.setString(4, product.getDescription());
+            stmt.setString(5, product.getCategory());
+            stmt.setBigDecimal(6, product.getSellPrice());
+            stmt.setInt(1,product.getProductId());
+            int tmp=stmt.executeUpdate();
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
     }
       public void deleteProduct(int id) throws SQLException{
-         Connection cnn=ConnectionDB.getConnection();
-         Statement statement=cnn.createStatement();
-         String query="DELETE FROM Products WHERE ProductId =?";
          try{
-            PreparedStatement pre=cnn.prepareStatement(query);
-            pre.setInt(1,id);       
-            int tmp=pre.executeUpdate();
+            Connection cnn=ConnectionDB.getConnection();
+            CallableStatement stmt = cnn.prepareCall("{call deleteProduct(?)}");
+            
+            stmt.setInt(1,id);       
+            int tmp=stmt.executeUpdate();
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -131,17 +127,14 @@ public class controller_Product {
     }
       public List<Product> findListProduct(String name) throws SQLException{
         List<Product> products = new ArrayList<>();
-        Connection cnn = ConnectionDB.getConnection();
-
-        String query = "SELECT * FROM Products WHERE ProductName LIKE ?";
         String searchTerm = "%" + name + "%";
 
         try {
             products.clear();
-            PreparedStatement statement = cnn.prepareStatement(query);
-            statement.setString(1, searchTerm);
-
-            ResultSet re = statement.executeQuery();
+            Connection cnn = ConnectionDB.getConnection();
+            CallableStatement stmt = cnn.prepareCall("{call findListProduct(?)}");
+            stmt.setString(1, searchTerm);
+            ResultSet re = stmt.executeQuery();
 
             while (re.next()) {
                 int id = re.getInt("ProductId");
@@ -154,7 +147,7 @@ public class controller_Product {
                 products.add(product);
             }
 
-            statement.close();
+            stmt.close();
             cnn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();

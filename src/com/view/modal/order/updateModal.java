@@ -15,6 +15,8 @@ import com.model.Invoice;
 import com.model.InvoiceItem;
 import com.model.Product;
 import com.model.Staff;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -58,10 +60,21 @@ public class updateModal extends javax.swing.JFrame {
         this.user = user;
     }
     
-    
+     private void centerFrameOnScreen() {
+        // Get the dimension of the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Calculate the coordinates for the top-left corner of the frame
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+
+        // Set the location of the frame
+        setLocation(x, y);
+    }
     
     public updateModal(Invoice selectedInvoice) {
         initComponents();
+        centerFrameOnScreen();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         try{

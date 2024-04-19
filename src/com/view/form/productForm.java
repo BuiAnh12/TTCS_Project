@@ -661,12 +661,16 @@ public class productForm extends javax.swing.JPanel {
             int row = table.getSelectedRow();
             Product selectedProduct = productList.get(row);
             controller_Product controller = new controller_Product();
-
-            try {
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this Product?", "Alert",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(response==JOptionPane.YES_OPTION){
+                 try {
                 controller.deleteProduct(selectedProduct.getProductId());
-            } catch (SQLException ex) {
-                Logger.getLogger(productForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                } catch (SQLException ex) {
+                    Logger.getLogger(productForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
+           
             refreshTable();
             JOptionPane.showMessageDialog(null, "Delete success!");
             refreshDetail();
