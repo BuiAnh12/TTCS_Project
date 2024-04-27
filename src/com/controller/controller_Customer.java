@@ -5,6 +5,7 @@ import com.model.Customer;
 import com.control.db.ConnectionDB;
 import com.model.DetailCustomer;
 import java.math.BigDecimal;
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,36 +20,13 @@ public class controller_Customer {
     public List<Customer> getAllCustomers(int status, String name) throws SQLException {
         List<Customer> customers = new ArrayList<>();
         Connection cnn = ConnectionDB.getConnection();
-        String query = "";
-
-        if (status == 1) {
-            query = "SELECT Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address, SUM(Invoice_Items.TotalPrice) AS TotalAmount "
-                    + "FROM Customers "
-                    + "LEFT JOIN Invoices ON Customers.CustomerId = Invoices.CustomerId "
-                    + "LEFT JOIN Invoice_Items ON Invoice_Items.InvoiceId = Invoices.InvoiceId "
-                    + "GROUP BY Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address "
-                    + "HAVING Customers.CustomerName LIKE ? ORDER BY CustomerName";
-        } else if (status == 2) {
-            query = "SELECT Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address, SUM(Invoice_Items.TotalPrice) AS TotalAmount "
-                    + "FROM Customers "
-                    + "LEFT JOIN Invoices ON Customers.CustomerId = Invoices.CustomerId "
-                    + "LEFT JOIN Invoice_Items ON Invoice_Items.InvoiceId = Invoices.InvoiceId "
-                    + "GROUP BY Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address "
-                    + "HAVING Customers.CustomerName LIKE ? ORDER BY Email";
-        } else if (status == 3) {
-            query = "SELECT Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address, SUM(Invoice_Items.TotalPrice) AS TotalAmount "
-                    + "FROM Customers "
-                    + "LEFT JOIN Invoices ON Customers.CustomerId = Invoices.CustomerId "
-                    + "LEFT JOIN Invoice_Items ON Invoice_Items.InvoiceId = Invoices.InvoiceId "
-                    + "GROUP BY Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address "
-                    + "HAVING Customers.CustomerName LIKE ? ORDER BY TotalAmount";
-        }
-        String searchTerm = "%" + name + "%";
+        String sp = "GetCustomerData(?,?)";
 
         try {
             customers.clear();
-            PreparedStatement statement = cnn.prepareStatement(query);
-            statement.setString(1, searchTerm);
+            CallableStatement statement = cnn.prepareCall("{call " + sp + "}");
+            statement.setInt(1, status);
+            statement.setString(2, name);
             ResultSet re = statement.executeQuery();
 
             while (re.next()) {
@@ -101,9 +79,9 @@ public class controller_Customer {
 
     public void addCustomer(Customer customer) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String query = "INSERT INTO Customers (CustomerName, Email, Address) VALUES(?,?,?)";
+        String sp = "{call AddCustomer(?,?,?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
+            PreparedStatement pre = cnn.prepareStatement(sp);
             pre.setString(1, customer.getCustomerName());
             pre.setString(2, customer.getEmail());
             pre.setString(3, customer.getAddress());
@@ -119,13 +97,13 @@ public class controller_Customer {
     public void editCustomer(Customer customer) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
 
-        String query = "UPDATE Customers SET  CustomerName =?,Email =?,Address =? WHERE CustomerId =?";
+        String sp = "{call EditCustomer(?,?,?,?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
-            pre.setString(1, customer.getCustomerName());
-            pre.setString(2, customer.getEmail());
-            pre.setString(3, customer.getAddress());
-            pre.setInt(4, customer.getCustomerId());
+            PreparedStatement pre = cnn.prepareStatement(sp);
+            pre.setString(2, customer.getCustomerName());
+            pre.setString(3, customer.getEmail());
+            pre.setString(4, customer.getAddress());
+            pre.setInt(1, customer.getCustomerId());
             int tmp = pre.executeUpdate();
             pre.close();
             cnn.close();
@@ -138,9 +116,9 @@ public class controller_Customer {
     public void deleteCustomer(int CustomerId) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
         Statement statement = cnn.createStatement();
-        String query = "DELETE FROM Customers WHERE CustomerId = ?";
+        String sp = "{call DeleteCustomer(?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(query);
+            PreparedStatement pre = cnn.prepareStatement(sp);
             pre.setInt(1, CustomerId);
             int tmp = pre.executeUpdate();
 
@@ -155,17 +133,12 @@ public class controller_Customer {
         List<Customer> customers = new ArrayList<>();
         Connection cnn = ConnectionDB.getConnection();
 
-        String query = "SELECT Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address, SUM(Invoice_Items.TotalPrice) AS TotalAmount "
-                + "FROM Customers "
-                + "JOIN Invoices ON Customers.CustomerId = Invoices.CustomerId "
-                + "JOIN Invoice_Items ON Invoice_Items.InvoiceId = Invoices.InvoiceId WHERE Customers.CustomerName LIKE ?"
-                + "GROUP BY Customers.CustomerId, Customers.CustomerName, Customers.Email, Customers.Address";
-        String searchTerm = "%" + name + "%";
+        String sp = "{call FindListCustomer(?)}";
 
         try {
             customers.clear();
-            PreparedStatement statement = cnn.prepareStatement(query);
-            statement.setString(1, searchTerm);
+            PreparedStatement statement = cnn.prepareStatement(sp);
+            statement.setString(1, name);
 
             ResultSet re = statement.executeQuery();
 
@@ -191,19 +164,12 @@ public class controller_Customer {
     public List<DetailCustomer> getDetail_Customers(int id) throws SQLException {
         List<DetailCustomer> details = new ArrayList<>();
         Connection cnn = ConnectionDB.getConnection();
-        String query = """
-                       select p.ProductName, ii.Quantity, p.SellPrice, ii.TotalPrice 
-                       from Invoice_Items ii
-                       join Invoices i on ii.InvoiceId=i.InvoiceId
-                       join Customers c on i.CustomerId=c.CustomerId
-                       join Imports im on ii.ImportId=im.ImportId
-                       join Products p on p.ProductId=im.ProductId
-                       where c.CustomerId=?""";
+        String sp = "{call GetDetailCustomers(?)}";
 
          try {
             details.clear();
-            PreparedStatement statement = cnn.prepareStatement(query);
-            statement.setString(1, String.valueOf(id));
+            PreparedStatement statement = cnn.prepareStatement(sp);
+            statement.setInt(1, id);
 
             ResultSet re = statement.executeQuery();
 
