@@ -414,6 +414,7 @@ public class staffForm extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(36, 36, 36));
 
         txtCustomerName.setEditable(false);
+        txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel8.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -458,6 +459,7 @@ public class staffForm extends javax.swing.JPanel {
         jPanel9.setBackground(new java.awt.Color(36, 36, 36));
 
         txtEmail.setEditable(false);
+        txtEmail.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel10.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -483,8 +485,8 @@ public class staffForm extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -500,6 +502,7 @@ public class staffForm extends javax.swing.JPanel {
         jPanel11.setBackground(new java.awt.Color(36, 36, 36));
 
         txtAddress.setEditable(false);
+        txtAddress.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel12.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -567,6 +570,7 @@ public class staffForm extends javax.swing.JPanel {
         );
 
         txtPosition.setEditable(false);
+        txtPosition.setBackground(new java.awt.Color(255, 255, 255));
         txtPosition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPositionActionPerformed(evt);
@@ -618,6 +622,7 @@ public class staffForm extends javax.swing.JPanel {
         );
 
         txtUsername.setEditable(false);
+        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -662,6 +667,7 @@ public class staffForm extends javax.swing.JPanel {
         );
 
         txtPassword.setEditable(false);
+        txtPassword.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -688,6 +694,7 @@ public class staffForm extends javax.swing.JPanel {
         jPanel19.setBackground(new java.awt.Color(36, 36, 36));
 
         txtAge.setEditable(false);
+        txtAge.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel20.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -713,8 +720,8 @@ public class staffForm extends javax.swing.JPanel {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel19Layout.setVerticalGroup(

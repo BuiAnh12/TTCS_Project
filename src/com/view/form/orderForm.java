@@ -449,6 +449,7 @@ public class orderForm extends javax.swing.JPanel {
         jLabel7.setText("Total Amount");
 
         txtCustomerName.setEditable(false);
+        txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtCustomerName.setForeground(new java.awt.Color(102, 102, 102));
         txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
@@ -458,18 +459,22 @@ public class orderForm extends javax.swing.JPanel {
         });
 
         txtStaffName.setEditable(false);
+        txtStaffName.setBackground(new java.awt.Color(255, 255, 255));
         txtStaffName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtStaffName.setForeground(new java.awt.Color(102, 102, 102));
 
         txtPurchaseDate.setEditable(false);
+        txtPurchaseDate.setBackground(new java.awt.Color(255, 255, 255));
         txtPurchaseDate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtPurchaseDate.setForeground(new java.awt.Color(102, 102, 102));
 
         txtUpdateDate.setEditable(false);
+        txtUpdateDate.setBackground(new java.awt.Color(255, 255, 255));
         txtUpdateDate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         txtUpdateDate.setForeground(new java.awt.Color(102, 102, 102));
 
         totalAmountField.setEditable(false);
+        totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
         totalAmountField.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         totalAmountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

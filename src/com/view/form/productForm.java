@@ -387,6 +387,7 @@ public class productForm extends javax.swing.JPanel {
         jLabel4.setText("Tên:");
 
         txtName.setEditable(false);
+        txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -400,6 +401,7 @@ public class productForm extends javax.swing.JPanel {
         jLabel5.setText("Nhà sản xuất:");
 
         txtManufacture.setEditable(false);
+        txtManufacture.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -414,11 +416,13 @@ public class productForm extends javax.swing.JPanel {
         jLabel7.setText("Mô tả:");
 
         descriptionTxt.setEditable(false);
+        descriptionTxt.setBackground(new java.awt.Color(255, 255, 255));
         descriptionTxt.setColumns(20);
         descriptionTxt.setRows(5);
         txtDescription.setViewportView(descriptionTxt);
 
         txtCategory.setEditable(false);
+        txtCategory.setBackground(new java.awt.Color(255, 255, 255));
 
         labelSellPrice.setBackground(new java.awt.Color(255, 255, 255));
         labelSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -427,6 +431,7 @@ public class productForm extends javax.swing.JPanel {
         labelSellPrice.setText("Giá bán:");
 
         txtSellPrice.setEditable(false);
+        txtSellPrice.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout PanelDetailLayout = new javax.swing.GroupLayout(PanelDetail);
         PanelDetail.setLayout(PanelDetailLayout);

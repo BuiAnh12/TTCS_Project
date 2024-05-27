@@ -236,7 +236,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(22, 23, 23));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Name");
+        jLabel1.setText("Tên khách hàng :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -286,7 +286,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(22, 23, 23));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(" Address");
+        jLabel3.setText("Địa chỉ :");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -311,7 +311,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(22, 23, 23));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText(" Customer ");
+        jLabel4.setText("Khách hàng :");
 
         combCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -320,7 +320,7 @@ public class updateModal extends javax.swing.JFrame {
             }
         });
 
-        txtInsert.setText("Insert");
+        txtInsert.setText("Thêm");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -373,7 +373,7 @@ public class updateModal extends javax.swing.JFrame {
         jPanel14.setBackground(new java.awt.Color(22, 23, 23));
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnInsert.setText("Insert");
+        btnInsert.setText("Thêm");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
@@ -381,7 +381,7 @@ public class updateModal extends javax.swing.JFrame {
         });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setText("Delete");
+        btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -408,7 +408,7 @@ public class updateModal extends javax.swing.JFrame {
         );
 
         txtSubmit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtSubmit.setText("Submit");
+        txtSubmit.setText("Hoàn tất ");
         txtSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSubmitActionPerformed(evt);
@@ -420,7 +420,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel10.setBackground(new java.awt.Color(22, 23, 23));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Total Price");
+        jLabel10.setText("Tổng tiền ");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -441,7 +441,7 @@ public class updateModal extends javax.swing.JFrame {
         );
 
         txtCancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtCancel.setText("Cancel");
+        txtCancel.setText("Bỏ");
         txtCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCancelActionPerformed(evt);
@@ -455,7 +455,7 @@ public class updateModal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity", "Unit Price", "Price"
+                "Tên sản phẩm ", "Số lượng ", "Giá vốn", "Giá bán"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -496,7 +496,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel5.setBackground(new java.awt.Color(22, 23, 23));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Name");
+        jLabel5.setText("Tên sản phẩm");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -507,7 +507,7 @@ public class updateModal extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(35, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
@@ -524,7 +524,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(22, 23, 23));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Manufacture");
+        jLabel6.setText("Nhà sản xuất :");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -552,7 +552,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(22, 23, 23));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Decscription");
+        jLabel7.setText("Mô tả :");
 
         txtDescription.setColumns(20);
         txtDescription.setRows(5);
@@ -584,7 +584,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(22, 23, 23));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Product");
+        jLabel8.setText("Sản phẩm :");
 
         combProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +619,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel9.setBackground(new java.awt.Color(22, 23, 23));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Quantity");
+        jLabel9.setText("Số lượng:");
 
         txtQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -710,8 +710,7 @@ public class updateModal extends javax.swing.JFrame {
                         .addGap(320, 320, 320)
                         .addComponent(txtSubmit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCancel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -742,7 +741,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("UPDATE ORDER");
+        jLabel12.setText("CẬP NHẬT ĐƠN HÀNG ");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
