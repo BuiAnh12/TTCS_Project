@@ -11,7 +11,7 @@ BEGIN
     Staffs.Name, 
     Customers.CustomerName, 
 	SUM(ii.TotalPrice) AS TotalPrice, 
-    ii.CreatedAt
+    Invoices.PurchaseDate
     
 FROM 
     Staffs
@@ -25,7 +25,6 @@ WHERE
     Invoices.InvoiceId = @InvoiceId
 GROUP BY 
     Staffs.Name, 
-    Customers.CustomerName, 
-    ii.TotalPrice, 
-    ii.CreatedAt;
+    Customers.CustomerName,
+    Invoices.PurchaseDate;
 END;

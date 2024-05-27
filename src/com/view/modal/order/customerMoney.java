@@ -50,8 +50,6 @@ public class customerMoney extends javax.swing.JFrame {
 
         jLabel1.setText("Tiền khách trả:");
 
-        cusMoney.setText("jTextField1");
-
         jButton1.setText("SUBMIT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +134,7 @@ public class customerMoney extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

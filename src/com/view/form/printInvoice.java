@@ -155,7 +155,7 @@ public class printInvoice extends javax.swing.JFrame implements Printable {
             
             while (re.next()) {
                 invoiceID.setText("Mã đơn hàng: " + id);
-                time.setText(re.getString("CreatedAt"));
+                time.setText(re.getString("PurchaseDate"));
                 customerName.setText("Khách hàng: " + re.getString("CustomerName"));
                 employeeName.setText("Nhân viên bán hàng: " + re.getString("Name"));
                 total.setText(re.getString("TotalPrice"));
