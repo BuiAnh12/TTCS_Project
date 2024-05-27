@@ -11,6 +11,7 @@ import com.model.Invoice;
 import com.model.InvoiceItem;
 import com.model.Product;
 import com.model.Staff;
+import com.view.modal.order.customerMoney;
 import com.view.modal.order.insertModal;
 import com.view.modal.order.updateModal;
 import com.view.swing.ScrollBar;
@@ -61,6 +62,8 @@ import javax.swing.JFrame;
 public class orderForm extends javax.swing.JPanel {
     private insertModal im = null;
     private updateModal um = null;
+    private customerMoney cm = null;
+    private Invoice invoice;
     private List<Invoice> invoiceList;
     private int status = 1;
     private Staff user;
@@ -180,6 +183,7 @@ public class orderForm extends javax.swing.JPanel {
         returnBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        btnPrint = new javax.swing.JButton();
 
         setForeground(new java.awt.Color(22, 23, 23));
         setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -654,27 +658,37 @@ public class orderForm extends javax.swing.JPanel {
             }
         });
 
+        btnPrint.setBackground(new java.awt.Color(36, 36, 36));
+        btnPrint.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrint.setText("PRINT");
+        btnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 153, Short.MAX_VALUE)
-                .addComponent(deleteBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(98, 98, 98)
                 .addComponent(returnBtn)
-                .addContainerGap())
+                .addComponent(deleteBtn)
+                .addComponent(updateBtn)
+                .addComponent(btnPrint)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(returnBtn)
+                    .addComponent(deleteBtn)
                     .addComponent(updateBtn)
-                    .addComponent(deleteBtn)))
+                    .addComponent(btnPrint))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PanelDUBtn.add(jPanel8);
@@ -689,21 +703,17 @@ public class orderForm extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1009, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -839,6 +849,27 @@ public class orderForm extends javax.swing.JPanel {
         this.refreshtable();
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
+    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        if (table.getSelectedRow() >= 0) {
+            if (cm==null) {
+            invoice = invoiceList.get(table.getSelectedRow());
+            cm = new customerMoney(invoice.getInvoiceId());
+            cm.setVisible(true);
+            cm.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        cm = null;
+                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            cm.toFront();
+        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn để in", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPrintActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButton;
@@ -851,6 +882,7 @@ public class orderForm extends javax.swing.JPanel {
     private javax.swing.JPanel PanelRight;
     private javax.swing.JPanel PanelSearch;
     private javax.swing.JPanel PanelTable;
+    private javax.swing.JButton btnPrint;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JScrollPane detailSpTable;
     private javax.swing.JButton insertBtn;
