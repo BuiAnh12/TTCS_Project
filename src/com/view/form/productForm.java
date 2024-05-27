@@ -136,12 +136,16 @@ public class productForm extends javax.swing.JPanel {
         updateBtn = new javax.swing.JButton();
         resetBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(22, 23, 23));
+        setForeground(new java.awt.Color(22, 23, 23));
+
         jPanel7.setBackground(new java.awt.Color(22, 23, 23));
         jPanel7.setForeground(new java.awt.Color(22, 23, 23));
         jPanel7.setPreferredSize(new java.awt.Dimension(1080, 720));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         jPanel8.setBackground(new java.awt.Color(22, 23, 23));
+        jPanel8.setForeground(new java.awt.Color(22, 23, 23));
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
 
         PanelLeft3.setBackground(new java.awt.Color(22, 23, 23));
