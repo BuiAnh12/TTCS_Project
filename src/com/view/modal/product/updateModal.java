@@ -189,21 +189,21 @@ public class updateModal extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("UPDATE PRODUCT");
+        jLabel10.setText("Cập nhật sản phẩm");
 
         jPanel6.setBackground(new java.awt.Color(36, 36, 36));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Name:");
+        jLabel11.setText("Tên :");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Manufacturer:");
+        jLabel12.setText("Nhà sản xuất :");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Description:");
+        jLabel13.setText("Mô tả :");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -211,11 +211,11 @@ public class updateModal extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Category:");
+        jLabel5.setText("Loại :");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Sell Price:");
+        jLabel6.setText("Giá bán :");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -266,7 +266,7 @@ public class updateModal extends javax.swing.JFrame {
         );
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton5.setText("SUMBIT");
+        jButton5.setText("Hoàn tất");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -274,7 +274,7 @@ public class updateModal extends javax.swing.JFrame {
         });
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton6.setText("CANCEL");
+        jButton6.setText("Bỏ");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -335,10 +335,10 @@ public class updateModal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to update this product?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật sản phẩm này?", "Thông báo",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(jTextField7.getText().equals("")||jTextField8.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hãy điền tất cả thông tin.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }else{
         if (response == JOptionPane.YES_OPTION) {
             String name = jTextField7.getText();
@@ -351,7 +351,7 @@ public class updateModal extends javax.swing.JFrame {
 
                 try {
                     controller.editProduct(product);
-                    JOptionPane.showMessageDialog(null, "Update success!");
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
                     dispose();
                 } catch (SQLException ex) {
                     Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);

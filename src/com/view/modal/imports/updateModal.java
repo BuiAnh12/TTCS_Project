@@ -118,37 +118,37 @@ public class updateModal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("UPDATE GOODS RECEIPT");
+        jLabel1.setText("Cập nhật phiếu nhập");
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ID's Product");
+        jLabel2.setText("ID Sản phẩm :");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Manufacturing Date");
+        jLabel3.setText("Ngày sản xuất :");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Expiry Date");
+        jLabel4.setText("Ngày hết hạn :");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Import Date");
+        jLabel5.setText("Ngày nhập :");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Quantities");
+        jLabel6.setText("Số lượng :");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Availabla Quantities");
+        jLabel7.setText("Số lượng khả dụng :");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Unit Price");
+        jLabel8.setText("Giá vốn :");
 
         combProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -212,7 +212,7 @@ public class updateModal extends javax.swing.JFrame {
         );
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("SUMBIT");
+        jButton1.setText("Hoàn tất");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -220,7 +220,7 @@ public class updateModal extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("CANCEL");
+        jButton2.setText("Bỏ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -279,10 +279,10 @@ public class updateModal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to update this import?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật phiếu nhập này?", "Thông báo",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
          if(jTextField7.getText().equals("")||jTextField2.getText().equals("")||jTextField3.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")||jTextField6.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hãy điền tất cả thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }else{
              
          
@@ -323,7 +323,7 @@ public class updateModal extends javax.swing.JFrame {
 
                 try {
                     controller.editImport(importData);
-                    JOptionPane.showMessageDialog(null, "Update success!");
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
                     dispose();
                 } catch (SQLException ex) {
                     Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);

@@ -213,7 +213,7 @@ public class customerForm extends javax.swing.JPanel {
         sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Name", "Sort By Email", "Sort By Amount" }));
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp Xếp Theo Tên", "Sắp Xếp Theo Email", "Sắp Xếp Theo Tổng tiền", " " }));
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 sortComboBoxItemStateChanged(evt);
@@ -240,7 +240,7 @@ public class customerForm extends javax.swing.JPanel {
         insertBtn.setBackground(new java.awt.Color(36, 36, 36));
         insertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         insertBtn.setForeground(new java.awt.Color(255, 255, 255));
-        insertBtn.setText("Insert");
+        insertBtn.setText("Thêm");
         insertBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertBtnActionPerformed(evt);
@@ -273,7 +273,7 @@ public class customerForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Email", "Address", "Amount Spent"
+                "Tên", "Email", "Địa chỉ", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -308,7 +308,7 @@ public class customerForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("CUSTOMER");
+        jLabel1.setText("Khách hàng");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -364,7 +364,7 @@ public class customerForm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DETAIL");
+        jLabel3.setText("Chi tiết");
 
         javax.swing.GroupLayout PanelHeaderLayout = new javax.swing.GroupLayout(PanelHeader);
         PanelHeader.setLayout(PanelHeaderLayout);
@@ -372,7 +372,7 @@ public class customerForm extends javax.swing.JPanel {
             PanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
         );
         PanelHeaderLayout.setVerticalGroup(
             PanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,13 +397,13 @@ public class customerForm extends javax.swing.JPanel {
         lableName.setBackground(new java.awt.Color(255, 255, 255));
         lableName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lableName.setForeground(new java.awt.Color(255, 255, 255));
-        lableName.setText("Customer name");
+        lableName.setText("Tên Khách hàng:");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lableName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+            .addComponent(lableName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,7 +442,7 @@ public class customerForm extends javax.swing.JPanel {
         lableEmail.setBackground(new java.awt.Color(255, 255, 255));
         lableEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lableEmail.setForeground(new java.awt.Color(255, 255, 255));
-        lableEmail.setText("Email");
+        lableEmail.setText("Email:");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -489,7 +489,7 @@ public class customerForm extends javax.swing.JPanel {
         lableAddress.setBackground(new java.awt.Color(255, 255, 255));
         lableAddress.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lableAddress.setForeground(new java.awt.Color(255, 255, 255));
-        lableAddress.setText("Address");
+        lableAddress.setText("Địa chỉ:");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -536,7 +536,7 @@ public class customerForm extends javax.swing.JPanel {
         lableTotalAmount.setBackground(new java.awt.Color(255, 255, 255));
         lableTotalAmount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lableTotalAmount.setForeground(new java.awt.Color(255, 255, 255));
-        lableTotalAmount.setText("Total Amount");
+        lableTotalAmount.setText("Tổng tiền:");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -607,7 +607,7 @@ public class customerForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Product", "Quantity", "Price", "Total"
+                "Sản Phẩm", "Số lượng", "Giá cả", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -667,7 +667,7 @@ public class customerForm extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGap(0, 242, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -678,7 +678,7 @@ public class customerForm extends javax.swing.JPanel {
 
         resetBtn.setBackground(new java.awt.Color(36, 36, 36));
         resetBtn.setForeground(new java.awt.Color(255, 255, 255));
-        resetBtn.setText("RESET");
+        resetBtn.setText("Hoàn tác");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -688,7 +688,7 @@ public class customerForm extends javax.swing.JPanel {
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("DELETE");
+        deleteBtn.setText("Xóa");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -698,7 +698,7 @@ public class customerForm extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(36, 36, 36));
         updateBtn.setForeground(new java.awt.Color(255, 255, 255));
-        updateBtn.setText("UPDATE");
+        updateBtn.setText("Cập nhật");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -809,9 +809,9 @@ public class customerForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a customer to delete!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn khách hàng cần xóa!");
         } else {
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this customer?", "Alert",
+            int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa khách hàng này không?", "Thông báo",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
                 int row = table.getSelectedRow();
@@ -821,7 +821,7 @@ public class customerForm extends javax.swing.JPanel {
                     controller.deleteCustomer(selectedCustomer.getCustomerId());
                     refreshTable();
                     refreshDetail();
-                    JOptionPane.showMessageDialog(null, "Delete success!");
+                    JOptionPane.showMessageDialog(null, "Xóa thành công!");
                 } catch (SQLException ex) {
                     Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -836,7 +836,7 @@ public class customerForm extends javax.swing.JPanel {
             openUpdateForm();
         updateCustomer.setDataCustomer(selectedCustomer);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a customer to update!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn khách hàng cần cập nhật!");
         }
         
     }//GEN-LAST:event_updateBtnActionPerformed
@@ -850,13 +850,13 @@ public class customerForm extends javax.swing.JPanel {
                 // Lấy phương thức sắp xếp được chọn
                 String selectedMethod = (String) evt.getItem();
                 switch (selectedMethod) {
-                    case "Sort By Name":
+                    case "Sắp Xếp Theo Tên":
                         status = 1;
                         break;
-                    case "Sort By Email":
+                    case "Sắp Xếp Theo Email":
                         status = 2;
                         break;
-                    case "Sort By Amount":
+                    case "Sắp Xếp Theo Tổng tiền":
                         status = 3;
                         break;
                 }

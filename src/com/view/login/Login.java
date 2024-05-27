@@ -41,8 +41,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(" USERNAME : ");
-        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, -1));
+        jLabel3.setText("Tên đăng nhập:");
+        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 140, -1));
 
         txtUsername.setBackground(new java.awt.Color(39, 38, 44));
         txtUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -68,13 +68,13 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(" PASSWORD :");
+        jLabel2.setText("Mật khẩu:");
         panelBorder1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 130, -1));
 
         btnLogin.setBackground(new java.awt.Color(64, 68, 237));
         btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setText("Login");
+        btnLogin.setText("Đăng nhập");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -152,8 +152,8 @@ public class Login extends javax.swing.JFrame {
                 
             } else {
                 System.out.println("Not Authorized");
-                JOptionPane.showMessageDialog(null, "Your username or password is wrong! Please enter again.",
-            "Incorrect Login", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu sai! Vui lòng nhập lại.",
+            "Sai đăng nhập", JOptionPane.WARNING_MESSAGE);
             } 
         } catch (SQLException ex) {
             ex.printStackTrace();

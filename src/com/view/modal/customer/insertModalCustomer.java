@@ -69,21 +69,21 @@ public class insertModalCustomer extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ADD NEW CUSTOMER");
+        jLabel1.setText("Thêm mới khách hàng:");
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("NAME:");
+        jLabel2.setText("Tên:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("EMAIL:");
+        jLabel3.setText("Email:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ADDRESS:");
+        jLabel4.setText("Địa chỉ:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,7 +125,7 @@ public class insertModalCustomer extends javax.swing.JFrame {
         );
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("SUMBIT");
+        jButton1.setText("Hoàn tất:");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -133,7 +133,7 @@ public class insertModalCustomer extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("CANCEL");
+        jButton2.setText("Bỏ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -187,7 +187,7 @@ public class insertModalCustomer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm khách hàng này?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm khách hàng này?", "Thông báo",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             String customerName = jTextField1.getText();
@@ -195,7 +195,7 @@ public class insertModalCustomer extends javax.swing.JFrame {
             String customerAddress = jTextField3.getText();
             // Kiểm tra ràng buộc không được để trống
             if (customerName.isEmpty() || customerEmail.isEmpty() || customerAddress.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Not left blank !", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
 
             }
             // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
@@ -209,7 +209,7 @@ public class insertModalCustomer extends javax.swing.JFrame {
             controller_Customer controller = new controller_Customer();
             try {
                 controller.addCustomer(newCustomer);
-                JOptionPane.showMessageDialog(null, "Add new customer success");
+                JOptionPane.showMessageDialog(null, "Thêm mới khách hàng thành công");
                 this.isUpdate = true;
                 jTextField1.setText("");
                 jTextField2.setText("");
