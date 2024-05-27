@@ -391,6 +391,7 @@ public class customerForm extends javax.swing.JPanel {
         jPanel12.setBackground(new java.awt.Color(36, 36, 36));
 
         txtCustomerName.setEditable(false);
+        txtCustomerName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel13.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -436,6 +437,7 @@ public class customerForm extends javax.swing.JPanel {
         jPanel14.setBackground(new java.awt.Color(36, 36, 36));
 
         txtEmail.setEditable(false);
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel15.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -483,6 +485,7 @@ public class customerForm extends javax.swing.JPanel {
         jPanel16.setBackground(new java.awt.Color(36, 36, 36));
 
         txtAddress.setEditable(false);
+        txtAddress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel17.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -530,6 +533,7 @@ public class customerForm extends javax.swing.JPanel {
         jPanel18.setBackground(new java.awt.Color(36, 36, 36));
 
         txtTotalAmount.setEditable(false);
+        txtTotalAmount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel19.setBackground(new java.awt.Color(36, 36, 36));
 

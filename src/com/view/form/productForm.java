@@ -388,6 +388,7 @@ public class productForm extends javax.swing.JPanel {
 
         txtName.setEditable(false);
         txtName.setBackground(new java.awt.Color(255, 255, 255));
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -402,6 +403,7 @@ public class productForm extends javax.swing.JPanel {
 
         txtManufacture.setEditable(false);
         txtManufacture.setBackground(new java.awt.Color(255, 255, 255));
+        txtManufacture.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -418,11 +420,13 @@ public class productForm extends javax.swing.JPanel {
         descriptionTxt.setEditable(false);
         descriptionTxt.setBackground(new java.awt.Color(255, 255, 255));
         descriptionTxt.setColumns(20);
+        descriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         descriptionTxt.setRows(5);
         txtDescription.setViewportView(descriptionTxt);
 
         txtCategory.setEditable(false);
         txtCategory.setBackground(new java.awt.Color(255, 255, 255));
+        txtCategory.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         labelSellPrice.setBackground(new java.awt.Color(255, 255, 255));
         labelSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -432,6 +436,7 @@ public class productForm extends javax.swing.JPanel {
 
         txtSellPrice.setEditable(false);
         txtSellPrice.setBackground(new java.awt.Color(255, 255, 255));
+        txtSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout PanelDetailLayout = new javax.swing.GroupLayout(PanelDetail);
         PanelDetail.setLayout(PanelDetailLayout);

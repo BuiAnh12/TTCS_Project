@@ -415,6 +415,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtCustomerName.setEditable(false);
         txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
+        txtCustomerName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel8.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -460,6 +461,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtEmail.setEditable(false);
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel10.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -503,6 +505,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtAddress.setEditable(false);
         txtAddress.setBackground(new java.awt.Color(255, 255, 255));
+        txtAddress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel12.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -571,6 +574,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtPosition.setEditable(false);
         txtPosition.setBackground(new java.awt.Color(255, 255, 255));
+        txtPosition.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtPosition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPositionActionPerformed(evt);
@@ -623,6 +627,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtUsername.setEditable(false);
         txtUsername.setBackground(new java.awt.Color(255, 255, 255));
+        txtUsername.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -668,6 +673,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtPassword.setEditable(false);
         txtPassword.setBackground(new java.awt.Color(255, 255, 255));
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -695,6 +701,7 @@ public class staffForm extends javax.swing.JPanel {
 
         txtAge.setEditable(false);
         txtAge.setBackground(new java.awt.Color(255, 255, 255));
+        txtAge.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel20.setBackground(new java.awt.Color(36, 36, 36));
 
