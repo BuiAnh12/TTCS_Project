@@ -11,6 +11,7 @@ import com.model.Invoice;
 import com.model.InvoiceItem;
 import com.model.Product;
 import com.model.Staff;
+import com.view.modal.order.customerMoney;
 import com.view.modal.order.insertModal;
 import com.view.modal.order.updateModal;
 import com.view.swing.ScrollBar;
@@ -61,7 +62,9 @@ import javax.swing.JFrame;
 public class orderForm extends javax.swing.JPanel {
     private insertModal im = null;
     private updateModal um = null;
+    private customerMoney cm = null;
     private List<Invoice> invoiceList;
+    private Invoice invoice;
     private int status = 1;
     private Staff user;
 
@@ -139,6 +142,7 @@ public class orderForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         PanelLeft = new javax.swing.JPanel();
@@ -180,6 +184,9 @@ public class orderForm extends javax.swing.JPanel {
         returnBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        printInvoiceBtn = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setForeground(new java.awt.Color(22, 23, 23));
         setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -679,6 +686,17 @@ public class orderForm extends javax.swing.JPanel {
 
         PanelDUBtn.add(jPanel8);
 
+        printInvoiceBtn.setBackground(new java.awt.Color(36, 36, 36));
+        printInvoiceBtn.setForeground(new java.awt.Color(255, 255, 255));
+        printInvoiceBtn.setText("PRINT");
+        printInvoiceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printInvoiceBtnActionPerformed(evt);
+            }
+        });
+        PanelDUBtn.add(printInvoiceBtn);
+
+
         PanelRight.add(PanelDUBtn, java.awt.BorderLayout.SOUTH);
 
         jPanel2.add(PanelRight);
@@ -839,6 +857,28 @@ public class orderForm extends javax.swing.JPanel {
         this.refreshtable();
     }//GEN-LAST:event_sortComboBoxActionPerformed
 
+    private void printInvoiceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printInvoiceBtnActionPerformed
+        // TODO add your handling code here:
+        if (table.getSelectedRow() >= 0) {
+            if (cm==null) {
+            invoice = invoiceList.get(table.getSelectedRow());
+            cm = new customerMoney(invoice.getInvoiceId());
+            cm.setVisible(true);
+            cm.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        cm = null;
+                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
+                    }
+                });
+        } else {
+            cm.toFront();
+        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn để in", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_printInvoiceBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelButton;
@@ -854,6 +894,7 @@ public class orderForm extends javax.swing.JPanel {
     private javax.swing.JButton deleteBtn;
     private javax.swing.JScrollPane detailSpTable;
     private javax.swing.JButton insertBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -870,6 +911,7 @@ public class orderForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JButton printInvoiceBtn;
     private javax.swing.JButton returnBtn;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;
