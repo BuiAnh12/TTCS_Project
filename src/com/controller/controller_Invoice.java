@@ -35,17 +35,16 @@ public class controller_Invoice {
                 int invoiceId = re.getInt("InvoiceId");
                 int customerId = re.getInt("CustomerId");
                 int staffId = re.getInt("StaffId");
-                Date purchaseDate = re.getDate("PurchaseDate");
+                Timestamp purchaseDate = re.getTimestamp("PurchaseDate");
                 String customerName = re.getString("CustomerName");
                 String staffName = re.getString("StaffName");
                 int totalAmount = re.getInt("TotalAmount");
-
-                Invoice invoice = new Invoice(invoiceId, customerId, staffId, purchaseDate, customerName, staffName, totalAmount);
+                Timestamp updateDate = re.getTimestamp("UpdateDate");
+                Invoice invoice = new Invoice(invoiceId, customerId, staffId, purchaseDate, customerName, staffName, totalAmount,updateDate);
                 invoices.add(invoice);
             }
 
         } catch (SQLException ex) {
-            // Handle exception if necessary
             ex.printStackTrace();
         }
 
@@ -56,18 +55,17 @@ public class controller_Invoice {
 
     public int addInvoice(Invoice invoice) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String storedProcedure = "{call AddInvoice(?, ?, ?, ?)}";
+        String storedProcedure = "{call AddInvoice(?, ?, ?)}";
 
         try (CallableStatement statement = cnn.prepareCall(storedProcedure)) {
             statement.setInt(1, invoice.getCustomerId());
             statement.setInt(2, invoice.getStaffId());
-            statement.setDate(3, new java.sql.Date(invoice.getPurchaseDate().getTime()));
-            statement.registerOutParameter(4, Types.INTEGER); // Register the output parameter for InvoiceId
+            statement.registerOutParameter(3, Types.INTEGER); // Register the output parameter for InvoiceId
 
             statement.executeUpdate();
 
             // Retrieve the generated InvoiceId
-            int invoiceId = statement.getInt(4);
+            int invoiceId = statement.getInt(3);
             return invoiceId;
         } catch (SQLException ex) {
             ex.printStackTrace(); // Log the exception for debugging
@@ -79,15 +77,14 @@ public class controller_Invoice {
 
 
     public void editInvoice(Invoice invoice) throws SQLException {
-        String storedProcedure = "{call EditInvoice(?, ?, ?, ?)}";
+        String storedProcedure = "{call EditInvoice(?, ?, ?)}";
 
         try (Connection cnn = ConnectionDB.getConnection();
              CallableStatement statement = cnn.prepareCall(storedProcedure)) {
 
             statement.setInt(1, invoice.getCustomerId());
             statement.setInt(2, invoice.getStaffId());
-            statement.setDate(3, new java.sql.Date(invoice.getPurchaseDate().getTime())); 
-            statement.setInt(4, invoice.getInvoiceId());
+            statement.setInt(3, invoice.getInvoiceId());
 
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -96,7 +93,7 @@ public class controller_Invoice {
         }
     }
 
-      
+    
       
 
     public void deleteInvoice(int invoiceId) throws SQLException {

@@ -1,35 +1,39 @@
 package com.model;
 import java.util.Date;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 public class Invoice {
     private int invoiceId;
     private int customerId;
     private int staffId;
-    private Date purchaseDate;
+    private Timestamp purchaseDate;
+    private Timestamp updateDate;
     private String customerName;
     private String staffName;
     private int totalAmount;
 
-        public Invoice(int invoiceId, int customerId, int staffId, Date purchaseDate, String customerName, String staffName, int totalAmount) {
-            this.invoiceId = invoiceId;
-            this.customerId = customerId;
-            this.staffId = staffId;
-            this.purchaseDate = purchaseDate;
-            this.customerName = customerName;
-            this.staffName = staffName;
-            this.totalAmount = totalAmount;
-        }
-        public Invoice(int invoiceId, int customerId, int staffId, Date purchaseDate) {
-            this.invoiceId = invoiceId;
-            this.customerId = customerId;
-            this.staffId = staffId;
-            this.purchaseDate = purchaseDate;
-        }
-        public Invoice( int customerId, int staffId, Date purchaseDate) {
-            this.customerId = customerId;
-            this.staffId = staffId;
-            this.purchaseDate = purchaseDate;
-        }
+    public Invoice(int invoiceId, int customerId, int staffId, Timestamp purchaseDate, String customerName, String staffName, int totalAmount, Timestamp updateDate) {
+        this.invoiceId = invoiceId;
+        this.customerId = customerId;
+        this.staffId = staffId;
+        this.purchaseDate = purchaseDate;
+        this.customerName = customerName;
+        this.staffName = staffName;
+        this.totalAmount = totalAmount;
+        this.updateDate = updateDate;
+    }
+    public Invoice(int invoiceId, int customerId, int staffId, Timestamp purchaseDate, Timestamp updateDate) {
+        this.invoiceId = invoiceId;
+        this.customerId = customerId;
+        this.staffId = staffId;
+        this.purchaseDate = purchaseDate;
+        this.updateDate = updateDate;
+    }
+    public Invoice( int customerId, int staffId, Timestamp purchaseDate, Timestamp updateDate) {
+        this.customerId = customerId;
+        this.staffId = staffId;
+        this.purchaseDate = purchaseDate;
+        this.updateDate = updateDate;
+    }
 
     public int getInvoiceId() {
         return invoiceId;
@@ -43,7 +47,7 @@ public class Invoice {
         return staffId;
     }
 
-    public Date getPurchaseDate() {
+    public Timestamp getPurchaseDate() {
         return purchaseDate;
     }
 
@@ -71,7 +75,7 @@ public class Invoice {
         this.staffId = staffId;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(Timestamp purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
@@ -86,6 +90,13 @@ public class Invoice {
     public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;
     }
-    
+
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
+    }
 
 }
