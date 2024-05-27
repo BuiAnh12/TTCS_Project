@@ -106,11 +106,9 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-                      <Component id="PanelButton" alignment="0" pref="648" max="32767" attributes="0"/>
-=======
+
                       <Component id="PanelButton" alignment="0" pref="0" max="32767" attributes="0"/>
->>>>>>> origin/main
+
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
@@ -159,11 +157,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
+
                                   <Component id="txtSearch" pref="257" max="32767" attributes="0"/>
-=======
-                                  <Component id="txtSearch" pref="244" max="32767" attributes="0"/>
->>>>>>> origin/main
+
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
@@ -218,11 +214,9 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
+
                                   <Component id="sortComboBox" pref="189" max="32767" attributes="0"/>
-=======
-                                  <Component id="sortComboBox" pref="176" max="32767" attributes="0"/>
->>>>>>> origin/main
+
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -274,11 +268,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
+
                                   <Component id="insertBtn" pref="138" max="32767" attributes="0"/>
-=======
-                                  <Component id="insertBtn" pref="133" max="32767" attributes="0"/>
->>>>>>> origin/main
+
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -609,6 +601,7 @@
                                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="txtCustomerName" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
+
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -621,6 +614,7 @@
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
+
                                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="txtUpdateDate" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
@@ -775,15 +769,13 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-                              <Component id="detailSpTable" alignment="0" pref="383" max="32767" attributes="0"/>
-=======
+
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="detailSpTable" min="-2" pref="252" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               </Group>
->>>>>>> origin/main
+
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -857,15 +849,15 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-<<<<<<< HEAD
+
                                   <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
-=======
+
                                   <EmptySpace min="0" pref="153" max="32767" attributes="0"/>
                                   <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="updateBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
->>>>>>> origin/main
+
                                   <Component id="returnBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -929,7 +921,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-<<<<<<< HEAD
+
                     <Component class="javax.swing.JButton" name="deleteBtn">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -972,8 +964,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printInvoiceBtnActionPerformed"/>
                       </Events>
                     </Component>
-=======
->>>>>>> origin/main
+
                   </SubComponents>
                 </Container>
               </SubComponents>

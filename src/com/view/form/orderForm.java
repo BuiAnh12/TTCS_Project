@@ -696,6 +696,7 @@ public class orderForm extends javax.swing.JPanel {
         });
         PanelDUBtn.add(printInvoiceBtn);
 
+
         PanelRight.add(PanelDUBtn, java.awt.BorderLayout.SOUTH);
 
         jPanel2.add(PanelRight);
