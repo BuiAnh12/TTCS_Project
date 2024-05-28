@@ -79,21 +79,21 @@ public class insertModal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ADD NEW PRODUCT");
+        jLabel1.setText("THÊM MỚI SẢN PHẨM");
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Name:");
+        jLabel2.setText("TÊN:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Manufacturer:");
+        jLabel3.setText("NHÀ SẢN XUẤT:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Description:");
+        jLabel4.setText("MÔ TẢ:");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -101,11 +101,11 @@ public class insertModal extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Category:");
+        jLabel5.setText("Loại:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Sell Price:");
+        jLabel6.setText("Giá bán:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -156,7 +156,7 @@ public class insertModal extends javax.swing.JFrame {
         );
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("SUMBIT");
+        jButton1.setText("Hoàn tất");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -164,7 +164,7 @@ public class insertModal extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("CANCEL");
+        jButton2.setText("Bỏ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -220,10 +220,10 @@ public class insertModal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(null, "Do you want to add new this product?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm mới sản phẩm này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(jTextField1.getText().equals("")||jTextField2.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
         }else{  
         if (response == JOptionPane.YES_OPTION) {
             String productName = jTextField1.getText();
@@ -246,7 +246,7 @@ public class insertModal extends javax.swing.JFrame {
 
                 try {
                     controller.addProduct(newProduct);
-                    JOptionPane.showMessageDialog(null, "Add new product success");
+                    JOptionPane.showMessageDialog(null, "Thêm mới thành công");
                     jTextField1.setText("");
                     jTextField2.setText("");
                     jTextArea1.setText("");

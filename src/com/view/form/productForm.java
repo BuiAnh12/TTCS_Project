@@ -183,7 +183,7 @@ public class productForm extends javax.swing.JPanel {
             PanelSearch3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSearch3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtSearch3, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addComponent(txtSearch3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -200,7 +200,7 @@ public class productForm extends javax.swing.JPanel {
         sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort by Name", "Sort by Manufacture", "Sort by Category", "" }));
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Tên", "Sắp xếp theo Nhà sản xuất", "Sắp xếp theo Loại", " " }));
         sortComboBox.setToolTipText("");
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -218,7 +218,7 @@ public class productForm extends javax.swing.JPanel {
         PanelFilterLayout.setHorizontalGroup(
             PanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFilterLayout.createSequentialGroup()
-                .addComponent(sortComboBox, 0, 201, Short.MAX_VALUE)
+                .addComponent(sortComboBox, 0, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelFilterLayout.setVerticalGroup(
@@ -233,7 +233,7 @@ public class productForm extends javax.swing.JPanel {
         insertBtn.setBackground(new java.awt.Color(36, 36, 36));
         insertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         insertBtn.setForeground(new java.awt.Color(255, 255, 255));
-        insertBtn.setText("Insert");
+        insertBtn.setText("Thêm");
         insertBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertBtnActionPerformed(evt);
@@ -246,7 +246,7 @@ public class productForm extends javax.swing.JPanel {
             PanelInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelInsertLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(insertBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(insertBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelInsertLayout.setVerticalGroup(
@@ -266,7 +266,7 @@ public class productForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Manufacture", "Sell Price", "Category"
+                "Tên ", "Nhà sản xuát", "Giá bán", "Loại"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -301,7 +301,7 @@ public class productForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("PRODUCT");
+        jLabel1.setText("SẢN PHẨM");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -325,7 +325,7 @@ public class productForm extends javax.swing.JPanel {
         PanelLeft3.setLayout(PanelLeft3Layout);
         PanelLeft3Layout.setHorizontalGroup(
             PanelLeft3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+            .addComponent(PanelButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
             .addGroup(PanelLeft3Layout.createSequentialGroup()
                 .addGroup(PanelLeft3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -357,7 +357,7 @@ public class productForm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DETAIL");
+        jLabel3.setText("CHI TIẾT");
 
         javax.swing.GroupLayout PanelHeaderLayout = new javax.swing.GroupLayout(PanelHeader);
         PanelHeader.setLayout(PanelHeaderLayout);
@@ -384,9 +384,11 @@ public class productForm extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Name");
+        jLabel4.setText("Tên:");
 
         txtName.setEditable(false);
+        txtName.setBackground(new java.awt.Color(255, 255, 255));
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -397,36 +399,44 @@ public class productForm extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Manufacture");
+        jLabel5.setText("Nhà sản xuất:");
 
         txtManufacture.setEditable(false);
+        txtManufacture.setBackground(new java.awt.Color(255, 255, 255));
+        txtManufacture.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Category");
+        jLabel6.setText("Loại:");
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Decscription");
+        jLabel7.setText("Mô tả:");
 
         descriptionTxt.setEditable(false);
+        descriptionTxt.setBackground(new java.awt.Color(255, 255, 255));
         descriptionTxt.setColumns(20);
+        descriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         descriptionTxt.setRows(5);
         txtDescription.setViewportView(descriptionTxt);
 
         txtCategory.setEditable(false);
+        txtCategory.setBackground(new java.awt.Color(255, 255, 255));
+        txtCategory.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         labelSellPrice.setBackground(new java.awt.Color(255, 255, 255));
         labelSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelSellPrice.setForeground(new java.awt.Color(255, 255, 255));
         labelSellPrice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelSellPrice.setText("Sell Price:");
+        labelSellPrice.setText("Giá bán:");
 
         txtSellPrice.setEditable(false);
+        txtSellPrice.setBackground(new java.awt.Color(255, 255, 255));
+        txtSellPrice.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout PanelDetailLayout = new javax.swing.GroupLayout(PanelDetail);
         PanelDetail.setLayout(PanelDetailLayout);
@@ -435,10 +445,7 @@ public class productForm extends javax.swing.JPanel {
             .addGroup(PanelDetailLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelDetailLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,8 +455,11 @@ public class productForm extends javax.swing.JPanel {
                                 .addComponent(txtName)
                                 .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                                 .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 21, Short.MAX_VALUE))
+                            .addComponent(txtSellPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
         PanelDetailLayout.setVerticalGroup(
             PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,7 +496,7 @@ public class productForm extends javax.swing.JPanel {
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("DELETE");
+        deleteBtn.setText("Xóa");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -495,7 +505,7 @@ public class productForm extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(36, 36, 36));
         updateBtn.setForeground(new java.awt.Color(255, 255, 255));
-        updateBtn.setText("UPDATE");
+        updateBtn.setText("Cập nhật");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -504,7 +514,7 @@ public class productForm extends javax.swing.JPanel {
 
         resetBtn.setBackground(new java.awt.Color(36, 36, 36));
         resetBtn.setForeground(new java.awt.Color(255, 255, 255));
-        resetBtn.setText("RESET");
+        resetBtn.setText("Hoàn tác");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -516,7 +526,7 @@ public class productForm extends javax.swing.JPanel {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addComponent(resetBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteBtn)
@@ -613,8 +623,8 @@ public class productForm extends javax.swing.JPanel {
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
         if (this.previlege == 1) {
-            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn không có quyền thực hiện điều này!",
+                    "Xác thực", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -654,18 +664,18 @@ public class productForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (this.previlege == 1) {
-            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn không có quyền thực hiện điều này!",
+                    "Xác thực", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a product to delete!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn sản phẩm muốn xóa!");
         } else {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int row = table.getSelectedRow();
             Product selectedProduct = productList.get(row);
             controller_Product controller = new controller_Product();
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this Product?", "Alert",
+            int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa sản phẩm này không?", "Alert",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(response==JOptionPane.YES_OPTION){
                  try {
@@ -676,7 +686,7 @@ public class productForm extends javax.swing.JPanel {
             } 
            
             refreshTable();
-            JOptionPane.showMessageDialog(null, "Delete success!");
+            JOptionPane.showMessageDialog(null, "Xóa thành công!");
             refreshDetail();
         }
 
@@ -684,15 +694,15 @@ public class productForm extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (this.previlege == 1) {
-            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn không có quyền thực hiện điều này!",
+                    "Xác thực", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (table.getSelectedRow() > -1) {
             openUpdateForm();
             um.setDataProduct(selectedProduct);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a product to update!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn sản phẩm muốn cập nhật!");
         }
 
     }//GEN-LAST:event_updateBtnActionPerformed
@@ -707,13 +717,13 @@ public class productForm extends javax.swing.JPanel {
                 // Lấy phương thức sắp xếp được chọn
                 String selectedMethod = (String) evt.getItem();
                 switch (selectedMethod) {
-                    case "Sort by Name":
+                    case "Sắp xếp theo Tên":
                         status = 1;
                         break;
-                    case "Sort by Manufacture":
+                    case "Sắp xếp theo Nhà sản xuất":
                         status = 2;
                         break;
-                    case "Sort by Category":
+                    case "Sắp xếp theo Loại":
                         status = 3;
                         break;
                 }

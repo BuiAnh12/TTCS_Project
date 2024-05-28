@@ -62,15 +62,15 @@ public class Form_chart extends javax.swing.JFrame {
         JFreeChart chart=null;
         if(index==0){
               chart = ChartFactory.createLineChart(
-                "Year Revenue", // Tiêu đề
-                "Year", // Label trục X
+                "Doanh thu năm", // Tiêu đề
+                "Năm", // Label trục X
                 "Income(VNĐ)", // Label trục Y
                 createDatasetYear()
         );
         }else{
               chart = ChartFactory.createLineChart(
-                "Monthly Revenue", // Tiêu đề
-                "Month", // Label trục X
+                "Doanh thu tháng", // Tiêu đề
+                "Tháng", // Label trục X
                 "Income(VNĐ)", // Label trục Y
                 createDatasetMonth()
         );

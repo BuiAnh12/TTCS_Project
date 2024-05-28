@@ -133,8 +133,8 @@ public class importForm extends javax.swing.JPanel {
 
     public void openUpdateForm() {
         if (this.previlege == 1) {
-            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Bạn không có quyền để thực hiện điều này!",
+                    "Xác thực", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -313,7 +313,7 @@ public class importForm extends javax.swing.JPanel {
         sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Name", "Sort By Quantity", "Sort By Status" }));
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Tên", "Sắp xếp theo Số lượng", "Sắp xếp theo Trạng thái", " ", " " }));
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 sortComboBoxItemStateChanged(evt);
@@ -345,7 +345,7 @@ public class importForm extends javax.swing.JPanel {
         insertBtn.setBackground(new java.awt.Color(36, 36, 36));
         insertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         insertBtn.setForeground(new java.awt.Color(255, 255, 255));
-        insertBtn.setText("Insert");
+        insertBtn.setText("Thêm");
         insertBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertBtnActionPerformed(evt);
@@ -378,7 +378,7 @@ public class importForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "Quantity", "Avaiable", "Status"
+                "ID", "Tên hàng", "Số lượng", "Khả dụng", "Trạng thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -413,7 +413,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("IMPORT");
+        jLabel1.setText("NHẬP HÀNG");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -469,7 +469,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DETAIL");
+        jLabel3.setText("CHI TIẾT");
 
         javax.swing.GroupLayout PanelHeaderLayout = new javax.swing.GroupLayout(PanelHeader);
         PanelHeader.setLayout(PanelHeaderLayout);
@@ -498,7 +498,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel15.setBackground(new java.awt.Color(36, 36, 36));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Product Name");
+        jLabel15.setText("Tên sản phẩm:");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -514,6 +514,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtName.setEditable(false);
+        txtName.setBackground(new java.awt.Color(255, 255, 255));
+        txtName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -543,7 +545,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel16.setBackground(new java.awt.Color(36, 36, 36));
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Quantity");
+        jLabel16.setText("Số lượng:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -559,6 +561,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtQuantity.setEditable(false);
+        txtQuantity.setBackground(new java.awt.Color(255, 255, 255));
+        txtQuantity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -583,7 +587,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel17.setBackground(new java.awt.Color(36, 36, 36));
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setText("Avaiable ");
+        jLabel17.setText("Khả dụng:");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -599,6 +603,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtStock.setEditable(false);
+        txtStock.setBackground(new java.awt.Color(255, 255, 255));
+        txtStock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -623,7 +629,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel18.setBackground(new java.awt.Color(36, 36, 36));
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Imp. Date");
+        jLabel18.setText("Ngày nhập:");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -639,6 +645,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtImpDate.setEditable(false);
+        txtImpDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtImpDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtImpDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtImpDateActionPerformed(evt);
@@ -668,7 +676,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel19.setBackground(new java.awt.Color(36, 36, 36));
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Manu. Date");
+        jLabel19.setText("Ngày sản xuất:");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -684,6 +692,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtManuDate.setEditable(false);
+        txtManuDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtManuDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -708,7 +718,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel20.setBackground(new java.awt.Color(36, 36, 36));
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Exp. Date");
+        jLabel20.setText("Ngày hết hạn:");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -724,6 +734,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtExpDate.setEditable(false);
+        txtExpDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtExpDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtExpDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtExpDateActionPerformed(evt);
@@ -753,7 +765,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel21.setBackground(new java.awt.Color(36, 36, 36));
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Unit Price");
+        jLabel21.setText("Giá vốn:");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -769,6 +781,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtUnitPrice.setEditable(false);
+        txtUnitPrice.setBackground(new java.awt.Color(255, 255, 255));
+        txtUnitPrice.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -793,7 +807,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel24.setBackground(new java.awt.Color(36, 36, 36));
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Total");
+        jLabel24.setText("Tổng tiền:");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -812,6 +826,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtTotal.setEditable(false);
+        txtTotal.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -873,7 +889,7 @@ public class importForm extends javax.swing.JPanel {
         jLabel25.setBackground(new java.awt.Color(36, 36, 36));
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("Category");
+        jLabel25.setText("Loại:");
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -889,6 +905,8 @@ public class importForm extends javax.swing.JPanel {
         );
 
         txtCategory.setEditable(false);
+        txtCategory.setBackground(new java.awt.Color(255, 255, 255));
+        txtCategory.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCategoryActionPerformed(evt);
@@ -972,7 +990,7 @@ public class importForm extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 231, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -983,7 +1001,7 @@ public class importForm extends javax.swing.JPanel {
 
         resetBtn.setBackground(new java.awt.Color(36, 36, 36));
         resetBtn.setForeground(new java.awt.Color(255, 255, 255));
-        resetBtn.setText("RESET");
+        resetBtn.setText("Hoàn tác ");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -993,7 +1011,7 @@ public class importForm extends javax.swing.JPanel {
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("DELETE");
+        deleteBtn.setText("Xóa");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -1003,7 +1021,7 @@ public class importForm extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(36, 36, 36));
         updateBtn.setForeground(new java.awt.Color(255, 255, 255));
-        updateBtn.setText("UPDATE");
+        updateBtn.setText("Cập nhật");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -1027,7 +1045,7 @@ public class importForm extends javax.swing.JPanel {
             openUpdateForm();
             um.setDataImport(selectedImport);
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a product to update!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần cập nhật!");
         }
 
 //        refreshDetail();
@@ -1076,12 +1094,12 @@ public class importForm extends javax.swing.JPanel {
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a order to return!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần hoàn tác!");
         } else {
             if (im == null) {
                 if (this.previlege == 1) {
-                    JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Bạn không có quyền để thực hiện điều này!",
+                            "Xác thực", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 im = new insertModal();
@@ -1101,24 +1119,24 @@ public class importForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a order to return!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần xóa!");
         } else {
             if (this.previlege == 1) {
-                JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                        "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền dể thực hiện điều này!",
+                        "Xác thực", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (table.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Please select a import to delete!");
             } else {
-                int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this import?", "Alert",
+                int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa đơn nhập này không?", "Thông báo",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (response == JOptionPane.YES_OPTION) {
                     try {
                         controller.deleteImport(selectedImport.getImportId());
                         refreshTable();
                         refreshDetail();
-                        JOptionPane.showMessageDialog(null, "Delete success!");
+                        JOptionPane.showMessageDialog(null, "Xóa thành công!");
                     } catch (SQLException ex) {
                         Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -1174,13 +1192,13 @@ public class importForm extends javax.swing.JPanel {
                 // Lấy phương thức sắp xếp được chọn
                 String selectedMethod = (String) evt.getItem();
                 switch (selectedMethod) {
-                    case "Sort By Name":
+                    case "Sắp xếp theo Tên":
                         status = 1;
                         break;
-                    case "Sort By Quantity":
+                    case "Sắp xếp theo Số lượng":
                         status = 2;
                         break;
-                    case "Sort By Status":
+                    case "Sắp xếp theo Trạng thái":
                         status = 3;
                         break;
                 }

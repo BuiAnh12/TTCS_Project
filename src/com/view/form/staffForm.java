@@ -236,7 +236,7 @@ public class staffForm extends javax.swing.JPanel {
         sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Name", "Sort By Email", "Sort By Position" }));
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Tên ", "Sắp xếp theo Email", "Sắp xếp theo Vị trí", " " }));
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 sortComboBoxItemStateChanged(evt);
@@ -263,7 +263,7 @@ public class staffForm extends javax.swing.JPanel {
         insertBtn.setBackground(new java.awt.Color(36, 36, 36));
         insertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         insertBtn.setForeground(new java.awt.Color(255, 255, 255));
-        insertBtn.setText("Insert");
+        insertBtn.setText("Thêm");
         insertBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertBtnActionPerformed(evt);
@@ -296,7 +296,7 @@ public class staffForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Email", "Address", "Position"
+                "Tên", "Email", "Địa chỉ", "Vị trí"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -331,7 +331,7 @@ public class staffForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("STAFF");
+        jLabel1.setText("NHÂN VIÊN");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -387,7 +387,7 @@ public class staffForm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DETAIL");
+        jLabel3.setText("CHI TIẾT");
 
         javax.swing.GroupLayout PanelHeaderLayout = new javax.swing.GroupLayout(PanelHeader);
         PanelHeader.setLayout(PanelHeaderLayout);
@@ -395,7 +395,7 @@ public class staffForm extends javax.swing.JPanel {
             PanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
         );
         PanelHeaderLayout.setVerticalGroup(
             PanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,7 +420,7 @@ public class staffForm extends javax.swing.JPanel {
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Staff name");
+        jLabel6.setText("Tên nhân viên:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -428,7 +428,7 @@ public class staffForm extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jLabel6)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,8 +483,8 @@ public class staffForm extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -506,7 +506,7 @@ public class staffForm extends javax.swing.JPanel {
         lableAddress.setBackground(new java.awt.Color(255, 255, 255));
         lableAddress.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lableAddress.setForeground(new java.awt.Color(255, 255, 255));
-        lableAddress.setText("Address");
+        lableAddress.setText("Địa chỉ:");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -551,7 +551,7 @@ public class staffForm extends javax.swing.JPanel {
         lablePosition.setBackground(new java.awt.Color(255, 255, 255));
         lablePosition.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lablePosition.setForeground(new java.awt.Color(255, 255, 255));
-        lablePosition.setText("Position");
+        lablePosition.setText("Vị trí:");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -602,7 +602,7 @@ public class staffForm extends javax.swing.JPanel {
         lablePosition1.setBackground(new java.awt.Color(255, 255, 255));
         lablePosition1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lablePosition1.setForeground(new java.awt.Color(255, 255, 255));
-        lablePosition1.setText("Username");
+        lablePosition1.setText("Tên đăng nhập:");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -646,7 +646,7 @@ public class staffForm extends javax.swing.JPanel {
         lablePosition2.setBackground(new java.awt.Color(255, 255, 255));
         lablePosition2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lablePosition2.setForeground(new java.awt.Color(255, 255, 255));
-        lablePosition2.setText("Password");
+        lablePosition2.setText("Mật khẩu:");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -694,7 +694,7 @@ public class staffForm extends javax.swing.JPanel {
         lablAge.setBackground(new java.awt.Color(255, 255, 255));
         lablAge.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lablAge.setForeground(new java.awt.Color(255, 255, 255));
-        lablAge.setText("Age");
+        lablAge.setText("Tuổi:");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
@@ -713,8 +713,8 @@ public class staffForm extends javax.swing.JPanel {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel19Layout.setVerticalGroup(
@@ -790,7 +790,7 @@ public class staffForm extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 234, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,7 +801,7 @@ public class staffForm extends javax.swing.JPanel {
 
         resetBtn.setBackground(new java.awt.Color(36, 36, 36));
         resetBtn.setForeground(new java.awt.Color(255, 255, 255));
-        resetBtn.setText("RESET");
+        resetBtn.setText("Hoàn tác");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -811,7 +811,7 @@ public class staffForm extends javax.swing.JPanel {
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("DELETE");
+        deleteBtn.setText("Xóa");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -821,7 +821,7 @@ public class staffForm extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(36, 36, 36));
         updateBtn.setForeground(new java.awt.Color(255, 255, 255));
-        updateBtn.setText("UPDATE");
+        updateBtn.setText("Cập nhật");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -842,7 +842,7 @@ public class staffForm extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a customer to update!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn nhân viên cần cập nhật!");
         } else {
             openUpdateForm();
             um.setDataStaff(selectedStaff);
@@ -868,13 +868,13 @@ public class staffForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a staff to delete!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn nhân viên muốn xóa!");
         } else {
             controller_Staff controller = new controller_Staff();
             try {
                 controller.deleteStaff(selectedStaff.getStaffId());
                 refreshTable();
-                JOptionPane.showMessageDialog(null, "Delete success!");
+                JOptionPane.showMessageDialog(null, "Xóa thành công!");
                 refreshDetail();
             } catch (SQLException ex) {
                 Logger.getLogger(staffForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -951,13 +951,13 @@ public class staffForm extends javax.swing.JPanel {
                 // Lấy phương thức sắp xếp được chọn
                 String selectedMethod = (String) evt.getItem();
                 switch (selectedMethod) {
-                    case "Sort By Name":
+                    case "Sắp xếp theo Tên":
                         status = 1;
                         break;
-                    case "Sort By Email":
+                    case "Sắp xếp theo Email":
                         status = 2;
                         break;
-                    case "Sort By Position":
+                    case "Sắp xếp theo Vị trí":
                         status = 3;
                         break;
                 }
