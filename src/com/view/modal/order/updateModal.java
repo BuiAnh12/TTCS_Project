@@ -95,71 +95,71 @@ public class updateModal extends javax.swing.JFrame {
             
             
             
-            public void tableChanged(TableModelEvent e) {
-                
-                if (e.getType() == TableModelEvent.UPDATE && e.getColumn() == 1 && model.getRowCount() > 0) {
-                    int index = table.getSelectedRow();
-                    if (cartList.get(index).getImportId()==-1) {
-                        JOptionPane.showMessageDialog(null, "You can not modify newly add product. Try delete and re-added.",
-                            "Error", JOptionPane.WARNING_MESSAGE);
-                        cartList.get(index).setImportId(0);
-                        model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
-                        table.setEditingRow(0);
-                        cartList.get(index).setImportId(-1);
-                        return;
-                    }
-                    if (cartList.get(index).getImportId()==0){
-                        return;
-                    }
-                    Product product = productList.get(cartList.get(index).getIndex());
-                    Integer newQuantity = Integer.parseInt((String)model.getValueAt(index, 1));
-                    int increasingAmount = newQuantity - cartList.get(index).getQuantity();
-                    if (index != -1 ){
-                        int availableImportQuantity = 0;
-                        Import tmpImp  = new Import();
-                        int importIndex = 0;
-                        for (Import imp : importList){
-                            if (imp.getImportId() == cartList.get(index).getImportId()) {
-                                tmpImp = imp;
-                                break;
-                            }
-                            importIndex += 1;
-                        }
-                        if (newQuantity < 0) {
-                            JOptionPane.showMessageDialog(null, "Fill quanitity must be larger than 0",
-                                "Error", JOptionPane.WARNING_MESSAGE);
-                            model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
-                            return; 
-                        }
-                        else if (tmpImp.getAvailableQuantity() + cartList.get(index).getQuantity() >= newQuantity){
-                            DecimalFormat decimalFormat = new DecimalFormat("#,###");
-                            product.setAvailability(product.getAvailability() - increasingAmount);
-                            cartList.get(index).setQuantity(newQuantity);
-                            combProductActionPerformed(null);
-                            BigDecimal previousTotal = cartList.get(index).getTotalPrice();
-                            cartList.get(index).setTotalPrice(cartList.get(index).getSellPrice().multiply(BigDecimal.valueOf(newQuantity)));
-                            totalPrice = totalPrice.add(previousTotal.negate()).add(cartList.get(index).getTotalPrice());
-                            txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
-                            importList.get(importIndex).setAvailableQuantity(importList.get(importIndex).getAvailableQuantity() -  increasingAmount);
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock for that import" 
-                                    + " (" + String.valueOf(importList.get(importIndex).getAvailableQuantity()) + ")",
-                                "Error", JOptionPane.WARNING_MESSAGE);
-                            model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
-                            return;                        
-                        }
+        public void tableChanged(TableModelEvent e) {
 
+            if (e.getType() == TableModelEvent.UPDATE && e.getColumn() == 1 && model.getRowCount() > 0) {
+                int index = table.getSelectedRow();
+                if (cartList.get(index).getImportId()==-1) {
+                    JOptionPane.showMessageDialog(null, "You can not modify newly add product. Try delete and re-added.",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+                    cartList.get(index).setImportId(0);
+                    model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                    table.setEditingRow(0);
+                    cartList.get(index).setImportId(-1);
+                    return;
+                }
+                if (cartList.get(index).getImportId()==0){
+                    return;
+                }
+                Product product = productList.get(cartList.get(index).getIndex());
+                Integer newQuantity = Integer.parseInt((String)model.getValueAt(index, 1));
+                int increasingAmount = newQuantity - cartList.get(index).getQuantity();
+                if (index != -1 ){
+                    int availableImportQuantity = 0;
+                    Import tmpImp  = new Import();
+                    int importIndex = 0;
+                    for (Import imp : importList){
+                        if (imp.getImportId() == cartList.get(index).getImportId()) {
+                            tmpImp = imp;
+                            break;
+                        }
+                        importIndex += 1;
+                    }
+                    if (newQuantity < 0) {
+                        JOptionPane.showMessageDialog(null, "Fill quanitity must be larger than 0",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                        model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                        return; 
+                    }
+                    else if (tmpImp.getAvailableQuantity() + cartList.get(index).getQuantity() >= newQuantity){
+                        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+                        product.setAvailability(product.getAvailability() - increasingAmount);
+                        cartList.get(index).setQuantity(newQuantity);
+                        combProductActionPerformed(null);
+                        BigDecimal previousTotal = cartList.get(index).getTotalPrice();
+                        cartList.get(index).setTotalPrice(cartList.get(index).getSellPrice().multiply(BigDecimal.valueOf(newQuantity)));
+                        totalPrice = totalPrice.add(previousTotal.negate()).add(cartList.get(index).getTotalPrice());
+                        txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
+                        importList.get(importIndex).setAvailableQuantity(importList.get(importIndex).getAvailableQuantity() -  increasingAmount);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Please select items you want to changes!",
+                        JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock for that import" 
+                                + " (" + String.valueOf(importList.get(importIndex).getAvailableQuantity()) + ")",
                             "Error", JOptionPane.WARNING_MESSAGE);
-                        return;                    
+                        model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                        return;                        
                     }
 
-                    
                 }
-                
+                else{
+                    JOptionPane.showMessageDialog(null, "Please select items you want to changes!",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+                    return;                    
+                    }
+
+
+                }
+
             }
         });
         
@@ -917,6 +917,7 @@ public class updateModal extends javax.swing.JFrame {
             "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
         int index = this.combProduct.getSelectedIndex();
         Product tmp = productList.get(index);
         int quantity = Integer.valueOf(this.txtQuantity.getText());

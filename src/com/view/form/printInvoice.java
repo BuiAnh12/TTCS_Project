@@ -136,7 +136,7 @@ public class printInvoice extends javax.swing.JFrame implements Printable {
                     Object[] row = new Object[3];
                     row[0] = re.getString("ProductName");
                     row[1] = re.getDouble("SellPrice");
-                    row[2] = re.getInt("Quantity");
+                    row[2] = re.getInt("TotalQuantity");
                     tableModel.addRow(row);
                 } else if (rowCount == 7) { // Hiển thị dấu 3 chấm (...) trong hàng thứ 8
                     Object[] row = {"...", "...", "..."};

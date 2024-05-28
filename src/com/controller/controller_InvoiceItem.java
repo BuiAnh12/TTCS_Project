@@ -118,7 +118,7 @@ public class controller_InvoiceItem {
     
     public void deleteInvoiceItemId(int invoiceId) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String storedProcedure = "{call DeleteInvoiceItemByInvoiceId(?)}";
+        String storedProcedure = "{call DeleteInvoiceItemsByInvoiceId(?)}";
 
         try (CallableStatement statement = cnn.prepareCall(storedProcedure)) {
             statement.setInt(1, invoiceId);

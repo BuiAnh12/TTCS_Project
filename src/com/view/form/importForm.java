@@ -455,7 +455,7 @@ public class importForm extends javax.swing.JPanel {
                 .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPanel1.add(PanelLeft);
@@ -958,7 +958,7 @@ public class importForm extends javax.swing.JPanel {
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         PanelRight.add(PanelDetail, java.awt.BorderLayout.CENTER);
@@ -1075,50 +1075,57 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-        if (im == null) {
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a order to return!");
+        } else {
+            if (im == null) {
+                if (this.previlege == 1) {
+                    JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
+                            "Unauthorize", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                im = new insertModal();
+                im.setVisible(true);
+                im.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        im = null; //// Đặt lại thành null khi cửa sổ đóng
+                        refreshTable();
+                    }
+                });
+            } else {
+                im.toFront();
+            }
+        }
+    }//GEN-LAST:event_insertBtnActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a order to return!");
+        } else {
             if (this.previlege == 1) {
                 JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
                         "Unauthorize", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            im = new insertModal();
-            im.setVisible(true);
-            im.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    im = null; //// Đặt lại thành null khi cửa sổ đóng
-                    refreshTable();
+            if (table.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Please select a import to delete!");
+            } else {
+                int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this import?", "Alert",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    try {
+                        controller.deleteImport(selectedImport.getImportId());
+                        refreshTable();
+                        refreshDetail();
+                        JOptionPane.showMessageDialog(null, "Delete success!");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            });
-        } else {
-            im.toFront();
-        }
-    }//GEN-LAST:event_insertBtnActionPerformed
 
-    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        if (this.previlege == 1) {
-            JOptionPane.showMessageDialog(null, "You do not have authorize to do this!",
-                    "Unauthorize", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a import to delete!");
-        } else {
-            int response = JOptionPane.showConfirmDialog(null, "Do you want to delete this import?", "Alert",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.YES_OPTION) {
-                try {
-                    controller.deleteImport(selectedImport.getImportId());
-                    refreshTable();
-                    refreshDetail();
-                    JOptionPane.showMessageDialog(null, "Delete success!");
-                } catch (SQLException ex) {
-                    Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
-
         }
-
 
     }//GEN-LAST:event_deleteBtnActionPerformed
 
