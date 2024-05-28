@@ -184,6 +184,8 @@ public class orderForm extends javax.swing.JPanel {
         returnBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        deleteBtn1 = new javax.swing.JButton();
+        updateBtn1 = new javax.swing.JButton();
         printInvoiceBtn = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
@@ -235,7 +237,7 @@ public class orderForm extends javax.swing.JPanel {
             PanelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSearchLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -252,7 +254,7 @@ public class orderForm extends javax.swing.JPanel {
         sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By Customer", "Sort By Staff", "Sort By Total" }));
+        sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Khách hàng", "Sắp xếp theo Nhân viên ", "Sắp xếp theo Tổng tiền", " " }));
         sortComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortComboBoxActionPerformed(evt);
@@ -264,7 +266,7 @@ public class orderForm extends javax.swing.JPanel {
         PanelFilterLayout.setHorizontalGroup(
             PanelFilterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFilterLayout.createSequentialGroup()
-                .addComponent(sortComboBox, 0, 176, Short.MAX_VALUE)
+                .addComponent(sortComboBox, 0, 189, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelFilterLayout.setVerticalGroup(
@@ -279,7 +281,7 @@ public class orderForm extends javax.swing.JPanel {
         insertBtn.setBackground(new java.awt.Color(36, 36, 36));
         insertBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         insertBtn.setForeground(new java.awt.Color(255, 255, 255));
-        insertBtn.setText("Insert");
+        insertBtn.setText("Thêm");
         insertBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertBtnActionPerformed(evt);
@@ -292,7 +294,7 @@ public class orderForm extends javax.swing.JPanel {
             PanelInsertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelInsertLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(insertBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(insertBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelInsertLayout.setVerticalGroup(
@@ -312,7 +314,7 @@ public class orderForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer name", "Staff name", "Date", "Total Amount"
+                "Tên khách hàng", "Tên nhân viên", "Ngày ", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -349,7 +351,7 @@ public class orderForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("ORDER");
+        jLabel1.setText("ĐẶT HÀNG");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -406,7 +408,7 @@ public class orderForm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DETAIL");
+        jLabel3.setText("CHI TIẾT");
 
         javax.swing.GroupLayout PanelHeaderLayout = new javax.swing.GroupLayout(PanelHeader);
         PanelHeader.setLayout(PanelHeaderLayout);
@@ -437,26 +439,27 @@ public class orderForm extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Customer name: ");
+        jLabel4.setText("Tên khách hàng:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Staff name:");
+        jLabel5.setText("Tên nhân viên:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Purchase date");
+        jLabel6.setText("Ngày mua:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Update date");
+        jLabel8.setText("Ngày cập nhật:");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Total Amount");
+        jLabel7.setText("Tổng tiền:");
 
         txtCustomerName.setEditable(false);
-        txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
+        txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtCustomerName.setForeground(new java.awt.Color(102, 102, 102));
         txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -465,18 +468,22 @@ public class orderForm extends javax.swing.JPanel {
         });
 
         txtStaffName.setEditable(false);
-        txtStaffName.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtStaffName.setBackground(new java.awt.Color(255, 255, 255));
+        txtStaffName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtStaffName.setForeground(new java.awt.Color(102, 102, 102));
 
         txtPurchaseDate.setEditable(false);
-        txtPurchaseDate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtPurchaseDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtPurchaseDate.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtPurchaseDate.setForeground(new java.awt.Color(102, 102, 102));
 
         txtUpdateDate.setEditable(false);
-        txtUpdateDate.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        txtUpdateDate.setBackground(new java.awt.Color(255, 255, 255));
+        txtUpdateDate.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtUpdateDate.setForeground(new java.awt.Color(102, 102, 102));
 
         totalAmountField.setEditable(false);
+        totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
         totalAmountField.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         totalAmountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -491,10 +498,11 @@ public class orderForm extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtUpdateDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
@@ -569,7 +577,7 @@ public class orderForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Quantity", "Total Pricce"
+                "Tên ", "Số lượng", "Tổng tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -636,7 +644,7 @@ public class orderForm extends javax.swing.JPanel {
 
         returnBtn.setBackground(new java.awt.Color(36, 36, 36));
         returnBtn.setForeground(new java.awt.Color(255, 255, 255));
-        returnBtn.setText("RETURN");
+        returnBtn.setText("Hoàn tác");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 returnBtnActionPerformed(evt);
@@ -645,7 +653,7 @@ public class orderForm extends javax.swing.JPanel {
 
         deleteBtn.setBackground(new java.awt.Color(36, 36, 36));
         deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
-        deleteBtn.setText("DELETE");
+        deleteBtn.setText("Xóa");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -654,7 +662,7 @@ public class orderForm extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(36, 36, 36));
         updateBtn.setForeground(new java.awt.Color(255, 255, 255));
-        updateBtn.setText("UPDATE");
+        updateBtn.setText("Cập nhật");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -666,7 +674,7 @@ public class orderForm extends javax.swing.JPanel {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 153, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(deleteBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateBtn)
@@ -686,16 +694,35 @@ public class orderForm extends javax.swing.JPanel {
 
         PanelDUBtn.add(jPanel8);
 
+        deleteBtn1.setBackground(new java.awt.Color(36, 36, 36));
+        deleteBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn1.setText("Xóa");
+        deleteBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
+        PanelDUBtn.add(deleteBtn1);
+
+        updateBtn1.setBackground(new java.awt.Color(36, 36, 36));
+        updateBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn1.setText("Cập nhật");
+        updateBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+        PanelDUBtn.add(updateBtn1);
+
         printInvoiceBtn.setBackground(new java.awt.Color(36, 36, 36));
         printInvoiceBtn.setForeground(new java.awt.Color(255, 255, 255));
-        printInvoiceBtn.setText("PRINT");
+        printInvoiceBtn.setText("In");
         printInvoiceBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printInvoiceBtnActionPerformed(evt);
             }
         });
         PanelDUBtn.add(printInvoiceBtn);
-
 
         PanelRight.add(PanelDUBtn, java.awt.BorderLayout.SOUTH);
 
@@ -711,7 +738,7 @@ public class orderForm extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1009, Short.MAX_VALUE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -777,7 +804,7 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableDetailMouseClicked
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn trả hàng của hóa đơn này?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn trả hàng của hóa đơn này?", "Thông báo",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             int selectedIndex = table.getSelectedRow();
@@ -815,7 +842,7 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_returnBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa hóa đơn này?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa hóa đơn này?", "Thông báo",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             int selectedIndex = table.getSelectedRow();
@@ -875,7 +902,7 @@ public class orderForm extends javax.swing.JPanel {
             cm.toFront();
         }
         } else {
-            JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn để in", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn để in", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_printInvoiceBtnActionPerformed
 
@@ -892,6 +919,7 @@ public class orderForm extends javax.swing.JPanel {
     private javax.swing.JPanel PanelSearch;
     private javax.swing.JPanel PanelTable;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JButton deleteBtn1;
     private javax.swing.JScrollPane detailSpTable;
     private javax.swing.JButton insertBtn;
     private javax.swing.JButton jButton1;
@@ -924,5 +952,6 @@ public class orderForm extends javax.swing.JPanel {
     private javax.swing.JTextField txtStaffName;
     private javax.swing.JTextField txtUpdateDate;
     private javax.swing.JButton updateBtn;
+    private javax.swing.JButton updateBtn1;
     // End of variables declaration//GEN-END:variables
 }

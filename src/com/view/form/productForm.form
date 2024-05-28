@@ -96,7 +96,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="PanelButton3" alignment="0" pref="703" max="32767" attributes="0"/>
+                      <Component id="PanelButton3" alignment="0" pref="696" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jPanel9" alignment="0" max="32767" attributes="0"/>
@@ -145,7 +145,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtSearch3" pref="290" max="32767" attributes="0"/>
+                                  <Component id="txtSearch3" pref="287" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" pref="33" max="-2" attributes="0"/>
                               </Group>
@@ -200,7 +200,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="sortComboBox" pref="201" max="32767" attributes="0"/>
+                                  <Component id="sortComboBox" pref="198" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -225,10 +225,10 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
-                                <StringItem index="0" value="Sort by Name"/>
-                                <StringItem index="1" value="Sort by Manufacture"/>
-                                <StringItem index="2" value="Sort by Category"/>
-                                <StringItem index="3" value=""/>
+                                <StringItem index="0" value="S&#x1eaf;p x&#x1ebf;p theo T&#xea;n"/>
+                                <StringItem index="1" value="S&#x1eaf;p x&#x1ebf;p theo S&#x1ea3;n xu&#x1ea5;t"/>
+                                <StringItem index="2" value="S&#x1eaf;p x&#x1ebf;p theo Lo&#x1ea1;i"/>
+                                <StringItem index="3" value=" "/>
                               </StringArray>
                             </Property>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -255,7 +255,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="insertBtn" pref="148" max="32767" attributes="0"/>
+                                  <Component id="insertBtn" pref="146" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -278,7 +278,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Insert"/>
+                            <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertBtnActionPerformed"/>
@@ -327,10 +327,10 @@
                             </Property>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="4" rowCount="0">
-                                <Column editable="false" title="Name" type="java.lang.Object"/>
-                                <Column editable="false" title="Manufacture" type="java.lang.Object"/>
-                                <Column editable="false" title="Sell Price" type="java.lang.Object"/>
-                                <Column editable="false" title="Category" type="java.lang.Object"/>
+                                <Column editable="false" title="T&#xea;n" type="java.lang.Object"/>
+                                <Column editable="false" title="Nh&#xe0; s&#x1ea3;n xu&#x1ea5;t" type="java.lang.Object"/>
+                                <Column editable="false" title="Gi&#xe1; b&#xe1;n" type="java.lang.Object"/>
+                                <Column editable="false" title="Lo&#x1ea1;i" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -409,7 +409,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="text" type="java.lang.String" value="PRODUCT"/>
+                        <Property name="text" type="java.lang.String" value="S&#x1ea2;N PH&#x1ea8;M"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                       </Properties>
                     </Component>
@@ -470,7 +470,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="DETAIL"/>
+                        <Property name="text" type="java.lang.String" value="CHI TI&#x1ebe;T"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -496,10 +496,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel4" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -513,8 +510,11 @@
                                           <Component id="txtSellPrice" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Component id="jLabel4" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -559,12 +559,15 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="Name"/>
+                        <Property name="text" type="java.lang.String" value="T&#xea;n:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameActionPerformed"/>
@@ -582,12 +585,15 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="Manufacture"/>
+                        <Property name="text" type="java.lang.String" value="Nh&#xe0; s&#x1ea3;n xu&#x1ea5;t:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtManufacture">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -602,7 +608,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="Category"/>
+                        <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -617,7 +623,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="Decscription"/>
+                        <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3;:"/>
                       </Properties>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="txtDescription">
@@ -630,6 +636,9 @@
                         <Component class="javax.swing.JTextArea" name="descriptionTxt">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
                           </Properties>
@@ -639,6 +648,9 @@
                     <Component class="javax.swing.JTextField" name="txtCategory">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="labelSellPrice">
@@ -653,12 +665,15 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="2"/>
-                        <Property name="text" type="java.lang.String" value="Sell Price:"/>
+                        <Property name="text" type="java.lang.String" value="Gi&#xe1; b&#xe1;n:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtSellPrice">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -688,7 +703,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="149" max="32767" attributes="0"/>
+                                  <EmptySpace pref="145" max="32767" attributes="0"/>
                                   <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
@@ -720,7 +735,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="DELETE"/>
+                            <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
@@ -734,7 +749,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="UPDATE"/>
+                            <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateBtnActionPerformed"/>
@@ -748,7 +763,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="RESET"/>
+                            <Property name="text" type="java.lang.String" value="Ho&#xe0;n t&#xe1;c"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetBtnActionPerformed"/>

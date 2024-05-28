@@ -40,7 +40,7 @@ public class Form_chart extends javax.swing.JFrame {
         List<List_Chart>listchart=new ArrayList<>();
         listchart=dashboard.getMonthlyrevenue();
         for(int i=0;i<listchart.size();i++){
-            dataset.addValue(listchart.get(i).getIncome(),"Income Line",listchart.get(i).getMonth());
+            dataset.addValue(listchart.get(i).getIncome(),"Đường thu",listchart.get(i).getMonth());
         }
         
         return dataset;
@@ -52,7 +52,7 @@ public class Form_chart extends javax.swing.JFrame {
         List<ListChartYear> lischChartYears=new ArrayList<>();
         lischChartYears=dashboard.getYearRevenue();
         for(int i=0;i<lischChartYears.size();i++){
-            dataset.addValue(lischChartYears.get(i).getIncome(), "Income Line",lischChartYears.get(i).getYear());
+            dataset.addValue(lischChartYears.get(i).getIncome(), "Đường thu",lischChartYears.get(i).getYear());
         }
         
         return dataset;
@@ -62,16 +62,16 @@ public class Form_chart extends javax.swing.JFrame {
         JFreeChart chart=null;
         if(index==0){
               chart = ChartFactory.createLineChart(
-                "Year Revenue", // Tiêu đề
-                "Year", // Label trục X
-                "Income(VNĐ)", // Label trục Y
+                "Doanh thu năm", // Tiêu đề
+                "Năm", // Label trục X
+                "Thu(VNĐ)", // Label trục Y
                 createDatasetYear()
         );
         }else{
               chart = ChartFactory.createLineChart(
-                "Monthly Revenue", // Tiêu đề
-                "Month", // Label trục X
-                "Income(VNĐ)", // Label trục Y
+                "Doanh thu tháng", // Tiêu đề
+                "Tháng", // Label trục X
+                "Thu(VNĐ)", // Label trục Y
                 createDatasetMonth()
         );
         }

@@ -159,15 +159,16 @@ public class insertModal extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(22, 23, 23));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Name");
+        jLabel1.setText("Tên khách hàng:");
 
         txtCustomerName.setEditable(false);
+        txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txtCustomerName, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
@@ -187,12 +188,13 @@ public class insertModal extends javax.swing.JFrame {
         jLabel2.setText(" Email");
 
         txtCustomerEmail.setEditable(false);
+        txtCustomerEmail.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txtCustomerEmail, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel3Layout.setVerticalGroup(
@@ -209,15 +211,16 @@ public class insertModal extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(22, 23, 23));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(" Address");
+        jLabel3.setText("Địa chỉ:");
 
         txtCustomerAddress.setEditable(false);
+        txtCustomerAddress.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txtCustomerAddress, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel4Layout.setVerticalGroup(
@@ -234,7 +237,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(22, 23, 23));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText(" Customer ");
+        jLabel4.setText("Khách hàng:");
 
         combCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -243,14 +246,14 @@ public class insertModal extends javax.swing.JFrame {
             }
         });
 
-        btnCustomerInsert.setText("Insert");
+        btnCustomerInsert.setText("Thêm");
         btnCustomerInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCustomerInsertActionPerformed(evt);
             }
         });
 
-        btnCustomerReload.setText("Reload");
+        btnCustomerReload.setText("Làm mới");
         btnCustomerReload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCustomerReloadActionPerformed(evt);
@@ -267,7 +270,8 @@ public class insertModal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCustomerInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCustomerReload, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                .addComponent(btnCustomerReload)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +282,7 @@ public class insertModal extends javax.swing.JFrame {
                     .addComponent(combCustomer)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCustomerInsert, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                        .addComponent(btnCustomerReload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnCustomerReload)))
                 .addContainerGap())
         );
 
@@ -309,7 +313,7 @@ public class insertModal extends javax.swing.JFrame {
         );
 
         btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnSubmit.setText("Submit");
+        btnSubmit.setText("Hoàn tất");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
@@ -321,7 +325,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel10.setBackground(new java.awt.Color(22, 23, 23));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Total Price");
+        jLabel10.setText("Tổng tiền:");
 
         txtTotalPrice.setEditable(false);
 
@@ -344,7 +348,7 @@ public class insertModal extends javax.swing.JFrame {
         );
 
         btnCancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnCancel.setText("Cancel");
+        btnCancel.setText("Bỏ");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -358,7 +362,7 @@ public class insertModal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity", "Unit Price", "Price"
+                "Tên sản phẩm", "Số lượng", "Giá vốn", "Giá bán"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -395,9 +399,10 @@ public class insertModal extends javax.swing.JFrame {
         jLabel5.setBackground(new java.awt.Color(22, 23, 23));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Name");
+        jLabel5.setText("Tên sản phẩm:");
 
         txtProductName.setEditable(false);
+        txtProductName.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -425,9 +430,10 @@ public class insertModal extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(22, 23, 23));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Manufacture");
+        jLabel6.setText("Nhà sản xuất:");
 
         txtManufacture.setEditable(false);
+        txtManufacture.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -455,7 +461,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(22, 23, 23));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Decscription");
+        jLabel7.setText("Mô tả:");
 
         txtDescription.setColumns(20);
         txtDescription.setRows(5);
@@ -487,7 +493,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(22, 23, 23));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Product");
+        jLabel8.setText("Sản phẩm:");
 
         combProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -522,7 +528,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel9.setBackground(new java.awt.Color(22, 23, 23));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Quantity");
+        jLabel9.setText("Số lượng:");
 
         txtQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -597,7 +603,7 @@ public class insertModal extends javax.swing.JFrame {
         );
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setText("Delete");
+        btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -605,7 +611,7 @@ public class insertModal extends javax.swing.JFrame {
         });
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnInsert.setText("Insert");
+        btnInsert.setText("Thêm ");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
@@ -636,7 +642,7 @@ public class insertModal extends javax.swing.JFrame {
                         .addGap(306, 306, 306)
                         .addComponent(btnSubmit)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancel)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -670,7 +676,7 @@ public class insertModal extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("INSERT ORDER");
+        jLabel12.setText("THÊM ĐƠN HÀNG");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -734,7 +740,7 @@ public class insertModal extends javax.swing.JFrame {
         int index = this.combProduct.getSelectedIndex();
         Product tmp = productList.get(index);
         if(currentQuantity > tmp.getAvailability()){
-            JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+            JOptionPane.showMessageDialog(null, "Thêm số lượng lớn hơn số lượng khả dụng",
             "Error", JOptionPane.WARNING_MESSAGE);
             this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
             return;
@@ -745,7 +751,7 @@ public class insertModal extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
 
         if ( table.getRowCount() <= 0){
-            JOptionPane.showMessageDialog(null, "You can not create empty order",
+            JOptionPane.showMessageDialog(null, "Không được tạo đơn hàng trống",
             "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -812,14 +818,14 @@ public class insertModal extends javax.swing.JFrame {
             int index = this.combProduct.getSelectedIndex();
             Product tmp = productList.get(index);
             if(currentQuantity > tmp.getAvailability()){
-                JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+                JOptionPane.showMessageDialog(null, "Thêm số lượng lớn hơn số lượng khả dụng",
                 "Error", JOptionPane.WARNING_MESSAGE);
                 this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
                 return;
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "This is not a number! Please retype!",
+            JOptionPane.showMessageDialog(null, "Phải là ký tự số! Hãy nhập lại!",
             "Error", JOptionPane.WARNING_MESSAGE);
             this.txtQuantity.requestFocusInWindow();
             this.txtQuantity.selectAll();
@@ -829,7 +835,7 @@ public class insertModal extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         if (this.txtQuantity.getText().equals("0")){
-            JOptionPane.showMessageDialog(null, "That product is out of stock",
+            JOptionPane.showMessageDialog(null, "Sản phẩm này không còn hàng",
             "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }

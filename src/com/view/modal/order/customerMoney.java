@@ -50,14 +50,14 @@ public class customerMoney extends javax.swing.JFrame {
 
         jLabel1.setText("Tiền khách trả:");
 
-        jButton1.setText("SUBMIT");
+        jButton1.setText("Hoàn tất");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("CANCEL");
+        jButton2.setText("Bỏ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

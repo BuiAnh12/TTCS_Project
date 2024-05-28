@@ -28,19 +28,19 @@ public class Util {
     public static boolean checkDate(Date manufactureDate, Date expiryDate, Date entry) {
         Date today = new Date();
         if (manufactureDate.after(entry)) {
-            JOptionPane.showMessageDialog(null, "Manufacturing date cannot be after import date", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày sản xuất phải trước ngày nhập", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         } else if (manufactureDate.after(entry)) {
-            JOptionPane.showMessageDialog(null, "The manufacturing date cannot be after the expiration date", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày sản xuất phải trước ngày hết hạn", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         } else if (entry.after(expiryDate)) {
-            JOptionPane.showMessageDialog(null, "The import date cannot be after the expiration date", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày nhập phải trước ngày hết hạn", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         } else if (manufactureDate.after(today)) {
-            JOptionPane.showMessageDialog(null, "Manufacturing date cannot be after today", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày sản xuất không thể sau hôm này", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         } else if (entry.after(today)) {
-            JOptionPane.showMessageDialog(null, "The import date cannot be after today", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày nhập không thể sau ngày hôm nay", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -58,7 +58,7 @@ public class Util {
             return false;
         }
         if (unitP.intValue() <= 0 || quantity <= 0 || avaiQuantity <= 0) {
-            JOptionPane.showMessageDialog(null, "Unit price and quantity must be greater than 0", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Giá vốn và số lượng phải lớn hơn 0", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return !(!checkDate(manufactureDate, expiryDate, entry));
@@ -70,7 +70,7 @@ public class Util {
             return false;
         }
         if (sellPrice.intValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "Sell price mus be greater than 0", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Giá bán phải lớn hơn 0", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ public class Util {
 //            return false;
 //        }
         if (!checkEmail(email)) {
-            JOptionPane.showMessageDialog(null, "Invalid email", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email không khả dụng", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -112,7 +112,7 @@ public class Util {
             return false;
         }
         if (!checkEmail(email)) {
-            JOptionPane.showMessageDialog(null, "Invalid email", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email không khả dụng", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;

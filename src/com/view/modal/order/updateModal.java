@@ -108,14 +108,14 @@ public class updateModal extends javax.swing.JFrame {
                             txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
                         }
                         else{
-                        JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+                        JOptionPane.showMessageDialog(null, "Nhập số lượng lớn hơn số lượng khả dụng!",
                             "Error", JOptionPane.WARNING_MESSAGE);
                         model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
                         return;                        }
 
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Please select items you want to changes!",
+                        JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng bạn cần muốn cập nhật!",
                             "Error", JOptionPane.WARNING_MESSAGE);
                         return;                    
                     }
@@ -236,7 +236,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(22, 23, 23));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Name");
+        jLabel1.setText("Tên khách hàng:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -286,7 +286,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(22, 23, 23));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(" Address");
+        jLabel3.setText("Địa chỉ:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -311,7 +311,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(22, 23, 23));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText(" Customer ");
+        jLabel4.setText("Khách Hàng:");
 
         combCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -320,7 +320,7 @@ public class updateModal extends javax.swing.JFrame {
             }
         });
 
-        txtInsert.setText("Insert");
+        txtInsert.setText("Thêm");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -373,7 +373,7 @@ public class updateModal extends javax.swing.JFrame {
         jPanel14.setBackground(new java.awt.Color(22, 23, 23));
 
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnInsert.setText("Insert");
+        btnInsert.setText("Thêm");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
@@ -381,7 +381,7 @@ public class updateModal extends javax.swing.JFrame {
         });
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDelete.setText("Delete");
+        btnDelete.setText("Xóa");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -408,7 +408,7 @@ public class updateModal extends javax.swing.JFrame {
         );
 
         txtSubmit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtSubmit.setText("Submit");
+        txtSubmit.setText("Hoàn tất");
         txtSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSubmitActionPerformed(evt);
@@ -420,7 +420,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel10.setBackground(new java.awt.Color(22, 23, 23));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Total Price");
+        jLabel10.setText("Tổng tiền:");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -441,7 +441,7 @@ public class updateModal extends javax.swing.JFrame {
         );
 
         txtCancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtCancel.setText("Cancel");
+        txtCancel.setText("Bỏ");
         txtCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCancelActionPerformed(evt);
@@ -455,7 +455,7 @@ public class updateModal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Quantity", "Unit Price", "Price"
+                "Tên sản phẩm", "Số lượng", "Giá vốn", "Giá bán"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -496,7 +496,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel5.setBackground(new java.awt.Color(22, 23, 23));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Name");
+        jLabel5.setText("Tên sản phẩm:");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -524,7 +524,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(22, 23, 23));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Manufacture");
+        jLabel6.setText("Nhà sản xuất:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -552,7 +552,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(22, 23, 23));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Decscription");
+        jLabel7.setText("Mô tả:");
 
         txtDescription.setColumns(20);
         txtDescription.setRows(5);
@@ -584,7 +584,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel8.setBackground(new java.awt.Color(22, 23, 23));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Product");
+        jLabel8.setText("Sản phẩm:");
 
         combProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -619,7 +619,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel9.setBackground(new java.awt.Color(22, 23, 23));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Quantity");
+        jLabel9.setText("Số lượng:");
 
         txtQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -742,7 +742,7 @@ public class updateModal extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("UPDATE ORDER");
+        jLabel12.setText("CẬP NHẬP ĐƠN HÀNG");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -808,12 +808,12 @@ public class updateModal extends javax.swing.JFrame {
     private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
         
         if ( table.getRowCount() <= 0){
-            JOptionPane.showMessageDialog(null, "You can not create empty order",
+            JOptionPane.showMessageDialog(null, "Không được tạo đơn rỗng",
             "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn chỉnh sửa hóa đơn này?", "Alert",
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn chỉnh sửa hóa đơn này?", "Thông báo",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             int invoiceId = currentInvoice.getInvoiceId();
@@ -873,7 +873,7 @@ public class updateModal extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         if (this.txtQuantity.getText().equals("0")){
-            JOptionPane.showMessageDialog(null, "That product is out of stock",
+            JOptionPane.showMessageDialog(null, "Sản phẩm này hết hàng",
             "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -930,14 +930,14 @@ public class updateModal extends javax.swing.JFrame {
             int index = this.combProduct.getSelectedIndex();
             Product tmp = productList.get(index);
             if(currentQuantity > tmp.getAvailability()){
-                JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
+                JOptionPane.showMessageDialog(null, "Nhập số lượng lớn hơn số lượng khả dụng!",
                 "Error", JOptionPane.WARNING_MESSAGE);
                 this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
                 return;
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "This is not a number! Please retype!",
+            JOptionPane.showMessageDialog(null, "Phải là ký tự số ! Hãy nhập lại!",
             "Error", JOptionPane.WARNING_MESSAGE);
             this.txtQuantity.requestFocusInWindow();
             this.txtQuantity.selectAll();

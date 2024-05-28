@@ -208,9 +208,9 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="3">
-                            <StringItem index="0" value="Sort By Name"/>
-                            <StringItem index="1" value="Sort By Quantity"/>
-                            <StringItem index="2" value="Sort By Status"/>
+                            <StringItem index="0" value="S&#x1eaf;p x&#x1ebf;p theo T&#xea;n"/>
+                            <StringItem index="1" value="S&#x1eaf;p x&#x1ebf;p theo S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
+                            <StringItem index="2" value="S&#x1eaf;p x&#x1ebf;p theo T&#xec;nh tr&#x1ea1;ng"/>
                           </StringArray>
                         </Property>
                       </Properties>
@@ -259,7 +259,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Insert"/>
+                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertBtnActionPerformed"/>
@@ -308,10 +308,10 @@
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="0">
-                            <Column editable="false" title="Name" type="java.lang.Object"/>
-                            <Column editable="false" title="Quantity" type="java.lang.Object"/>
-                            <Column editable="false" title="Avaiable" type="java.lang.Object"/>
-                            <Column editable="false" title="Status" type="java.lang.Object"/>
+                            <Column editable="false" title="T&#xea;n " type="java.lang.Object"/>
+                            <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                            <Column editable="false" title="Kh&#x1ea3; d&#x1ee5;ng" type="java.lang.Object"/>
+                            <Column editable="false" title="T&#xec;nh tr&#x1ea1;ng" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -390,7 +390,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
-                    <Property name="text" type="java.lang.String" value="IMPORT"/>
+                    <Property name="text" type="java.lang.String" value="NH&#x1eac;P H&#xc0;NG"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
                 </Component>
@@ -451,7 +451,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="DETAIL"/>
+                    <Property name="text" type="java.lang.String" value="CHI TI&#x1ebe;T"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -578,7 +578,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Product Name"/>
+                            <Property name="text" type="java.lang.String" value="T&#xea;n s&#x1ea3;n ph&#x1ea9;m:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -586,6 +586,9 @@
                     <Component class="javax.swing.JTextField" name="txtName">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameActionPerformed"/>
@@ -653,7 +656,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Quantity"/>
+                            <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -661,6 +664,9 @@
                     <Component class="javax.swing.JTextField" name="txtQuantity">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -725,7 +731,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Avaiable "/>
+                            <Property name="text" type="java.lang.String" value="Kh&#x1ea3; d&#x1ee5;ng:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -733,6 +739,9 @@
                     <Component class="javax.swing.JTextField" name="txtStock">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -797,7 +806,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Imp. Date"/>
+                            <Property name="text" type="java.lang.String" value="Ng&#xe0;y nh&#x1ead;p:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -805,6 +814,9 @@
                     <Component class="javax.swing.JTextField" name="txtImpDate">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtImpDateActionPerformed"/>
@@ -872,7 +884,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Manu. Date"/>
+                            <Property name="text" type="java.lang.String" value="Ng&#xe0;y s&#x1ea3;n xu&#x1ea5;t:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -880,6 +892,9 @@
                     <Component class="javax.swing.JTextField" name="txtManuDate">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -944,7 +959,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Exp. Date"/>
+                            <Property name="text" type="java.lang.String" value="Ng&#xe0;y h&#x1ebf;t h&#x1ea1;n:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -952,6 +967,9 @@
                     <Component class="javax.swing.JTextField" name="txtExpDate">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtExpDateActionPerformed"/>
@@ -1019,7 +1037,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Unit Price"/>
+                            <Property name="text" type="java.lang.String" value="Gi&#xe1; v&#x1ed1;n:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1027,6 +1045,9 @@
                     <Component class="javax.swing.JTextField" name="txtUnitPrice">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1106,7 +1127,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Total"/>
+                            <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1114,6 +1135,9 @@
                     <Component class="javax.swing.JTextField" name="txtTotal">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1234,7 +1258,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Category"/>
+                            <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i:"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -1242,6 +1266,9 @@
                     <Component class="javax.swing.JTextField" name="txtCategory">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCategoryActionPerformed"/>
@@ -1275,7 +1302,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="234" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -1293,7 +1320,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="RESET"/>
+                    <Property name="text" type="java.lang.String" value="Ho&#xe0;n t&#xe1;c"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetBtnActionPerformed"/>
@@ -1307,7 +1334,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="DELETE"/>
+                    <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
@@ -1321,7 +1348,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="UPDATE"/>
+                    <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateBtnActionPerformed"/>

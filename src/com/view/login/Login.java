@@ -41,8 +41,8 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText(" USERNAME : ");
-        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 120, -1));
+        jLabel3.setText("TÊN ĐĂNG NHẬP:");
+        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 160, -1));
 
         txtUsername.setBackground(new java.awt.Color(39, 38, 44));
         txtUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -68,7 +68,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(" PASSWORD :");
+        jLabel2.setText("MẬT KHẨU:");
         panelBorder1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 130, -1));
 
         btnLogin.setBackground(new java.awt.Color(64, 68, 237));
@@ -152,7 +152,7 @@ public class Login extends javax.swing.JFrame {
                 
             } else {
                 System.out.println("Not Authorized");
-                JOptionPane.showMessageDialog(null, "Your username or password is wrong! Please enter again.",
+                JOptionPane.showMessageDialog(null, "Tên đăng nhập hoặc mật khẩu sai! Hãy điền lại.",
             "Incorrect Login", JOptionPane.WARNING_MESSAGE);
             } 
         } catch (SQLException ex) {
