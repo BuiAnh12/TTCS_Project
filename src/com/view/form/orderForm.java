@@ -86,9 +86,6 @@ public class orderForm extends javax.swing.JPanel {
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         refreshtable();
-        this.returnBtn.setEnabled(false);
-        this.updateBtn.setEnabled(false);
-        this.deleteBtn.setEnabled(false);
     }
     public void refreshtable(){
         try {
@@ -105,6 +102,17 @@ public class orderForm extends javax.swing.JPanel {
             table.addRow(new Object[]{invoice.getCustomerName(), invoice.getStaffName(), invoice.getPurchaseDate(), decimalFormat.format(invoice.getTotalAmount()) +" VNĐ" });
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
+    }
+    
+    public void refreshDetail(){
+        this.txtCustomerName.setText("");
+        this.txtPurchaseDate.setText("");
+        this.txtStaffName.setText("");
+        this.txtUpdateDate.setText("");
+        this.totalAmountField.setText("");
+        DefaultTableModel model =(DefaultTableModel) tableDetail.getModel();
+        model.setRowCount(0);
+        
     }
     
     public void updateDetail(Invoice selectedInvoice){
@@ -184,6 +192,7 @@ public class orderForm extends javax.swing.JPanel {
         deleteBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
+        resetBtn = new javax.swing.JButton();
 
         setForeground(new java.awt.Color(22, 23, 23));
         setPreferredSize(new java.awt.Dimension(1080, 720));
@@ -370,7 +379,7 @@ public class orderForm extends javax.swing.JPanel {
         PanelLeft.setLayout(PanelLeftLayout);
         PanelLeftLayout.setHorizontalGroup(
             PanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(PanelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
             .addGroup(PanelLeftLayout.createSequentialGroup()
                 .addGroup(PanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -667,12 +676,23 @@ public class orderForm extends javax.swing.JPanel {
             }
         });
 
+        resetBtn.setBackground(new java.awt.Color(36, 36, 36));
+        resetBtn.setForeground(new java.awt.Color(255, 255, 255));
+        resetBtn.setText("RESET");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(18, 18, 18)
+                .addComponent(resetBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(returnBtn)
                 .addGap(0, 0, 0)
                 .addComponent(deleteBtn)
@@ -680,14 +700,16 @@ public class orderForm extends javax.swing.JPanel {
                 .addComponent(updateBtn)
                 .addGap(0, 0, 0)
                 .addComponent(btnPrint)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(returnBtn)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(returnBtn)
+                        .addComponent(resetBtn))
                     .addComponent(deleteBtn)
                     .addComponent(updateBtn)
                     .addComponent(btnPrint))
@@ -733,30 +755,27 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-
         if (im==null) {
-            im = new insertModal();
-            im.setVisible(true);
-            im.setUser(user);
-            im.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        im = null;
-                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
-        } else {
-            im.toFront();
-        }
-    
+                im = new insertModal();
+                im.setVisible(true);
+                im.setUser(user);
+                im.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            im = null;
+                            refreshtable();
+                            refreshDetail();//// Đặt lại thành null khi cửa sổ đóng
+                        }
+                    });
+            } else {
+                im.toFront();
+            }
+        
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         int index = this.table.getSelectedRow() ;
         updateDetail(invoiceList.get(index));
-        this.returnBtn.setEnabled(true);
-        this.updateBtn.setEnabled(true);
-        this.deleteBtn.setEnabled(true);
     }//GEN-LAST:event_tableMouseClicked
 
     private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerNameActionPerformed
@@ -772,78 +791,93 @@ public class orderForm extends javax.swing.JPanel {
     }//GEN-LAST:event_tableDetailMouseClicked
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn trả hàng của hóa đơn này?", "Alert",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.YES_OPTION) {
-            int selectedIndex = table.getSelectedRow();
-            Invoice tmp = invoiceList.get(selectedIndex);
-            controller_cartElement controller_cart = new controller_cartElement();
-            List<CartElement> cartList = new ArrayList<CartElement>();
-            try{
-                cartList = controller_cart.getAllCartElement(tmp.getInvoiceId());
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            for (CartElement cart: cartList ){
-                int importId = cart.getImportId();
-                int quantity = cart.getQuantity();
-                controller_Import controller_import = new controller_Import();
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a order to return!");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn trả hàng của hóa đơn này?", "Alert",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                int selectedIndex = table.getSelectedRow();
+                Invoice tmp = invoiceList.get(selectedIndex);
+                controller_cartElement controller_cart = new controller_cartElement();
+                List<CartElement> cartList = new ArrayList<CartElement>();
                 try{
-                    controller_import.editImport(importId, quantity);
+                    cartList = controller_cart.getAllCartElement(tmp.getInvoiceId());
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                for (CartElement cart: cartList ){
+                    int importId = cart.getImportId();
+                    int quantity = cart.getQuantity();
+                    controller_Import controller_import = new controller_Import();
+                    try{
+                        controller_import.editImport(importId, quantity);
+                    }
+                    catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                controller_Invoice controller_invoice = new controller_Invoice();
+                controller_InvoiceItem controller_item = new controller_InvoiceItem();
+                try{
+                    controller_item.deleteInvoiceItemId(tmp.getInvoiceId());
+                    controller_invoice.deleteInvoice(tmp.getInvoiceId());
                 }
                 catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
-            controller_Invoice controller_invoice = new controller_Invoice();
-            controller_InvoiceItem controller_item = new controller_InvoiceItem();
-            try{
-                controller_item.deleteInvoiceItemId(tmp.getInvoiceId());
-                controller_invoice.deleteInvoice(tmp.getInvoiceId());
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            refreshtable();
+            refreshDetail();
         }
-        refreshtable();
     }//GEN-LAST:event_returnBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa hóa đơn này?", "Alert",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.YES_OPTION) {
-            int selectedIndex = table.getSelectedRow();
-            Invoice tmp = invoiceList.get(selectedIndex);
-            controller_Invoice controller = new controller_Invoice();
-            controller_InvoiceItem controller_item = new controller_InvoiceItem();
-            try{
-                controller_item.deleteInvoiceItemId(tmp.getInvoiceId());
-                controller.deleteInvoice(tmp.getInvoiceId());
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a order to delete!");
+        } else {
+            int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa hóa đơn này?", "Alert",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                int selectedIndex = table.getSelectedRow();
+                Invoice tmp = invoiceList.get(selectedIndex);
+                controller_Invoice controller = new controller_Invoice();
+                controller_InvoiceItem controller_item = new controller_InvoiceItem();
+                try{
+                    controller_item.deleteInvoiceItemId(tmp.getInvoiceId());
+                    controller.deleteInvoice(tmp.getInvoiceId());
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                refreshtable();
+                refreshDetail();
             }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            refreshtable();
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        if (um==null) {
-            int selectedIndex = table.getSelectedRow();
-            
-            um = new updateModal(invoiceList.get(selectedIndex));
-            um.setVisible(true);
-            um.setUser(user);
-            um.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        um = null;
-                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
-                    }
-                });
+        if (table.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a order to update!");
         } else {
-            um.toFront();
+            if (um==null) {
+                int selectedIndex = table.getSelectedRow();
+
+                um = new updateModal(invoiceList.get(selectedIndex));
+                um.setVisible(true);
+                um.setUser(user);
+                um.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            um = null;
+                            refreshtable();
+                            refreshDetail();//// Đặt lại thành null khi cửa sổ đóng
+                        }
+                    });
+            } else {
+                um.toFront();
+            }
         }
     }//GEN-LAST:event_updateBtnActionPerformed
 
@@ -862,7 +896,8 @@ public class orderForm extends javax.swing.JPanel {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         cm = null;
-                        refreshtable();//// Đặt lại thành null khi cửa sổ đóng
+                        refreshtable();
+                        refreshDetail();
                     }
                 });
         } else {
@@ -872,6 +907,11 @@ public class orderForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn để in", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        refreshtable();
+        refreshDetail();
+    }//GEN-LAST:event_resetBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -905,6 +945,7 @@ public class orderForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JButton resetBtn;
     private javax.swing.JButton returnBtn;
     private javax.swing.JComboBox<String> sortComboBox;
     private javax.swing.JScrollPane spTable;

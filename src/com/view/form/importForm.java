@@ -126,7 +126,7 @@ public class importForm extends javax.swing.JPanel {
             } else if (tmp.getAvailableQuantity() == 0) {
                 statusType = statusType.OUT_OF_STOCK;
             }
-            table.addRow(new Object[]{tmp.getProductName(), tmp.getImportQuantity(), tmp.getAvailableQuantity(), statusType});
+            table.addRow(new Object[]{tmp.getImportId(),tmp.getProductName(), tmp.getImportQuantity(), tmp.getAvailableQuantity(), statusType});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -378,11 +378,11 @@ public class importForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Quantity", "Avaiable", "Status"
+                "ID", "Name", "Quantity", "Avaiable", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
