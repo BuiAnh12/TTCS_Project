@@ -464,7 +464,7 @@ public class orderForm extends javax.swing.JPanel {
         txtCustomerName.setEditable(false);
         txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtCustomerName.setForeground(new java.awt.Color(102, 102, 102));
+        txtCustomerName.setForeground(new java.awt.Color(0, 0, 0));
         txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCustomerNameActionPerformed(evt);
@@ -474,20 +474,21 @@ public class orderForm extends javax.swing.JPanel {
         txtStaffName.setEditable(false);
         txtStaffName.setBackground(new java.awt.Color(255, 255, 255));
         txtStaffName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtStaffName.setForeground(new java.awt.Color(102, 102, 102));
+        txtStaffName.setForeground(new java.awt.Color(0, 0, 0));
 
         txtPurchaseDate.setEditable(false);
         txtPurchaseDate.setBackground(new java.awt.Color(255, 255, 255));
         txtPurchaseDate.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtPurchaseDate.setForeground(new java.awt.Color(102, 102, 102));
+        txtPurchaseDate.setForeground(new java.awt.Color(0, 0, 0));
 
         txtUpdateDate.setEditable(false);
         txtUpdateDate.setBackground(new java.awt.Color(255, 255, 255));
         txtUpdateDate.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtUpdateDate.setForeground(new java.awt.Color(102, 102, 102));
+        txtUpdateDate.setForeground(new java.awt.Color(0, 0, 0));
 
         totalAmountField.setEditable(false);
         totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
+        totalAmountField.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountField.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         totalAmountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -574,7 +575,7 @@ public class orderForm extends javax.swing.JPanel {
 
         detailSpTable.setBorder(null);
 
-        tableDetail.setForeground(new java.awt.Color(22, 23, 23));
+        tableDetail.setForeground(new java.awt.Color(0, 0, 0));
         tableDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
