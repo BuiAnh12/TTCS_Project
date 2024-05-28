@@ -35,6 +35,7 @@ public class CartElement {
         this.sellPrice = sellPrice;
         this.totalPrice = totalPrice;
         this.previousQuantity = quantity;
+        this.importId = -1;
     }
 
     public CartElement(int productId, String productName, int quantity, BigDecimal sellPrice, BigDecimal totalPrice, int index) {
@@ -45,6 +46,7 @@ public class CartElement {
         this.totalPrice = totalPrice;
         this.index = index;
         this.previousQuantity = quantity;
+        this.importId = -1;
     }
 
     

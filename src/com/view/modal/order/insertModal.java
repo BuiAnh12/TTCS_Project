@@ -760,24 +760,32 @@ public class insertModal extends javax.swing.JFrame {
             //Create InvoiceItems
             for (CartElement cart: cartList ){
                 int quantity = cart.getQuantity();
-                InvoiceItem tmp = new InvoiceItem(invoiceId, cart.getSellPrice(),0); // setCartQuanitity deffault = 0
+                
                 List<Import> ListImport = controller_invoice.findAvailableId(cart.getProductId(), cart.getQuantity());
                 for (Import imp : ListImport){
+                    InvoiceItem tmp = new InvoiceItem(invoiceId, cart.getSellPrice(),0); // setCartQuanitity deffault = 0
                     tmp.setImportId(imp.getImportId());
                     tmp.setProfit(cart.getTotalPrice().add(imp.getUnitPrice().negate().multiply(BigDecimal.valueOf(quantity))));
                     tmp.setUnitPrice(imp.getUnitPrice());
-                    tmp.setTotalPrice(cart.getTotalPrice());
+                    
                     if (imp.getAvailableQuantity() <= quantity){
                         tmp.setQuantity(tmp.getQuantity() + imp.getAvailableQuantity());
-                        quantity -= tmp.getQuantity();
+                        tmp.setTotalPrice(cart.getSellPrice().multiply(BigDecimal.valueOf(imp.getAvailableQuantity())));
+                        quantity -= imp.getAvailableQuantity();
                         imp.setAvailableQuantity(0);
+                        
                     }
                     else {
                         tmp.setQuantity(tmp.getQuantity() + quantity);
+                        tmp.setTotalPrice(cart.getSellPrice().multiply(BigDecimal.valueOf(quantity)));
                         imp.setAvailableQuantity(imp.getAvailableQuantity() - quantity);
+                        quantity = 0;
                     }
                     controller_import.editImport(imp);
                     controller_invoiceItem.addInvoiceItem(tmp);
+                    if (quantity <= 0) {
+                        break;
+                    }
                 }
                 this.dispose();
                 

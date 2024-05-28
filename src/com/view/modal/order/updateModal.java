@@ -36,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 public class updateModal extends javax.swing.JFrame {
     
     private List<Product> productList;
+    private List<Import> importList;
     private List<Customer> customerList;
     private List<CartElement> cartList = new ArrayList<CartElement>();
     private BigDecimal totalPrice;
@@ -80,6 +81,7 @@ public class updateModal extends javax.swing.JFrame {
         try{
             productList = product_controller.getAllAvailableProduct();
             customerList = customer_controller.getAllCustomers(1, "");
+            importList = controller_import.findListImport("");
         }
         catch (SQLException ex) {
             ex.printStackTrace();
@@ -88,16 +90,48 @@ public class updateModal extends javax.swing.JFrame {
         fillProductData();
         showInfo(selectedInvoice);
         DefaultTableModel model =(DefaultTableModel) table.getModel();
+        boolean  ticket = false;
         model.addTableModelListener(new TableModelListener() {
+            
+            
+            
             public void tableChanged(TableModelEvent e) {
+                
                 if (e.getType() == TableModelEvent.UPDATE && e.getColumn() == 1 && model.getRowCount() > 0) {
                     int index = table.getSelectedRow();
+                    if (cartList.get(index).getImportId()==-1) {
+                        JOptionPane.showMessageDialog(null, "You can not modify newly add product. Try delete and re-added.",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                        cartList.get(index).setImportId(0);
+                        model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                        table.setEditingRow(0);
+                        cartList.get(index).setImportId(-1);
+                        return;
+                    }
+                    if (cartList.get(index).getImportId()==0){
+                        return;
+                    }
                     Product product = productList.get(cartList.get(index).getIndex());
                     Integer newQuantity = Integer.parseInt((String)model.getValueAt(index, 1));
-                    int available = product.getAvailability();
                     int increasingAmount = newQuantity - cartList.get(index).getQuantity();
                     if (index != -1 ){
-                        if (available >= increasingAmount){
+                        int availableImportQuantity = 0;
+                        Import tmpImp  = new Import();
+                        int importIndex = 0;
+                        for (Import imp : importList){
+                            if (imp.getImportId() == cartList.get(index).getImportId()) {
+                                tmpImp = imp;
+                                break;
+                            }
+                            importIndex += 1;
+                        }
+                        if (newQuantity < 0) {
+                            JOptionPane.showMessageDialog(null, "Fill quanitity must be larger than 0",
+                                "Error", JOptionPane.WARNING_MESSAGE);
+                            model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                            return; 
+                        }
+                        else if (tmpImp.getAvailableQuantity() + cartList.get(index).getQuantity() >= newQuantity){
                             DecimalFormat decimalFormat = new DecimalFormat("#,###");
                             product.setAvailability(product.getAvailability() - increasingAmount);
                             cartList.get(index).setQuantity(newQuantity);
@@ -106,12 +140,15 @@ public class updateModal extends javax.swing.JFrame {
                             cartList.get(index).setTotalPrice(cartList.get(index).getSellPrice().multiply(BigDecimal.valueOf(newQuantity)));
                             totalPrice = totalPrice.add(previousTotal.negate()).add(cartList.get(index).getTotalPrice());
                             txtTotalPrice.setText(decimalFormat.format(totalPrice) +" VNĐ");
+                            importList.get(importIndex).setAvailableQuantity(importList.get(importIndex).getAvailableQuantity() -  increasingAmount);
                         }
                         else{
-                        JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock",
-                            "Error", JOptionPane.WARNING_MESSAGE);
-                        model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
-                        return;                        }
+                            JOptionPane.showMessageDialog(null, "Fill quanitity is more than available stock for that import" 
+                                    + " (" + String.valueOf(importList.get(importIndex).getAvailableQuantity()) + ")",
+                                "Error", JOptionPane.WARNING_MESSAGE);
+                            model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
+                            return;                        
+                        }
 
                     }
                     else{
@@ -824,7 +861,7 @@ public class updateModal extends javax.swing.JFrame {
                 currentInvoice = new Invoice(invoiceId ,customer.getCustomerId(),user.getStaffId(),null,null);
                 controller_invoice.editInvoice(currentInvoice);
                 for (CartElement cart: cartList ){
-                    if (cart.getInvoiceItemId() == -1){ // if it is a new Items
+                    if (cart.getInvoiceItemId() == -1){ // sp mới -> add như bth 
                         int quantity = cart.getQuantity();
                         InvoiceItem tmp = new InvoiceItem(invoiceId, cart.getSellPrice(),0); // setCartQuanitity deffault = 0
                         List<Import> ListImport = controller_invoice.findAvailableId(cart.getProductId(), cart.getQuantity());
@@ -836,11 +873,14 @@ public class updateModal extends javax.swing.JFrame {
                             if (imp.getAvailableQuantity() <= quantity){
                                 tmp.setQuantity(tmp.getQuantity() + imp.getAvailableQuantity());
                                 quantity -= tmp.getQuantity();
+                                tmp.setTotalPrice(cart.getSellPrice().multiply(BigDecimal.valueOf(imp.getAvailableQuantity())));
                                 imp.setAvailableQuantity(0);
                             }
                             else {
                                 tmp.setQuantity(tmp.getQuantity() + quantity);
+                                tmp.setTotalPrice(cart.getSellPrice().multiply(BigDecimal.valueOf(quantity)));
                                 imp.setAvailableQuantity(imp.getAvailableQuantity() - quantity);
+                                quantity = 0;
                             }
                             controller_import.editImport(imp);
                             controller_invoiceItem.addInvoiceItem(tmp);

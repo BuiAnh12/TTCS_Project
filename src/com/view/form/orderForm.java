@@ -129,7 +129,7 @@ public class orderForm extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         for (CartElement cart : cartList) {
-            tableDetail.addRow(new Object[]{cart.getProductName(), cart.getQuantity(), decimalFormat.format(cart.getTotalPrice()) + " VNĐ" });
+            tableDetail.addRow(new Object[]{cart.getImportId(), cart.getProductName(), cart.getQuantity(), decimalFormat.format(cart.getTotalPrice()) + " VNĐ" });
             tableDetail.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
         }
          this.txtCustomerName.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14)); 
@@ -566,11 +566,11 @@ public class orderForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Quantity", "Total Pricce"
+                "Imp. ID", "Name", "No", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -590,8 +590,8 @@ public class orderForm extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(detailSpTable, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(detailSpTable, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,7 +611,7 @@ public class orderForm extends javax.swing.JPanel {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PanelDetailLayout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 26, Short.MAX_VALUE))))
         );
         PanelDetailLayout.setVerticalGroup(
             PanelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,8 +674,11 @@ public class orderForm extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addComponent(returnBtn)
+                .addGap(0, 0, 0)
                 .addComponent(deleteBtn)
+                .addGap(0, 0, 0)
                 .addComponent(updateBtn)
+                .addGap(0, 0, 0)
                 .addComponent(btnPrint)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
