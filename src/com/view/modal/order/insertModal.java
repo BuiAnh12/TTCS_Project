@@ -163,6 +163,7 @@ public class insertModal extends javax.swing.JFrame {
 
         txtCustomerName.setEditable(false);
         txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
+        txtCustomerName.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -189,6 +190,7 @@ public class insertModal extends javax.swing.JFrame {
 
         txtCustomerEmail.setEditable(false);
         txtCustomerEmail.setBackground(new java.awt.Color(255, 255, 255));
+        txtCustomerEmail.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -215,6 +217,7 @@ public class insertModal extends javax.swing.JFrame {
 
         txtCustomerAddress.setEditable(false);
         txtCustomerAddress.setBackground(new java.awt.Color(255, 255, 255));
+        txtCustomerAddress.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -328,6 +331,8 @@ public class insertModal extends javax.swing.JFrame {
         jLabel10.setText("Tổng tiền:");
 
         txtTotalPrice.setEditable(false);
+        txtTotalPrice.setBackground(new java.awt.Color(255, 255, 255));
+        txtTotalPrice.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -357,6 +362,8 @@ public class insertModal extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(22, 23, 23));
 
+        table.setBackground(new java.awt.Color(255, 255, 255));
+        table.setForeground(new java.awt.Color(0, 0, 0));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -403,6 +410,7 @@ public class insertModal extends javax.swing.JFrame {
 
         txtProductName.setEditable(false);
         txtProductName.setBackground(new java.awt.Color(255, 255, 255));
+        txtProductName.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -434,6 +442,7 @@ public class insertModal extends javax.swing.JFrame {
 
         txtManufacture.setEditable(false);
         txtManufacture.setBackground(new java.awt.Color(255, 255, 255));
+        txtManufacture.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -463,7 +472,9 @@ public class insertModal extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Mô tả:");
 
+        txtDescription.setBackground(new java.awt.Color(255, 255, 255));
         txtDescription.setColumns(20);
+        txtDescription.setForeground(new java.awt.Color(0, 0, 0));
         txtDescription.setRows(5);
         jScrollPane2.setViewportView(txtDescription);
 
@@ -530,6 +541,8 @@ public class insertModal extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Số lượng:");
 
+        txtQuantity.setBackground(new java.awt.Color(255, 255, 255));
+        txtQuantity.setForeground(new java.awt.Color(0, 0, 0));
         txtQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtQuantityFocusLost(evt);

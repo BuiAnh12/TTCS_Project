@@ -259,6 +259,7 @@ public class orderForm extends javax.swing.JPanel {
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Khách hàng", "Sắp xếp theo Nhân viên ", "Sắp xếp theo Tổng tiền", " " }));
+        sortComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sortComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortComboBoxActionPerformed(evt);
@@ -581,7 +582,7 @@ public class orderForm extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Imp. ID", "Tên", "No", "Giá"
+                "Mã Imp.", "Tên", "No", "Giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
