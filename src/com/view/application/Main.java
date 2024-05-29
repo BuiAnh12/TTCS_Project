@@ -43,11 +43,24 @@ public class Main extends javax.swing.JFrame {
         this.menu.setPrevilege(this.account.getPrevilege());
         this.menu.reset();
     }
-    
+    public void support(){
+        if(account.getPrevilege()==3){
+            home = new dashboardForm();
+            setForm(home);
+        }else if(account.getPrevilege()==2){
+            proForm = new productForm();
+            setForm(proForm);
+        }else if (account.getPrevilege()==1){
+            ordForm = new orderForm();
+            setForm(ordForm);
+            ordForm.setUser(account);
+        }
+    }
     public void reset(){
         
         header2.setAccount(account);
         header2.UpdateAccountName();
+        support();
         menu.addEventMenuSelected(new EventMenuSelected() {
                 @Override
                 public void selected(int index) {
@@ -77,7 +90,7 @@ public class Main extends javax.swing.JFrame {
 
                         }
                     }
-                    else if (account.getPrevilege() == 2){
+                    else if (account.getPrevilege() == 2){                    
                         if (index == 0) {
                             proForm = new productForm();
                             setForm(proForm);
@@ -85,9 +98,7 @@ public class Main extends javax.swing.JFrame {
                             impForm = new importForm();
                             setForm(impForm);
                         }
-                    } else if (account.getPrevilege() == 1){
-                       
-                        
+                    } else if (account.getPrevilege() == 1){    
                         if (index == 0) {
                             ordForm = new orderForm();
                             setForm(ordForm);
@@ -109,6 +120,7 @@ public class Main extends javax.swing.JFrame {
                     
                 }
             });
+      
             
         
     }

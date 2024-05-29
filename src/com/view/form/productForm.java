@@ -87,7 +87,6 @@ public class productForm extends javax.swing.JPanel {
                 public void windowClosed(WindowEvent e) {
                     um = null; //// Đặt lại thành null khi cửa sổ đóng
                     refreshTable();
-//                        refreshDetail();
                 }
             });
         } else {
@@ -197,9 +196,7 @@ public class productForm extends javax.swing.JPanel {
 
         PanelFilter.setBackground(new java.awt.Color(22, 23, 23));
 
-        sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Tên", "Sắp xếp theo Nhà sản xuất", "Sắp xếp theo Loại", " " }));
         sortComboBox.setToolTipText("");
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {

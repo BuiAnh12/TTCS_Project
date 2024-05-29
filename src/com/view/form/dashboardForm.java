@@ -52,7 +52,6 @@ public class dashboardForm extends javax.swing.JPanel {
                 String selectedValue = sortComboBox.getSelectedItem().toString(); 
                 
                 if (selectedValue.equals("Năm")){
-                   
                     try {
                         resetChart(0);
                         System.out.println("0");
@@ -60,8 +59,7 @@ public class dashboardForm extends javax.swing.JPanel {
                         ex.printStackTrace();
                     }
                 }
-                else if(selectedValue.equals("Tháng")){
-                    
+                else if(selectedValue.equals("Tháng")){           
                     try {
                         resetChart(1);
                         System.out.println(1);
@@ -77,7 +75,6 @@ public class dashboardForm extends javax.swing.JPanel {
                 card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/stock.png")), "Số lượng",String.valueOf(controller_dashDashboard.getSoldQuanity())));
                 Object moneyValue = money.get(2);
                 card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/3.png")), "Lợi nhuận", "0"));
-//                card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/3.png")), "Profit","0"," "));
                 if (moneyValue instanceof Number) {
                     card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/view/icon/3.png")), "Lợi nhuận", String.valueOf(decimalFormat.format((Number) moneyValue)) + " VNĐ"));
                 } 
@@ -136,9 +133,7 @@ public class dashboardForm extends javax.swing.JPanel {
             .addGap(0, 392, Short.MAX_VALUE)
         );
 
-        sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng", "Năm", " " }));
         sortComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -118,7 +118,6 @@ public class importForm extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-//        CellStatus cellStatus=new CellStatus(StatusType.IN_STOCK);
         for (Import tmp : import_list) {
             StatusType statusType = null;
             if (tmp.getAvailableQuantity() != 0) {
@@ -313,9 +312,7 @@ public class importForm extends javax.swing.JPanel {
 
         PanelFilter.setBackground(new java.awt.Color(22, 23, 23));
 
-        sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Tên", "Sắp xếp theo Số lượng", "Sắp xếp theo Trạng thái", " ", " " }));
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -440,7 +437,7 @@ public class importForm extends javax.swing.JPanel {
         PanelLeft.setLayout(PanelLeftLayout);
         PanelLeftLayout.setHorizontalGroup(
             PanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(PanelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(PanelLeftLayout.createSequentialGroup()
                 .addGroup(PanelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -519,7 +516,6 @@ public class importForm extends javax.swing.JPanel {
         txtName.setEditable(false);
         txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtName.setForeground(new java.awt.Color(0, 0, 0));
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -565,7 +561,6 @@ public class importForm extends javax.swing.JPanel {
         txtQuantity.setEditable(false);
         txtQuantity.setBackground(new java.awt.Color(255, 255, 255));
         txtQuantity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtQuantity.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -608,7 +603,6 @@ public class importForm extends javax.swing.JPanel {
         txtStock.setEditable(false);
         txtStock.setBackground(new java.awt.Color(255, 255, 255));
         txtStock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtStock.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -651,7 +645,6 @@ public class importForm extends javax.swing.JPanel {
         txtImpDate.setEditable(false);
         txtImpDate.setBackground(new java.awt.Color(255, 255, 255));
         txtImpDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtImpDate.setForeground(new java.awt.Color(0, 0, 0));
         txtImpDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtImpDateActionPerformed(evt);
@@ -699,7 +692,6 @@ public class importForm extends javax.swing.JPanel {
         txtManuDate.setEditable(false);
         txtManuDate.setBackground(new java.awt.Color(255, 255, 255));
         txtManuDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtManuDate.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -742,7 +734,6 @@ public class importForm extends javax.swing.JPanel {
         txtExpDate.setEditable(false);
         txtExpDate.setBackground(new java.awt.Color(255, 255, 255));
         txtExpDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtExpDate.setForeground(new java.awt.Color(0, 0, 0));
         txtExpDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtExpDateActionPerformed(evt);
@@ -790,7 +781,6 @@ public class importForm extends javax.swing.JPanel {
         txtUnitPrice.setEditable(false);
         txtUnitPrice.setBackground(new java.awt.Color(255, 255, 255));
         txtUnitPrice.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtUnitPrice.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -836,7 +826,6 @@ public class importForm extends javax.swing.JPanel {
         txtTotal.setEditable(false);
         txtTotal.setBackground(new java.awt.Color(255, 255, 255));
         txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtTotal.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -879,7 +868,6 @@ public class importForm extends javax.swing.JPanel {
         txtCategory.setEditable(false);
         txtCategory.setBackground(new java.awt.Color(255, 255, 255));
         txtCategory.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtCategory.setForeground(new java.awt.Color(0, 0, 0));
         txtCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCategoryActionPerformed(evt);
@@ -932,7 +920,6 @@ public class importForm extends javax.swing.JPanel {
         txtId.setEditable(false);
         txtId.setBackground(new java.awt.Color(255, 255, 255));
         txtId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtId.setForeground(new java.awt.Color(0, 0, 0));
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);

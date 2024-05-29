@@ -124,7 +124,6 @@ public class orderForm extends javax.swing.JPanel {
         this.txtPurchaseDate.setText(sdf.format(tmp.getPurchaseDate()));
         this.txtUpdateDate.setText(sdf.format(tmp.getUpdateDate()));
         this.totalAmountField.setValue(tmp.getTotalAmount());   
-//        int invoice_id = tmp.getInvoiceId();  
         DefaultTableModel model =(DefaultTableModel) tableDetail.getModel();
         model.setRowCount(0);
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
@@ -255,9 +254,7 @@ public class orderForm extends javax.swing.JPanel {
 
         PanelFilter.setBackground(new java.awt.Color(22, 23, 23));
 
-        sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Khách hàng", "Sắp xếp theo Nhân viên ", "Sắp xếp theo Tổng tiền", " " }));
         sortComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sortComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -465,7 +462,6 @@ public class orderForm extends javax.swing.JPanel {
         txtCustomerName.setEditable(false);
         txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtCustomerName.setForeground(new java.awt.Color(0, 0, 0));
         txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCustomerNameActionPerformed(evt);
@@ -475,21 +471,17 @@ public class orderForm extends javax.swing.JPanel {
         txtStaffName.setEditable(false);
         txtStaffName.setBackground(new java.awt.Color(255, 255, 255));
         txtStaffName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtStaffName.setForeground(new java.awt.Color(0, 0, 0));
 
         txtPurchaseDate.setEditable(false);
         txtPurchaseDate.setBackground(new java.awt.Color(255, 255, 255));
         txtPurchaseDate.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtPurchaseDate.setForeground(new java.awt.Color(0, 0, 0));
 
         txtUpdateDate.setEditable(false);
         txtUpdateDate.setBackground(new java.awt.Color(255, 255, 255));
         txtUpdateDate.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtUpdateDate.setForeground(new java.awt.Color(0, 0, 0));
 
         totalAmountField.setEditable(false);
         totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
-        totalAmountField.setForeground(new java.awt.Color(0, 0, 0));
         totalAmountField.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         totalAmountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -576,7 +568,6 @@ public class orderForm extends javax.swing.JPanel {
 
         detailSpTable.setBorder(null);
 
-        tableDetail.setForeground(new java.awt.Color(0, 0, 0));
         tableDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

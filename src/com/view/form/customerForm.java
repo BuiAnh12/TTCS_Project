@@ -210,9 +210,7 @@ public class customerForm extends javax.swing.JPanel {
 
         PanelFilter.setBackground(new java.awt.Color(22, 23, 23));
 
-        sortComboBox.setBackground(new java.awt.Color(36, 36, 36));
         sortComboBox.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        sortComboBox.setForeground(new java.awt.Color(255, 255, 255));
         sortComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sắp xếp theo Tên", "Sắp xếp theo Email", "Sắp xếp theo Amount", " " }));
         sortComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
