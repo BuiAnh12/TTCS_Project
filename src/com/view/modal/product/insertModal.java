@@ -29,7 +29,7 @@ public class insertModal extends javax.swing.JFrame {
      */
     private List<Product> productList = new ArrayList<>();
 
-     private void centerFrameOnScreen() {
+    private void centerFrameOnScreen() {
         // Get the dimension of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -40,6 +40,7 @@ public class insertModal extends javax.swing.JFrame {
         // Set the location of the frame
         setLocation(x, y);
     }
+
     public insertModal() {
         initComponents();
         centerFrameOnScreen();
@@ -222,9 +223,9 @@ public class insertModal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm mới sản phẩm này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(jTextField1.getText().equals("")||jTextField2.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{  
+        //if(jTextField1.getText().equals("")||jTextField2.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
+        //JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
+        //}else{  
         if (response == JOptionPane.YES_OPTION) {
             String productName = jTextField1.getText();
             String manufacturer = jTextField2.getText();
@@ -246,7 +247,7 @@ public class insertModal extends javax.swing.JFrame {
 
                 try {
                     controller.addProduct(newProduct);
-                    JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+                    JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     jTextField1.setText("");
                     jTextField2.setText("");
                     jTextArea1.setText("");
@@ -257,8 +258,9 @@ public class insertModal extends javax.swing.JFrame {
                 }
             }
 
-        }}
-        
+        }
+//}
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

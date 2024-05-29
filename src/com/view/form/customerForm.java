@@ -813,7 +813,7 @@ public class customerForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn khách hàng cần xóa!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn khách hàng cần xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             int response = JOptionPane.showConfirmDialog(null, "Ban có muốn xóa khách hàng này không?", "Alert",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -822,10 +822,14 @@ public class customerForm extends javax.swing.JPanel {
                 Customer selectedCustomer = customerList.get(row);
                 controller_Customer controller = new controller_Customer();
                 try {
-                    controller.deleteCustomer(selectedCustomer.getCustomerId());
-                    refreshTable();
-                    refreshDetail();
-                    JOptionPane.showMessageDialog(null, "Xóa thành công!");
+
+                    if (controller.deleteCustomer(selectedCustomer.getCustomerId())) {
+                        refreshTable();
+                        refreshDetail();
+                        JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Không thể xóa khách hàng này vì có hóa đơn liên quan", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(customerForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -836,13 +840,13 @@ public class customerForm extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        if(table.getSelectedRow()>-1) {
+        if (table.getSelectedRow() > -1) {
             openUpdateForm();
-        updateCustomer.setDataCustomer(selectedCustomer);
+            updateCustomer.setDataCustomer(selectedCustomer);
         } else {
-            JOptionPane.showMessageDialog(null, "Hãy chọn khách hàng cần cập nhật!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn khách hàng cần cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void sortComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortComboBoxItemStateChanged

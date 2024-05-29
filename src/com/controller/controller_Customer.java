@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 public class controller_Customer {
 
@@ -113,7 +114,7 @@ public class controller_Customer {
     }
 
     //
-    public void deleteCustomer(int CustomerId) throws SQLException {
+    public boolean deleteCustomer(int CustomerId) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
         Statement statement = cnn.createStatement();
         String sp = "{call DeleteCustomer(?)}";
@@ -124,8 +125,10 @@ public class controller_Customer {
 
             statement.close();
             cnn.close();
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

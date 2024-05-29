@@ -28,19 +28,19 @@ public class Util {
     public static boolean checkDate(Date manufactureDate, Date expiryDate, Date entry) {
         Date today = new Date();
         if (manufactureDate.after(entry)) {
-            JOptionPane.showMessageDialog(null, "Manufacturing date cannot be after import date", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày sản xuất không được sau ngày nhập khẩu", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (manufactureDate.after(entry)) {
-            JOptionPane.showMessageDialog(null, "The manufacturing date cannot be after the expiration date", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày sản xuất không thể sau ngày hết hạn", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (entry.after(expiryDate)) {
-            JOptionPane.showMessageDialog(null, "The import date cannot be after the expiration date", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày nhập không thể sau ngày hết hạn", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (manufactureDate.after(today)) {
-            JOptionPane.showMessageDialog(null, "Manufacturing date cannot be after today", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày sản xuất không thể sau ngày hôm nay", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         } else if (entry.after(today)) {
-            JOptionPane.showMessageDialog(null, "The import date cannot be after today", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ngày nhập không thể sau ngày hôm nay", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -54,11 +54,11 @@ public class Util {
     //Kiểm tra đầu vào của Product
     public static boolean validateImportInput(Date manufactureDate, Date expiryDate, Date entry, int quantity, int avaiQuantity, BigDecimal unitP) {
         if (manufactureDate == null || expiryDate == null || entry == null || String.valueOf(unitP).isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Information is incomplete", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Thông tin không được để trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (unitP.intValue() <= 0 || quantity <= 0 || avaiQuantity <= 0) {
-            JOptionPane.showMessageDialog(null, "Unit price and quantity must be greater than 0", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Giá sản phẩm và số lượng phải lớn hơn hoặc bằng 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return !(!checkDate(manufactureDate, expiryDate, entry));
@@ -66,11 +66,11 @@ public class Util {
 
     public static boolean validateProductInput(String name, String manufacturer, String desc, String category, BigDecimal sellPrice) {
         if (name.isEmpty() || manufacturer.isEmpty() || category.isEmpty() || desc.isEmpty() || String.valueOf(sellPrice).isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Information is incomplete", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Thông tin không được để trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (sellPrice.intValue() <= 0) {
-            JOptionPane.showMessageDialog(null, "Sell price mus be greater than 0", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Giá bán phải lớn hơn hoặc bằng 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -78,7 +78,7 @@ public class Util {
 
     //Kiểm tra email có hợp lệ không
     public static boolean checkEmail(String email) {
-        final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+(com|net|org|edu|gov|mil)$";
         final Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
@@ -87,15 +87,11 @@ public class Util {
     //Kiểm tra đầu vào của Customer
     public static boolean validateCustomerInput(String name, String email, String address) {
         if (name.isEmpty() || address.isEmpty() || email.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Information is incomplete", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Thông tin không được để trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-//        if (!isValidPhoneNumber(phone)) {
-//            JOptionPane.showMessageDialog(null, "SĐT không hợp lệ", "Warning", JOptionPane.WARNING_MESSAGE);
-//            return false;
-//        }
         if (!checkEmail(email)) {
-            JOptionPane.showMessageDialog(null, "Invalid email", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -104,15 +100,15 @@ public class Util {
     //Kiểm tra đầu vào của Employee
     public static boolean validateStaffInput(String name, int age, String email, String address, String username, String pw) {
         if (name.isEmpty() || email.isEmpty() || address.isEmpty() || username.isEmpty() || String.valueOf(age).isEmpty() || pw.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Information is incomplete", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Thông tin không được để trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (!isValidUsername(username)) {
-            JOptionPane.showMessageDialog(null, "Invalid username", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Username không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (!checkEmail(email)) {
-            JOptionPane.showMessageDialog(null, "Invalid email", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

@@ -19,6 +19,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -34,6 +36,8 @@ public class printInvoice extends javax.swing.JFrame implements Printable {
 
     private int id;
     private double customerMoney;
+    // Định dạng số tiền
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
     
     private void centerFrameOnScreen() {
         // Get the dimension of the screen
@@ -102,7 +106,7 @@ public class printInvoice extends javax.swing.JFrame implements Printable {
                 JOptionPane.showMessageDialog(null, "Không thể in: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Người dùng đã hủy thao tác.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Người dùng đã hủy thao tác.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -135,7 +139,8 @@ public class printInvoice extends javax.swing.JFrame implements Printable {
                 if (rowCount < 7) { // Hiển thị 7 sản phẩm đầu tiên
                     Object[] row = new Object[3];
                     row[0] = re.getString("ProductName");
-                    row[1] = re.getDouble("SellPrice");
+                    double sellPrice = re.getDouble("SellPrice");
+                    row[1] = currencyFormat.format(sellPrice);
                     row[2] = re.getInt("TotalQuantity");
                     tableModel.addRow(row);
                 } else if (rowCount == 7) { // Hiển thị dấu 3 chấm (...) trong hàng thứ 8
@@ -174,9 +179,9 @@ public class printInvoice extends javax.swing.JFrame implements Printable {
                 time.setText(re.getString("PurchaseDate"));
                 customerName.setText("Khách hàng: " + re.getString("CustomerName"));
                 employeeName.setText("Nhân viên bán hàng: " + re.getString("Name"));
-                total.setText(re.getString("TotalPrice"));
-                cusMoney.setText(String.valueOf(customerMoney));
-                returnMoney.setText(String.valueOf(customerMoney - Double.valueOf(re.getString("TotalPrice"))));
+                total.setText(currencyFormat.format(Double.valueOf(re.getString("TotalPrice"))));
+                cusMoney.setText(currencyFormat.format(customerMoney));
+                returnMoney.setText(currencyFormat.format(customerMoney - Double.valueOf(re.getString("TotalPrice"))));
             }
 
         } catch (SQLException ex) {

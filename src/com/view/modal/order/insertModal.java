@@ -754,7 +754,7 @@ public class insertModal extends javax.swing.JFrame {
         Product tmp = productList.get(index);
         if(currentQuantity > tmp.getAvailability()){
             JOptionPane.showMessageDialog(null, "Số lượng phải nhỏ hơn số lượng khả dụng",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Lỗi", JOptionPane.ERROR_MESSAGE);
             this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
             return;
         }
@@ -765,7 +765,7 @@ public class insertModal extends javax.swing.JFrame {
 
         if ( table.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "Không thể tạo đơn hàng rỗng",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         // Create Invoice
@@ -840,14 +840,14 @@ public class insertModal extends javax.swing.JFrame {
             Product tmp = productList.get(index);
             if(currentQuantity > tmp.getAvailability()){
                 JOptionPane.showMessageDialog(null, "Số lượng phải nhỏ hơn số lượng khả dụng",
-                "Error", JOptionPane.WARNING_MESSAGE);
+                "Lỗi", JOptionPane.ERROR_MESSAGE);
                 this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
                 return;
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Phải là ký tự số !Nhập lại!",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Lỗi", JOptionPane.ERROR_MESSAGE);
             this.txtQuantity.requestFocusInWindow();
             this.txtQuantity.selectAll();
         }
@@ -857,7 +857,7 @@ public class insertModal extends javax.swing.JFrame {
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         if (this.txtQuantity.getText().equals("0")){
             JOptionPane.showMessageDialog(null, "Sản phẩm hết hàng",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         int index = this.combProduct.getSelectedIndex();

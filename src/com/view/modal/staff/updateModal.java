@@ -6,6 +6,7 @@ package com.view.modal.staff;
 
 import com.controller.controller_Staff;
 import com.model.Staff;
+import com.util.Util;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class updateModal extends javax.swing.JFrame {
      */
     private int staffId;
 
-     private void centerFrameOnScreen() {
+    private void centerFrameOnScreen() {
         // Get the dimension of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -36,12 +37,13 @@ public class updateModal extends javax.swing.JFrame {
         // Set the location of the frame
         setLocation(x, y);
     }
+
     public updateModal() {
         initComponents();
         centerFrameOnScreen();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    
+
     public void setDataStaff(Staff staff) {
         jTextField1.setText(staff.getName());
         jTextField2.setText(String.valueOf(staff.getAge()));
@@ -272,16 +274,16 @@ public class updateModal extends javax.swing.JFrame {
                 default:
                     throw new AssertionError();
             }
-
-            Staff staff = new Staff(staffId, name, age, email, address, username, password, accpreNum);
-
-            controller_Staff controller = new controller_Staff();
-            try {
-                controller.editStaff(staff);
-                JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
-                dispose();
-            } catch (SQLException ex) {
-                Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+            if (Util.validateStaffInput(name, age, email, address, username, password)) {
+                Staff staff = new Staff(staffId, name, age, email, address, username, password, accpreNum);
+                controller_Staff controller = new controller_Staff();
+                try {
+                    controller.editStaff(staff);
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

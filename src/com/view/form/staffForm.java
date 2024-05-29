@@ -862,7 +862,7 @@ public class staffForm extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn nhân viên cần cập nhật!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn nhân viên cần cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             openUpdateForm();
             um.setDataStaff(selectedStaff);
@@ -888,19 +888,30 @@ public class staffForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn nhân viên muốn xóa!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn nhân viên muốn xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
-            controller_Staff controller = new controller_Staff();
-            try {
-                controller.deleteStaff(selectedStaff.getStaffId());
-                refreshTable();
-                JOptionPane.showMessageDialog(null, "Xóa thành công!");
-                refreshDetail();
-            } catch (SQLException ex) {
-                Logger.getLogger(staffForm.class.getName()).log(Level.SEVERE, null, ex);
+            int response = JOptionPane.showConfirmDialog(null, "Ban có muốn xóa khách hàng này không?", "Alert",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                controller_Staff controller = new controller_Staff();
+                try {
+                    if (controller.getInfoStaff(selectedStaff.getStaffId()) == 3) {
+                        JOptionPane.showMessageDialog(null, "Không được xóa tài khoản của Admin!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                    } else if (!controller.deleteStaff(selectedStaff.getStaffId())) {
+                        System.out.println("xóa thất bại");
+                        JOptionPane.showMessageDialog(null, "Không thể xóa nhân viên này vì họ có hóa đơn liên quan", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        refreshTable();
+                        JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        refreshDetail();
+                        System.out.println("xóa thành công");
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(staffForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked

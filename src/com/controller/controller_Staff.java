@@ -74,7 +74,7 @@ public class controller_Staff {
             pre.setInt(6, staff.getPrevilege());
             pre.setString(7, staff.getUsername());
             pre.setString(8, staff.getPassword());
-            
+
             int tmp = pre.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -91,7 +91,7 @@ public class controller_Staff {
             pre.setString(2, staff.getUsername());
             pre.setString(3, staff.getPassword());
             pre.setInt(4, staff.getPrevilege());
-            
+
             int tmp = pre.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -99,7 +99,7 @@ public class controller_Staff {
     }
 
     //
-    public void deleteStaff(int staffId) throws SQLException {
+    public boolean deleteStaff(int staffId) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
         Statement statement = cnn.createStatement();
         String sp = "{call DeleteStaff(?)}";
@@ -107,8 +107,10 @@ public class controller_Staff {
             PreparedStatement pre = cnn.prepareStatement(sp);
             pre.setInt(1, staffId);
             int tmp = pre.executeUpdate();
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
@@ -170,6 +172,7 @@ public class controller_Staff {
         }
         return staffs;
     }
+
     public List<Integer> getAccountPrevilege() throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
         List<Integer> list = new ArrayList<>();
@@ -185,5 +188,22 @@ public class controller_Staff {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public int getInfoStaff(int id) throws SQLException {
+        Connection cnn = ConnectionDB.getConnection();
+        String sp = "{call GetAccPreStaff(?)}";
+        int accountPrivilege = -1;
+        try {
+            PreparedStatement pre = cnn.prepareStatement(sp);
+            pre.setInt(1, id);
+            ResultSet re = pre.executeQuery();
+            while (re.next()) {
+                accountPrivilege = re.getInt("AccountPrevilege");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return accountPrivilege;
     }
 }

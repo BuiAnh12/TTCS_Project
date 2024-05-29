@@ -29,19 +29,19 @@ public class updateModal extends javax.swing.JFrame {
      */
     private int productId;
     private controller_Product controller = new controller_Product();
-    
+
     private void centerFrameOnScreen() {
-           // Get the dimension of the screen
-           Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Get the dimension of the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-           // Calculate the coordinates for the top-left corner of the frame
-           int x = (screenSize.width - getWidth()) / 2;
-           int y = (screenSize.height - getHeight()) / 2;
+        // Calculate the coordinates for the top-left corner of the frame
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
 
-           // Set the location of the frame
-           setLocation(x, y);
-       }
-    
+        // Set the location of the frame
+        setLocation(x, y);
+    }
+
     public updateModal() {
         initComponents();
         centerFrameOnScreen();
@@ -337,9 +337,9 @@ public class updateModal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật sản phẩm này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(jTextField7.getText().equals("")||jTextField8.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        //if(jTextField7.getText().equals("")||jTextField8.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
+        //JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
+        //}else{
         if (response == JOptionPane.YES_OPTION) {
             String name = jTextField7.getText();
             String manu = jTextField8.getText();
@@ -351,14 +351,14 @@ public class updateModal extends javax.swing.JFrame {
 
                 try {
                     controller.editProduct(product);
-                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                 } catch (SQLException ex) {
                     Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        }
+        //}
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

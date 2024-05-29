@@ -277,7 +277,7 @@ public class insertModal extends javax.swing.JFrame {
                 // saveToDatabase(newCustomer);
                 try {
                     controller.addStaff(newStaff);
-                    JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+                    JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     jTextField1.setText("");
                     jTextField2.setText("");
                     jTextField3.setText("");

@@ -30,7 +30,7 @@ public class insertModal extends javax.swing.JFrame {
     private List<Import> importList = new ArrayList<>();
     private List<String> listProductName = new ArrayList<>();
 
-      private void centerFrameOnScreen() {
+    private void centerFrameOnScreen() {
         // Get the dimension of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -41,6 +41,7 @@ public class insertModal extends javax.swing.JFrame {
         // Set the location of the frame
         setLocation(x, y);
     }
+
     public insertModal() {
         initComponents();
         centerFrameOnScreen();
@@ -273,70 +274,70 @@ public class insertModal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn thêm mới đơn nhập này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(jTextField7.getText().equals("")||jTextField2.getText().equals("")||jTextField3.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")||jTextField6.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            int quantities = Integer.parseInt(jTextField5.getText());
-            int avaiQuantities = Integer.parseInt(jTextField6.getText());
-            if(quantities<avaiQuantities){
-                  JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn số lượng khả dụng.", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-                if (response == JOptionPane.YES_OPTION) {
-                    String productName = (String) combProduct.getSelectedItem();
-                    int productId = 0;
+        //if(jTextField7.getText().equals("")||jTextField2.getText().equals("")||jTextField3.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")||jTextField6.getText().equals("")){
+        //JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
+        //}else{
+        int quantities = Integer.parseInt(jTextField5.getText());
+        int avaiQuantities = Integer.parseInt(jTextField6.getText());
+        if (quantities < avaiQuantities) {
+            JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn số lượng khả dụng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (response == JOptionPane.YES_OPTION) {
+                String productName = (String) combProduct.getSelectedItem();
+                int productId = 0;
+                try {
+                    productId = controller_Import.getProductId(productName);
+                    System.out.println(productId);
+                } catch (SQLException ex) {
+                    Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Date utilManuDate = null;
+                Date utilExpiryDate = null;
+                Date utilImportDate = null;
+
+                java.sql.Date manuDate = null;
+                java.sql.Date expiryDate = null;
+                java.sql.Date importDate = null;
+                try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    utilManuDate = dateFormat.parse(jTextField2.getText());
+                    manuDate = new java.sql.Date(utilManuDate.getTime());
+
+                    utilExpiryDate = dateFormat.parse(jTextField3.getText());
+                    expiryDate = new java.sql.Date(utilExpiryDate.getTime());
+
+                    utilImportDate = dateFormat.parse(jTextField4.getText());
+                    importDate = new java.sql.Date(utilImportDate.getTime());
+                } catch (ParseException ex) {
+                    Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                quantities = Integer.parseInt(jTextField5.getText());
+                avaiQuantities = Integer.parseInt(jTextField6.getText());
+                BigDecimal unitPrice = new BigDecimal(jTextField7.getText());
+
+                if (Util.validateImportInput(manuDate, expiryDate, importDate, quantities, avaiQuantities, unitPrice)) {
+                    Import newImport = new Import(productId, manuDate, expiryDate, importDate,
+                            quantities, avaiQuantities, unitPrice);
+
+                    importList.add(newImport);
+
+                    // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
+                    controller_Import controller = new controller_Import();
+
                     try {
-                        productId = controller_Import.getProductId(productName);
-                        System.out.println(productId);
+                        controller.addImport(newImport);
+                        JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        refreshDetail();
                     } catch (SQLException ex) {
                         Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                    Date utilManuDate = null;
-                    Date utilExpiryDate = null;
-                    Date utilImportDate = null;
-
-                    java.sql.Date manuDate = null;
-                    java.sql.Date expiryDate = null;
-                    java.sql.Date importDate = null;
-                    try {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        utilManuDate = dateFormat.parse(jTextField2.getText());
-                        manuDate = new java.sql.Date(utilManuDate.getTime());
-
-                        utilExpiryDate = dateFormat.parse(jTextField3.getText());
-                        expiryDate = new java.sql.Date(utilExpiryDate.getTime());
-
-                        utilImportDate = dateFormat.parse(jTextField4.getText());
-                        importDate = new java.sql.Date(utilImportDate.getTime());
-                    } catch (ParseException ex) {
-                        Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    quantities = Integer.parseInt(jTextField5.getText());
-                    avaiQuantities = Integer.parseInt(jTextField6.getText());
-                    BigDecimal unitPrice = new BigDecimal(jTextField7.getText());
-
-                    if (Util.validateImportInput(manuDate, expiryDate, importDate, quantities, avaiQuantities, unitPrice)) {
-                        Import newImport = new Import(productId, manuDate, expiryDate, importDate,
-                                quantities, avaiQuantities, unitPrice);
-
-                        importList.add(newImport);
-
-                        // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
-                        controller_Import controller = new controller_Import();
-
-                        try {
-                            controller.addImport(newImport);
-                            JOptionPane.showMessageDialog(null, "Thêm mới thành công");
-                            refreshDetail();
-                        } catch (SQLException ex) {
-                            Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-
                 }
+
+            }
         }
-        }
+        //}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

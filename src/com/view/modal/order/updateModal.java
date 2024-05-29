@@ -101,7 +101,7 @@ public class updateModal extends javax.swing.JFrame {
                 int index = table.getSelectedRow();
                 if (cartList.get(index).getImportId()==-1) {
                     JOptionPane.showMessageDialog(null, "Bạn không thể thêm mới sản phẩm.Hãy xóa hóa đơn này và thêm lại",
-                        "Error", JOptionPane.WARNING_MESSAGE);
+                        "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                     cartList.get(index).setImportId(0);
                     model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
                     table.setEditingRow(0);
@@ -126,7 +126,7 @@ public class updateModal extends javax.swing.JFrame {
                     }
                     if (newQuantity < 0) {
                         JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0",
-                            "Error", JOptionPane.WARNING_MESSAGE);
+                            "Lỗi", JOptionPane.ERROR_MESSAGE);
                         model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
                         return; 
                     }
@@ -144,7 +144,7 @@ public class updateModal extends javax.swing.JFrame {
                     else{
                         JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn số lượng khả dụng trong kho cho đơn nhập sản phẩm này" 
                                 + " (" + String.valueOf(importList.get(importIndex).getAvailableQuantity()) + ")",
-                            "Error", JOptionPane.WARNING_MESSAGE);
+                            "Lỗi", JOptionPane.ERROR_MESSAGE);
                         model.setValueAt(Integer.toString(cartList.get(index).getQuantity()), index, 1);
                         return;                        
                     }
@@ -152,7 +152,7 @@ public class updateModal extends javax.swing.JFrame {
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Hãy chọn dòng bạn muốn thay đổi!",
-                        "Error", JOptionPane.WARNING_MESSAGE);
+                        "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                     return;                    
                     }
 
@@ -884,7 +884,7 @@ public class updateModal extends javax.swing.JFrame {
     private void txtSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubmitActionPerformed
         if (table.getRowCount() <= 0){
             JOptionPane.showMessageDialog(null, "Bạn không thể tạo hóa đơn trống",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn chỉnh sửa hóa đơn này?", "Alert",
@@ -951,7 +951,7 @@ public class updateModal extends javax.swing.JFrame {
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         if(!validator.isNumber(this.txtQuantity.getText())){
             JOptionPane.showMessageDialog(null, "Phải là ký tự số! Vui lòng nhập lại!",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Lỗi", JOptionPane.ERROR_MESSAGE);
             this.txtQuantity.requestFocusInWindow();
             this.txtQuantity.selectAll();
             return;
@@ -968,7 +968,7 @@ public class updateModal extends javax.swing.JFrame {
         }
         if (this.txtQuantity.getText().equals("0")){
             JOptionPane.showMessageDialog(null, "Sản phẩm này đã hết hàng",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -1006,7 +1006,7 @@ public class updateModal extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Không thể xóa hóa đơn tồn tại!",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -1026,14 +1026,14 @@ public class updateModal extends javax.swing.JFrame {
             Product tmp = productList.get(index);
             if(currentQuantity > tmp.getAvailability()){
                 JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn số lượng khả dụng trong kho",
-                "Error", JOptionPane.WARNING_MESSAGE);
+                "Lỗi", JOptionPane.ERROR_MESSAGE);
                 this.txtQuantity.setText(Integer.toString(tmp.getAvailability()));
                 return;
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Phải là ký tự số!Nhập lại!",
-            "Error", JOptionPane.WARNING_MESSAGE);
+            "Lỗi", JOptionPane.ERROR_MESSAGE);
             this.txtQuantity.requestFocusInWindow();
             this.txtQuantity.selectAll();
         }

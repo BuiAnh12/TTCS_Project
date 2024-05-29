@@ -25,7 +25,7 @@ public class updateModal extends javax.swing.JFrame {
     private int totalAmount;
     private controller_Customer controller = new controller_Customer();
 
-     private void centerFrameOnScreen() {
+    private void centerFrameOnScreen() {
         // Get the dimension of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -36,7 +36,7 @@ public class updateModal extends javax.swing.JFrame {
         // Set the location of the frame
         setLocation(x, y);
     }
-     
+
     public updateModal() {
         initComponents();
         centerFrameOnScreen();
@@ -197,20 +197,23 @@ public class updateModal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField1.getText();
-        String email = jTextField2.getText();
-        String address = jTextField3.getText();
-        Customer cus = new Customer(idCus, name, email, address, totalAmount);
-        if (Util.validateCustomerInput(name, email, address)) {
-            try {
-                controller.editCustomer(cus);
-                JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
-                dispose();
-            } catch (SQLException ex) {
-                Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+        int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật khách hàng này?", "Alert",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            String name = jTextField1.getText();
+            String email = jTextField2.getText();
+            String address = jTextField3.getText();
+            Customer cus = new Customer(idCus, name, email, address, totalAmount);
+            if (Util.validateCustomerInput(name, email, address)) {
+                try {
+                    controller.editCustomer(cus);
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

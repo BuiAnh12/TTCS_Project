@@ -125,7 +125,7 @@ public class importForm extends javax.swing.JPanel {
             } else if (tmp.getAvailableQuantity() == 0) {
                 statusType = statusType.OUT_OF_STOCK;
             }
-            table.addRow(new Object[]{tmp.getImportId(),tmp.getProductName(), tmp.getImportQuantity(), tmp.getAvailableQuantity(), statusType});
+            table.addRow(new Object[]{tmp.getImportId(), tmp.getProductName(), tmp.getImportQuantity(), tmp.getAvailableQuantity(), statusType});
         }
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
@@ -1054,7 +1054,7 @@ public class importForm extends javax.swing.JPanel {
             openUpdateForm();
             um.setDataImport(selectedImport);
         } else {
-            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần cập nhật!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
 
 //        refreshDetail();
@@ -1103,41 +1103,41 @@ public class importForm extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCategoryActionPerformed
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
-        if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần hoàn tác!");
-        } else {
-            if (im == null) {
-                if (this.previlege == 1) {
-                    JOptionPane.showMessageDialog(null, "Bạn không có quyền để thực hiện điều này!",
-                            "Xác thực", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                im = new insertModal();
-                im.setVisible(true);
-                im.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        im = null; //// Đặt lại thành null khi cửa sổ đóng
-                        refreshTable();
-                    }
-                });
-            } else {
-                im.toFront();
+        //if (table.getSelectedRow() < 0) {
+        //JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần hoàn tác!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        //} else {
+        if (im == null) {
+            if (this.previlege == 1) {
+                JOptionPane.showMessageDialog(null, "Bạn không có quyền để thực hiện điều này!",
+                        "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
             }
+            im = new insertModal();
+            im.setVisible(true);
+            im.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    refreshTable();
+                }
+            });
+        } else {
+            im.toFront();
         }
+        //}
     }//GEN-LAST:event_insertBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần xóa!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             if (this.previlege == 1) {
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền dể thực hiện điều này!",
-                        "Xác thực", JOptionPane.WARNING_MESSAGE);
+                        "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if (table.getSelectedRow() < 0) {
-                JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần xóa!");
+                JOptionPane.showMessageDialog(null, "Hãy chọn đơn nhập cần xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             } else {
                 int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa đơn nhập này không?", "Thông báo",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -1146,7 +1146,7 @@ public class importForm extends javax.swing.JPanel {
                         controller.deleteImport(selectedImport.getImportId());
                         refreshTable();
                         refreshDetail();
-                        JOptionPane.showMessageDialog(null, "Xóa thành công!");
+                        JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     } catch (SQLException ex) {
                         Logger.getLogger(importForm.class.getName()).log(Level.SEVERE, null, ex);
                     }

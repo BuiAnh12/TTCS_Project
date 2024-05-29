@@ -790,7 +790,7 @@ public class orderForm extends javax.swing.JPanel {
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng cần trả lại!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng cần trả lại!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn trả hàng của hóa đơn này?", "Alert",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -833,7 +833,7 @@ public class orderForm extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng cần xóa!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng cần xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa hóa đơn này?", "Alert",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -857,7 +857,7 @@ public class orderForm extends javax.swing.JPanel {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng cần cập nhật!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn đơn hàng cần cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             if (um==null) {
                 int selectedIndex = table.getSelectedRow();
@@ -902,7 +902,7 @@ public class orderForm extends javax.swing.JPanel {
             cm.toFront();
         }
         } else {
-            JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn để in", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Hãy chọn hóa đơn để in!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnPrintActionPerformed
 

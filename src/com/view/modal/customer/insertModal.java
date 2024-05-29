@@ -208,7 +208,7 @@ public class insertModal extends javax.swing.JFrame {
             if (Util.validateCustomerInput(customerName, customerEmail, customerAddress)) {
                 try {
                     controller.addCustomer(newCustomer);
-                    JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+                    JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     jTextField1.setText("");
                     jTextField2.setText("");
                     jTextField3.setText("");

@@ -133,16 +133,16 @@ public class customerMoney extends javax.swing.JFrame {
         }
         try {
             if (cusMoney.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Số tiền không được để trống!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Số tiền không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else if (Double.valueOf(cusMoney.getText()) < totalMoney) {
-                JOptionPane.showMessageDialog(null, "Số tiền phải lớn hơn tổng tiền của hóa đơn!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Số tiền phải lớn hơn tổng tiền của hóa đơn!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } else {
                 double moneyValue = Double.parseDouble(cusMoney.getText());
                 printInvoice pi = new printInvoice(invoiceId, moneyValue);
+                this.dispose();
             }
         } catch (NumberFormatException e) {
-            System.out.println("lỗi tiền");
-            JOptionPane.showMessageDialog(null, "Số tiền phải là một số hợp lệ!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Số tiền phải là một số hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

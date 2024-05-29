@@ -6,6 +6,7 @@ package com.view.modal.customer;
 
 import com.controller.controller_Customer;
 import com.model.Customer;
+import com.util.Util;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -22,8 +23,8 @@ public class insertModalCustomer extends javax.swing.JFrame {
 
     public boolean isUpdate = false;
     private List<Customer> customerList = new ArrayList<>();
-    
-     private void centerFrameOnScreen() {
+
+    private void centerFrameOnScreen() {
         // Get the dimension of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -34,7 +35,7 @@ public class insertModalCustomer extends javax.swing.JFrame {
         // Set the location of the frame
         setLocation(x, y);
     }
-     
+
     public insertModalCustomer() {
         initComponents();
         centerFrameOnScreen();
@@ -194,29 +195,32 @@ public class insertModalCustomer extends javax.swing.JFrame {
             String customerEmail = jTextField2.getText();
             String customerAddress = jTextField3.getText();
             // Kiểm tra ràng buộc không được để trống
-            if (customerName.isEmpty() || customerEmail.isEmpty() || customerAddress.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Không được để trống !", "Error", JOptionPane.ERROR_MESSAGE);
+            //if (customerName.isEmpty() || customerEmail.isEmpty() || customerAddress.isEmpty()) {
+            //JOptionPane.showMessageDialog(null, "Không được để trống !", "Error", JOptionPane.ERROR_MESSAGE);
+            //}
+            if (Util.validateCustomerInput(customerName, customerEmail, customerAddress)) {
 
+                // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
+                Customer newCustomer = new Customer(customerList.size() + 1, customerName, customerEmail, customerAddress, 0);
+
+                // Thêm vào danh sách khách hàng và cập nhật bảng
+                customerList.add(newCustomer);
+
+                // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
+                // saveToDatabase(newCustomer);
+                controller_Customer controller = new controller_Customer();
+                try {
+                    controller.addCustomer(newCustomer);
+                    JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    this.isUpdate = true;
+                    jTextField1.setText("");
+                    jTextField2.setText("");
+                    jTextField3.setText("");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
-            // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
-            Customer newCustomer = new Customer(customerList.size() + 1, customerName, customerEmail, customerAddress, 0);
 
-            // Thêm vào danh sách khách hàng và cập nhật bảng
-            customerList.add(newCustomer);
-
-            // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
-            // saveToDatabase(newCustomer);
-            controller_Customer controller = new controller_Customer();
-            try {
-                controller.addCustomer(newCustomer);
-                JOptionPane.showMessageDialog(null, "Thêm thành công");
-                this.isUpdate = true;
-                jTextField1.setText("");
-                jTextField2.setText("");
-                jTextField3.setText("");
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

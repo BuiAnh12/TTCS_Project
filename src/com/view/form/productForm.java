@@ -621,7 +621,7 @@ public class productForm extends javax.swing.JPanel {
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
         if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "Bạn không có quyền thực hiện điều này!",
-                    "Xác thực", JOptionPane.WARNING_MESSAGE);
+                    "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -662,11 +662,11 @@ public class productForm extends javax.swing.JPanel {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "Bạn không có quyền thực hiện điều này!",
-                    "Xác thực", JOptionPane.WARNING_MESSAGE);
+                    "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (table.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null, "Hãy chọn sản phẩm muốn xóa!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn sản phẩm muốn xóa!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int row = table.getSelectedRow();
@@ -674,16 +674,15 @@ public class productForm extends javax.swing.JPanel {
             controller_Product controller = new controller_Product();
             int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn xóa sản phẩm này không?", "Alert",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(response==JOptionPane.YES_OPTION){
-                 try {
-                controller.deleteProduct(selectedProduct.getProductId());
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    controller.deleteProduct(selectedProduct.getProductId());
+                    JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 } catch (SQLException ex) {
                     Logger.getLogger(productForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } 
-           
+            }
             refreshTable();
-            JOptionPane.showMessageDialog(null, "Xóa thành công!");
             refreshDetail();
         }
 
@@ -692,14 +691,14 @@ public class productForm extends javax.swing.JPanel {
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         if (this.previlege == 1) {
             JOptionPane.showMessageDialog(null, "Bạn không có quyền thực hiện điều này!",
-                    "Xác thực", JOptionPane.WARNING_MESSAGE);
+                    "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
         if (table.getSelectedRow() > -1) {
             openUpdateForm();
             um.setDataProduct(selectedProduct);
         } else {
-            JOptionPane.showMessageDialog(null, "Hãy chọn sản phẩm muốn cập nhật!");
+            JOptionPane.showMessageDialog(null, "Hãy chọn sản phẩm muốn cập nhật!", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_updateBtnActionPerformed
