@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.Types;
 import javax.swing.JOptionPane;
 
 public class controller_Customer {
@@ -78,38 +79,55 @@ public class controller_Customer {
 
     }
 
-    public void addCustomer(Customer customer) throws SQLException {
+    public int addCustomer(Customer customer) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String sp = "{call AddCustomer(?,?,?)}";
+        String sp = "{call AddCustomer(?,?,?,?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(sp);
-            pre.setString(1, customer.getCustomerName());
-            pre.setString(2, customer.getEmail());
-            pre.setString(3, customer.getAddress());
-            int tmp = pre.executeUpdate();
-            pre.close();
-            cnn.close();
+            CallableStatement cs = cnn.prepareCall(sp);
+            cs.setString(1, customer.getCustomerName());
+            cs.setString(2, customer.getEmail());
+            cs.setString(3, customer.getAddress());
+            // Đăng ký tham số output
+            cs.registerOutParameter(4, Types.INTEGER);
+
+            int rowsAffected = cs.executeUpdate();
+
+            // Lấy giá trị trả về từ thủ tục lưu trữ
+            int returnValue = cs.getInt(4);
+
+            return returnValue;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return 0;
         }
     }
 
     //
-    public void editCustomer(Customer customer) throws SQLException {
+    public int editCustomer(Customer customer) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
 
-        String sp = "{call EditCustomer(?,?,?,?)}";
+        String sp = "{call EditCustomer(?,?,?,?,?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(sp);
-            pre.setString(2, customer.getCustomerName());
-            pre.setString(3, customer.getEmail());
-            pre.setString(4, customer.getAddress());
-            pre.setInt(1, customer.getCustomerId());
-            int tmp = pre.executeUpdate();
-            pre.close();
+            CallableStatement cs = cnn.prepareCall(sp);
+            cs.setString(2, customer.getCustomerName());
+            cs.setString(3, customer.getEmail());
+            cs.setString(4, customer.getAddress());
+            cs.setInt(1, customer.getCustomerId());
+            // Đăng ký tham số output
+            cs.registerOutParameter(5, Types.INTEGER);
+
+            int rowsAffected = cs.executeUpdate();
+
+            // Lấy giá trị trả về từ thủ tục lưu trữ
+            int returnValue = cs.getInt(5);
+
+            cs.close();
             cnn.close();
+            
+            return returnValue;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return 0;
         }
     }
 

@@ -28,17 +28,19 @@ public class insertModal extends javax.swing.JFrame {
      */
     private List<Staff> staffList = new ArrayList<>();
     controller_Staff controller = new controller_Staff();
+
     private void centerFrameOnScreen() {
-           // Get the dimension of the screen
-           Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Get the dimension of the screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-           // Calculate the coordinates for the top-left corner of the frame
-           int x = (screenSize.width - getWidth()) / 2;
-           int y = (screenSize.height - getHeight()) / 2;
+        // Calculate the coordinates for the top-left corner of the frame
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
 
-           // Set the location of the frame
-           setLocation(x, y);
-       }
+        // Set the location of the frame
+        setLocation(x, y);
+    }
+
     public insertModal() {
         initComponents();
         centerFrameOnScreen();
@@ -267,6 +269,7 @@ public class insertModal extends javax.swing.JFrame {
 
             // Kiểm tra ràng buộc không được để trống
             if (Util.validateStaffInput(name, age, email, address, username, password)) {
+
                 // Tạo một đối tượng Customer từ thông tin vừa nhập với totalAmount mặc định là 0
                 Staff newStaff = new Staff(staffList.size() + 1, name, age, email, address, username, password, accpreNum);
 
@@ -276,15 +279,28 @@ public class insertModal extends javax.swing.JFrame {
                 // Lưu vào cơ sở dữ liệu hoặc thực hiện các hành động khác theo yêu cầu của bạn
                 // saveToDatabase(newCustomer);
                 try {
-                    controller.addStaff(newStaff);
-                    JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
-                    jTextField4.setText("");
-                    jTextField5.setText("");
-                    jTextField6.setText("");
-                    combAccPre.setSelectedIndex(0);
+                    int result = controller.addStaff(newStaff);
+                    System.out.println(result);
+                    switch (result) {
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Email đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case -2:
+                            JOptionPane.showMessageDialog(null, "Username đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            jTextField1.setText("");
+                            jTextField2.setText("");
+                            jTextField3.setText("");
+                            jTextField4.setText("");
+                            jTextField5.setText("");
+                            jTextField6.setText("");
+                            combAccPre.setSelectedIndex(0);
+                            break;
+                        default:
+                            break;
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(insertModal.class.getName()).log(Level.SEVERE, null, ex);
                 }

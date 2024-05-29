@@ -206,9 +206,19 @@ public class updateModal extends javax.swing.JFrame {
             Customer cus = new Customer(idCus, name, email, address, totalAmount);
             if (Util.validateCustomerInput(name, email, address)) {
                 try {
-                    controller.editCustomer(cus);
-                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
+                    int result = controller.editCustomer(cus);
+                    switch (result) {
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Email đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            break;
+                        default:
+                            break;
+                    }
+
                 } catch (SQLException ex) {
                     Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
                 }

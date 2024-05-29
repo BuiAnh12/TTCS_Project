@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
+import java.sql.Types;
 
 public class controller_Staff {
 
@@ -42,42 +44,61 @@ public class controller_Staff {
         return staffs;
     }
 
-    public void addStaff(Staff staff) throws SQLException {
+    public int addStaff(Staff staff) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String sp = "{call AddStaff(?,?,?,?,?,?,?)}";
+        String sp = "{call AddStaff(?,?,?,?,?,?,?,?)}"; // Thêm một tham số output
         try {
-            PreparedStatement pre = cnn.prepareStatement(sp);
-            pre.setString(1, staff.getName());
-            pre.setInt(2, staff.getAge());
-            pre.setString(3, staff.getEmail());
-            pre.setString(4, staff.getAddress());
-            pre.setString(5, staff.getUsername());
-            pre.setString(6, staff.getPassword());
-            pre.setInt(7, staff.getPrevilege());
-            int tmp = pre.executeUpdate();
-        } catch (Exception ex) {
+            CallableStatement cs = cnn.prepareCall(sp);
+            cs.setString(1, staff.getName());
+            cs.setInt(2, staff.getAge());
+            cs.setString(3, staff.getEmail());
+            cs.setString(4, staff.getAddress());
+            cs.setString(5, staff.getUsername());
+            cs.setString(6, staff.getPassword());
+            cs.setInt(7, staff.getPrevilege());
+
+            // Đăng ký tham số output
+            cs.registerOutParameter(8, Types.INTEGER);
+
+            int rowsAffected = cs.executeUpdate();
+
+            // Lấy giá trị trả về từ thủ tục lưu trữ
+            int returnValue = cs.getInt(8);
+
+            return returnValue;
+        } catch (SQLException ex) {
             ex.printStackTrace();
+            return 0;
         }
     }
 
-    public void editStaff(Staff staff) throws SQLException {
+    public int editStaff(Staff staff) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
 
-        String sp = "{call EditStaff(?,?,?,?,?,?,?,?)}";
+        String sp = "{call EditStaff(?,?,?,?,?,?,?,?,?)}";
         try {
-            PreparedStatement pre = cnn.prepareStatement(sp);
-            pre.setInt(1, staff.getStaffId());
-            pre.setString(2, staff.getName());
-            pre.setInt(3, staff.getAge());
-            pre.setString(4, staff.getEmail());
-            pre.setString(5, staff.getAddress());
-            pre.setInt(6, staff.getPrevilege());
-            pre.setString(7, staff.getUsername());
-            pre.setString(8, staff.getPassword());
+            CallableStatement cs = cnn.prepareCall(sp);
+            cs.setInt(1, staff.getStaffId());
+            cs.setString(2, staff.getName());
+            cs.setInt(3, staff.getAge());
+            cs.setString(4, staff.getEmail());
+            cs.setString(5, staff.getAddress());
+            cs.setInt(6, staff.getPrevilege());
+            cs.setString(7, staff.getUsername());
+            cs.setString(8, staff.getPassword());
 
-            int tmp = pre.executeUpdate();
+            // Đăng ký tham số output
+            cs.registerOutParameter(8, Types.INTEGER);
+
+            int rowsAffected = cs.executeUpdate();
+
+            // Lấy giá trị trả về từ thủ tục lưu trữ
+            int returnValue = cs.getInt(8);
+
+            return returnValue;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return 0;
         }
     }
 

@@ -26,7 +26,7 @@ public class insertModal extends javax.swing.JFrame {
      */
     private List<Customer> customerList = new ArrayList<>();
 
-      private void centerFrameOnScreen() {
+    private void centerFrameOnScreen() {
         // Get the dimension of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -37,6 +37,7 @@ public class insertModal extends javax.swing.JFrame {
         // Set the location of the frame
         setLocation(x, y);
     }
+
     public insertModal() {
         initComponents();
         centerFrameOnScreen();
@@ -207,16 +208,25 @@ public class insertModal extends javax.swing.JFrame {
             controller_Customer controller = new controller_Customer();
             if (Util.validateCustomerInput(customerName, customerEmail, customerAddress)) {
                 try {
-                    controller.addCustomer(newCustomer);
-                    JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
+                    int result = controller.addCustomer(newCustomer);
+                    switch (result) {
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Email đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            jTextField1.setText("");
+                            jTextField2.setText("");
+                            jTextField3.setText("");
+                            break;
+                        default:
+                            break;
+                    }
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }
-
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

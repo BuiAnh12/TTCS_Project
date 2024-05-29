@@ -210,12 +210,20 @@ public class insertModalCustomer extends javax.swing.JFrame {
                 // saveToDatabase(newCustomer);
                 controller_Customer controller = new controller_Customer();
                 try {
-                    controller.addCustomer(newCustomer);
-                    JOptionPane.showMessageDialog(null, "Thêm thành công");
-                    this.isUpdate = true;
-                    jTextField1.setText("");
-                    jTextField2.setText("");
-                    jTextField3.setText("");
+                    int result = controller.addCustomer(newCustomer);
+                    switch (result) {
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Email đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Thêm mới thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            jTextField1.setText("");
+                            jTextField2.setText("");
+                            jTextField3.setText("");
+                            break;
+                        default:
+                            break;
+                    }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

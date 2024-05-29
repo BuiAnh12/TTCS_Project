@@ -278,9 +278,27 @@ public class updateModal extends javax.swing.JFrame {
                 Staff staff = new Staff(staffId, name, age, email, address, username, password, accpreNum);
                 controller_Staff controller = new controller_Staff();
                 try {
-                    controller.editStaff(staff);
-                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
+                    int result = controller.editStaff(staff);
+                    switch (result) {
+                        case -1:
+                            JOptionPane.showMessageDialog(null, "Email đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case -2:
+                            JOptionPane.showMessageDialog(null, "Username đã tồn tại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case 1:
+                            JOptionPane.showMessageDialog(null, "Cập nhật thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            jTextField1.setText("");
+                            jTextField2.setText("");
+                            jTextField3.setText("");
+                            jTextField4.setText("");
+                            jTextField5.setText("");
+                            jTextField6.setText("");
+                            combAccPre.setSelectedIndex(0);
+                            break;
+                        default:
+                            break;
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(updateModal.class.getName()).log(Level.SEVERE, null, ex);
                 }
