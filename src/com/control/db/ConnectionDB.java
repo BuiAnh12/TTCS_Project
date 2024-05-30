@@ -33,7 +33,7 @@ public class ConnectionDB {
         }
     }
 }
-// Tom conection
+// Tom-An conection
 //            String url = "jdbc:sqlserver://localhost:1433;databaseName=DOAN_PHANBON;encrypt=true;trustServerCertificate=true";
 //            String user = "sa";
 //            String password = "123";

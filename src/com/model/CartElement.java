@@ -49,7 +49,7 @@ public class CartElement {
         this.importId = -1;
     }
 
-    
+    // Getter - Setter
 
     public int getImportId() {
         return importId;
@@ -67,8 +67,6 @@ public class CartElement {
         this.unitPrice = unitPrice;
     }
     
-    
-    
     public int getInvoiceItemId() {
         return InvoiceItemId;
     }
@@ -84,11 +82,6 @@ public class CartElement {
     public void setPreviousQuantity(int previousQuantity) {
         this.previousQuantity = previousQuantity;
     }
-    
-    
-    
-    
-    
     
     public int getProductId() {
         return productId;

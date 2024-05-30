@@ -3,7 +3,6 @@ import com.control.db.ConnectionDB;
 import com.model.Staff;
 import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -20,7 +19,7 @@ public class controller_Account {
     }
     
     
-        private boolean checkCredentials(String username, String password) throws SQLException {
+    private boolean checkCredentials(String username, String password) throws SQLException {
         Connection cnn = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

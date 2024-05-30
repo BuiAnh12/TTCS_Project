@@ -9,6 +9,8 @@ public class Account {
         instance = this;
     }
     
+    // Getter - Setter
+    
     public void setUserAccount(Staff staff){
         this.userAccount = staff;
     }
@@ -36,9 +38,5 @@ public class Account {
         }
         return instance;
     }
-     
-    
-    
-    
     
 }

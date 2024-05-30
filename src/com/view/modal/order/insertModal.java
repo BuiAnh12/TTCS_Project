@@ -16,20 +16,15 @@ import com.model.Staff;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JFrame;
-import com.view.modal.customer.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import com.control.validate.CommonValidation;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.sql.Timestamp;
 
 public class insertModal extends javax.swing.JFrame {
     // Modal variable

@@ -16,13 +16,8 @@ import java.sql.PreparedStatement;
 
 public class controller_Product {
     public List<Product> getAllAvailableProduct() throws SQLException {
+        // Get all available product for invoice
         List<Product> products =new ArrayList<>();
-        
-//         String query="select distinct p.*, sum(i.AvailableQuantity) as totalAmount" +
-//                " from Products p" +
-//                " join Imports i on p.ProductId = i.ProductId" +
-//                " where i.AvailableQuantity > 0" +
-//                " group by p.ProductId, p.Category, p.Description, p.Manufacturer, p.ProductName, p.Flag,p.SellPrice;";
          try{
                 Connection cnn=ConnectionDB.getConnection();
                 CallableStatement  statement = cnn.prepareCall("{call getAllAvailableProduct}");
@@ -151,7 +146,6 @@ public class controller_Product {
             cnn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle the SQL exception (show a message dialog, log the error, etc.)
         }
         return products;
     }

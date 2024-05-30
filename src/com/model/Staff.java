@@ -8,6 +8,7 @@ public class Staff {
     private String username;
     private String password;
     private int previlege;
+    
     // 1: Staff - 2: Stock - 3: Admin
     
     public Staff(int staffId, String name,String email, String address,String position) {
@@ -64,8 +65,6 @@ public class Staff {
         this.password = "";
         this.previlege = 0;
     }
-    
-    
 
     public int getStaffId() {
         return staffId;

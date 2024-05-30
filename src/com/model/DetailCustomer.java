@@ -16,6 +16,7 @@ public class DetailCustomer {
         this.total = total;
     }
 
+    // Getter - Setter
     
     public String getProductName() {
         return productName;

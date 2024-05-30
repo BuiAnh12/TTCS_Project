@@ -7,13 +7,9 @@ import com.view.modal.product.updateModal;
 import com.view.swing.ScrollBar;
 import java.awt.Color;
 import java.util.List;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -386,11 +382,6 @@ public class productForm extends javax.swing.JPanel {
         txtName.setEditable(false);
         txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -606,12 +597,10 @@ public class productForm extends javax.swing.JPanel {
                 }
             }
         });
-//        refreshTable();
     }//GEN-LAST:event_txtSearch3KeyTyped
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
-//        refreshTable();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void sortComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortComboBoxActionPerformed
@@ -654,10 +643,6 @@ public class productForm extends javax.swing.JPanel {
             descriptionTxt.setText(selectedProduct.getDescription());
         }
     }//GEN-LAST:event_tableMouseClicked
-
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         if (this.previlege == 1) {

@@ -10,7 +10,6 @@ public class Import{
     private int importQuantity;
     private int availableQuantity;
     private BigDecimal unitPrice;
-//    private BigDecimal sellPrice;
     private String productName;
     private String category;
     
@@ -26,7 +25,6 @@ public class Import{
         this.importQuantity = importQuantity;
         this.availableQuantity = availableQuantity;
         this.unitPrice = unitPrice;
-//        this.sellPrice = sellPrice;
         this.productName=productName;
         this.category=category;
     }
@@ -40,7 +38,6 @@ public class Import{
         this.importQuantity = importQuantity;
         this.availableQuantity = availableQuantity;
         this.unitPrice = unitPrice;
-//        this.sellPrice = sellPrice;
     }
     
     public Import(int productId, Date manufacturingDate, Date expiryDate, Date importDate,int importQuantity, int availableQuantity, BigDecimal unitPrice) {
@@ -50,9 +47,7 @@ public class Import{
         this.importDate = importDate;
          this.importQuantity = importQuantity;
         this.availableQuantity = availableQuantity;
-        this.unitPrice = unitPrice;
-//        this.sellPrice = sellPrice;
-        
+        this.unitPrice = unitPrice;        
     }
     public Import( Date manufacturingDate, Date expiryDate, Date importDate,int importQuantity, int availableQuantity, BigDecimal unitPrice, BigDecimal sellPrice,int importId,int productId) {
         this.importId = importId;
@@ -63,10 +58,10 @@ public class Import{
          this.importQuantity = importQuantity;
         this.availableQuantity = availableQuantity;
         this.unitPrice = unitPrice;
-//        this.sellPrice = sellPrice;
         
     }
     
+    // Getter - Setter
 
     public String getCategory() {
         return category;
@@ -118,9 +113,6 @@ public class Import{
         return unitPrice;
     }
 
-//    public BigDecimal getSellPrice() {
-//        return sellPrice;
-//    }
 
     public void setImportId(int importId) {
         this.importId = importId;
@@ -154,9 +146,7 @@ public class Import{
         this.unitPrice = unitPrice;
     }
 
-//    public void setSellPrice(BigDecimal sellPrice) {
-//        this.sellPrice = sellPrice;
-//    }
+
     
 
 }

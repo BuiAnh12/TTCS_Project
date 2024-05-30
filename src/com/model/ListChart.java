@@ -10,6 +10,8 @@ public class ListChart {
         this.month = month;
         this.income = income;
     }
+    
+    // Getter - Setter
 
     public String getMonth() {
         return month;

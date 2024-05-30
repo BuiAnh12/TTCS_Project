@@ -13,7 +13,9 @@ public class Customer {
         this.address = address;
         this.TotalAmount =  TotalAmount;
     }
-
+    
+    // Getter - Setter
+    
     public int getCustomerId() {
         return customerId;
     }

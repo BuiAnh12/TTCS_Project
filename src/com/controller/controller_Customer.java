@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.Types;
-import javax.swing.JOptionPane;
 
 public class controller_Customer {
 
@@ -43,10 +42,7 @@ public class controller_Customer {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (Exception ex) {
-
-            ex.printStackTrace();
-        }
+        } 
         return customers;
     }
 
@@ -71,10 +67,7 @@ public class controller_Customer {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (Exception ex) {
-
-            ex.printStackTrace();
-        }
+        } 
         return null;
 
     }
@@ -177,7 +170,6 @@ public class controller_Customer {
             cnn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle the SQL exception (show a message dialog, log the error, etc.)
         }
         return customers;
     }
@@ -208,7 +200,6 @@ public class controller_Customer {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return details;
     }
 

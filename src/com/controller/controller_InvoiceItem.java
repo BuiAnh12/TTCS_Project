@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
+
 
 public class controller_InvoiceItem {
     public List<InvoiceItem> getAllInvoiceItems() throws SQLException {
@@ -39,7 +35,7 @@ public class controller_InvoiceItem {
             ex.printStackTrace();
         } finally {
             if (cnn != null) {
-                cnn.close(); // Close connection in finally block
+                cnn.close(); 
             }
         }
 
@@ -66,7 +62,7 @@ public class controller_InvoiceItem {
             System.out.println("fail");
         } finally {
             if (cnn != null) {
-                cnn.close(); // Close connection in finally block
+                cnn.close(); 
             }
         }
     }
@@ -88,10 +84,9 @@ public class controller_InvoiceItem {
             System.out.println("Update success");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle exception if needed
         } finally {
             if (cnn != null) {
-                cnn.close(); // Close connection in finally block
+                cnn.close();
             }
         }
     }
@@ -107,10 +102,10 @@ public class controller_InvoiceItem {
             System.out.println("Delete success");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle exception if needed
+            
         } finally {
             if (cnn != null) {
-                cnn.close(); // Close connection in finally block
+                cnn.close(); 
             }
         }
     }
@@ -127,10 +122,9 @@ public class controller_InvoiceItem {
             System.out.println("Delete success");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle exception if needed
         } finally {
             if (cnn != null) {
-                cnn.close(); // Close connection in finally block
+                cnn.close(); 
             }
         }
     }

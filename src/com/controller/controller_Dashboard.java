@@ -123,9 +123,7 @@ public class controller_Dashboard {
          }   
          catch(Exception ex){
              ex.printStackTrace();
-         } 
-         //Sort Array by year 
-         
+         }          
            Collections.sort(listChartYears, new Comparator<ListChartYear>() {
             @Override
             public int compare(ListChartYear obj1, ListChartYear obj2) {

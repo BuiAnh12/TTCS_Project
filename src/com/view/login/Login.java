@@ -136,19 +136,7 @@ public class Login extends javax.swing.JFrame {
                 dashboard.setAccount(loginAccount);
                 dashboard.setMenuPrevilege();
                 dashboard.reset();
-
-
-//                int privelge = control_account.getAccount().getPrevilege();
-//                dashboard.setPrivilege(privelge);
-//                dashboard.setMenuPrevilege(privelge);
-//                dashboard.setAccount(control_account.getAccount());
-//                dashboard.reset();
                 dashboard.setVisible(true);
-//                dashboard.repaint();
-                
-                
-                
-//                System.out.println(dashboard.getPrivilege());
                 
             } else {
                 System.out.println("Not Authorized");

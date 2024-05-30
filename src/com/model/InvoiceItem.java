@@ -17,20 +17,15 @@ public class InvoiceItem {
     public InvoiceItem(int invoiceItemId, int invoiceId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
         this.invoiceItemId = invoiceItemId;
         this.invoiceId = invoiceId;
-//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.profit = profit;
-        //this.createdAt = createdAt;
-        //this.updatedAt = updatedAt;
     }
-    // Add here 
 
     public InvoiceItem( int invoiceId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
         this.invoiceId = invoiceId;
-//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -39,7 +34,6 @@ public class InvoiceItem {
     }
     public InvoiceItem( int invoiceId, int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit,int invoiceItemId) {
         this.invoiceId = invoiceId;
-//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -48,7 +42,6 @@ public class InvoiceItem {
         this.invoiceItemId = invoiceItemId;
     }
     public InvoiceItem( int importId, BigDecimal unitPrice, int quantity, BigDecimal totalPrice, BigDecimal profit) {
-//        this.productId = productId;
         this.importId = importId;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
@@ -61,7 +54,9 @@ public class InvoiceItem {
         this.sellPrice = sellPrice;
         this.quantity = quantity;
     }
-
+    
+    // Getter - Setter
+    
     public BigDecimal getSellPrice() {
         return sellPrice;
     }
@@ -69,9 +64,6 @@ public class InvoiceItem {
     public void setSellPrice(BigDecimal sellPrice) {
         this.sellPrice = sellPrice;
     }
-    
-    
-    
 
     public int getInvoiceItemId() {
         return invoiceItemId;
@@ -80,10 +72,6 @@ public class InvoiceItem {
     public int getInvoiceId() {
         return invoiceId;
     }
-
-//    public int getProductId() {
-//        return productId;
-//    }
 
     public int getImportId() {
         return importId;
@@ -120,10 +108,6 @@ public class InvoiceItem {
     public void setInvoiceId(int invoiceId) {
         this.invoiceId = invoiceId;
     }
-
-//    public void setProductId(int productId) {
-//        this.productId = productId;
-//    }
 
     public void setImportId(int importId) {
         this.importId = importId;

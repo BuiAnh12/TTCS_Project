@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
+
 
 
 public class controller_Invoice {
@@ -60,7 +56,7 @@ public class controller_Invoice {
         try (CallableStatement statement = cnn.prepareCall(storedProcedure)) {
             statement.setInt(1, invoice.getCustomerId());
             statement.setInt(2, invoice.getStaffId());
-            statement.registerOutParameter(3, Types.INTEGER); // Register the output parameter for InvoiceId
+            statement.registerOutParameter(3, Types.INTEGER); 
 
             statement.executeUpdate();
 
@@ -68,10 +64,10 @@ public class controller_Invoice {
             int invoiceId = statement.getInt(3);
             return invoiceId;
         } catch (SQLException ex) {
-            ex.printStackTrace(); // Log the exception for debugging
+            ex.printStackTrace(); 
         }
 
-        return -1; // Return -1 indicating failure
+        return -1; 
     }
 
 
@@ -88,8 +84,8 @@ public class controller_Invoice {
 
             statement.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace(); // Log the exception or handle it appropriately
-            throw ex; // Re-throw the exception if necessary
+            ex.printStackTrace(); 
+            throw ex; 
         }
     }
 
@@ -106,7 +102,7 @@ public class controller_Invoice {
 
             statement.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace(); // Log the exception or handle it appropriately
+            ex.printStackTrace(); 
             throw ex; // Re-throw the exception if necessary
         }
     }
@@ -141,7 +137,7 @@ public class controller_Invoice {
             return null;
         } finally {
             if (cnn != null) {
-                cnn.close(); // Close connection in finally block
+                cnn.close(); 
             }
         }
     }

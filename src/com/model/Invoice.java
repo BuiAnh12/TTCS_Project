@@ -34,7 +34,9 @@ public class Invoice {
         this.purchaseDate = purchaseDate;
         this.updateDate = updateDate;
     }
-
+    
+    // Getter - Setter
+    
     public int getInvoiceId() {
         return invoiceId;
     }

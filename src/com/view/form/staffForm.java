@@ -6,24 +6,18 @@ import com.view.modal.staff.insertModal;
 import com.view.modal.staff.updateModal;
 import com.view.swing.ScrollBar;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
@@ -86,27 +80,6 @@ public class staffForm extends javax.swing.JPanel {
 
     public staffForm() {
         initComponents();
-
-        sortComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                // Lấy giá trị được chọn khi có sự kiện thay đổi
-//                String selectedValue = sortComboBox.getSelectedItem().toString(); 
-//                if (selectedValue.equals("Sort By Email")){
-//                   status=2;
-//                   refreshTable();
-//                }
-//                else if(selectedValue.equals("Sort By Position")){
-//                    status=3;
-//                    refreshTable();
-//                }
-//                else if(selectedValue.equals("Sort By Name")){
-//                    status=1;
-//                    refreshTable();
-//                }
-//               
-            }
-        });
 
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
@@ -877,7 +850,7 @@ public class staffForm extends javax.swing.JPanel {
             im.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    im = null; //// Đặt lại thành null khi cửa sổ đóng
+                    im = null; 
                     refreshTable();
                 }
             });

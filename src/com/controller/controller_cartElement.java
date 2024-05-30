@@ -4,7 +4,6 @@ package com.controller;
 
 import com.control.db.ConnectionDB;
 import com.model.CartElement;
-import com.model.Product;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

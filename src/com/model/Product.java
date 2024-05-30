@@ -21,8 +21,6 @@ public class Product {
         this.sellPrice = sellPrice;
     }
     
-    
-    
     public Product(int productId, String productName, String manufacturer, String description, String category, int availability) {
         this.productId = productId;
         this.productName = productName;
@@ -31,8 +29,6 @@ public class Product {
         this.category = category;
         this.availability = availability;
     }
-    
-    
 
     public Product(int productId, String productName, String manufacturer, String description, String category, BigDecimal sellPrice) {
         this.productId = productId;
@@ -42,6 +38,8 @@ public class Product {
         this.category = category;
         this.sellPrice = sellPrice;
     }
+    
+    // Getter - Setter
 
     public BigDecimal getSellPrice() {
         return sellPrice;
@@ -50,8 +48,6 @@ public class Product {
     public void setSellPrice(BigDecimal sellPrice) {
         this.sellPrice = sellPrice;
     }
-
-    
     
     public int getAvailability() {
         return availability;
@@ -60,8 +56,6 @@ public class Product {
     public void setAvailability(int availability) {
         this.availability = availability;
     }
-    
-    
 
     public int getProductId() {
         return productId;

@@ -7,11 +7,9 @@ package com.view.modal.product;
 import com.controller.controller_Product;
 import com.model.Product;
 import com.util.Util;
-import com.view.modal.customer.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -334,12 +332,8 @@ public class updateModal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật sản phẩm này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        //if(jTextField7.getText().equals("")||jTextField8.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")){
-        //JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
-        //}else{
         if (response == JOptionPane.YES_OPTION) {
             String name = jTextField7.getText();
             String manu = jTextField8.getText();

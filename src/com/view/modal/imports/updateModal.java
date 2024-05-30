@@ -124,7 +124,7 @@ public class updateModal extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ID Sản phẩm");
+        jLabel2.setText("Mã sản phẩm");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -281,9 +281,6 @@ public class updateModal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(null, "Bạn có muốn cập nhật đơn này?", "Alert",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        //if(jTextField7.getText().equals("")||jTextField2.getText().equals("")||jTextField3.getText().equals("")||jTextField4.getText().equals("")||jTextField5.getText().equals("")||jTextField6.getText().equals("")){
-        //    JOptionPane.showMessageDialog(null, "Không được để trống.", "Error", JOptionPane.ERROR_MESSAGE);
-        //}else{
         int quantities = Integer.parseInt(jTextField5.getText());
         int avaiQuantities = Integer.parseInt(jTextField6.getText());
         if (quantities < avaiQuantities) {
@@ -329,7 +326,6 @@ public class updateModal extends javax.swing.JFrame {
                 }
             }
         }
-        //}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

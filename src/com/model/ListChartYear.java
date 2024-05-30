@@ -11,6 +11,7 @@ public class ListChartYear {
         this.income = income;
     }
     
+    // Getter - Setter
     
     public int getYear() {
         return year;

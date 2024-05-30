@@ -46,7 +46,7 @@ public class controller_Staff {
 
     public int addStaff(Staff staff) throws SQLException {
         Connection cnn = ConnectionDB.getConnection();
-        String sp = "{call AddStaff(?,?,?,?,?,?,?,?)}"; // Thêm một tham số output
+        String sp = "{call AddStaff(?,?,?,?,?,?,?,?)}"; 
         try {
             CallableStatement cs = cnn.prepareCall(sp);
             cs.setString(1, staff.getName());
@@ -57,12 +57,10 @@ public class controller_Staff {
             cs.setString(6, staff.getPassword());
             cs.setInt(7, staff.getPrevilege());
 
-            // Đăng ký tham số output
             cs.registerOutParameter(8, Types.INTEGER);
 
             int rowsAffected = cs.executeUpdate();
 
-            // Lấy giá trị trả về từ thủ tục lưu trữ
             int returnValue = cs.getInt(8);
 
             return returnValue;
@@ -86,13 +84,10 @@ public class controller_Staff {
             cs.setInt(6, staff.getPrevilege());
             cs.setString(7, staff.getUsername());
             cs.setString(8, staff.getPassword());
-
-            // Đăng ký tham số output
             cs.registerOutParameter(8, Types.INTEGER);
 
             int rowsAffected = cs.executeUpdate();
 
-            // Lấy giá trị trả về từ thủ tục lưu trữ
             int returnValue = cs.getInt(8);
 
             return returnValue;
@@ -189,7 +184,6 @@ public class controller_Staff {
             cnn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            // Handle the SQL exception (show a message dialog, log the error, etc.)
         }
         return staffs;
     }

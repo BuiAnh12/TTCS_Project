@@ -8,56 +8,26 @@ import com.controller.controller_InvoiceItem;
 import com.controller.controller_cartElement;
 import com.model.CartElement;
 import com.model.Invoice;
-import com.model.InvoiceItem;
-import com.model.Product;
 import com.model.Staff;
 import com.view.modal.order.customerMoney;
 import com.view.modal.order.insertModal;
 import com.view.modal.order.updateModal;
 import com.view.swing.ScrollBar;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.text.SimpleDateFormat;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JFrame;
+
 
 public class orderForm extends javax.swing.JPanel {
     private insertModal im = null;
@@ -214,11 +184,6 @@ public class orderForm extends javax.swing.JPanel {
 
         txtSearch.setBackground(new java.awt.Color(36, 36, 36));
         txtSearch.setForeground(new java.awt.Color(255, 255, 255));
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtSearchKeyTyped(evt);
@@ -228,11 +193,6 @@ public class orderForm extends javax.swing.JPanel {
         jLabel2.setBackground(new java.awt.Color(22, 23, 23));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/view/icon/search.png"))); // NOI18N
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout PanelSearchLayout = new javax.swing.GroupLayout(PanelSearch);
         PanelSearch.setLayout(PanelSearchLayout);
@@ -462,11 +422,6 @@ public class orderForm extends javax.swing.JPanel {
         txtCustomerName.setEditable(false);
         txtCustomerName.setBackground(new java.awt.Color(255, 255, 255));
         txtCustomerName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerNameActionPerformed(evt);
-            }
-        });
 
         txtStaffName.setEditable(false);
         txtStaffName.setBackground(new java.awt.Color(255, 255, 255));
@@ -483,11 +438,6 @@ public class orderForm extends javax.swing.JPanel {
         totalAmountField.setEditable(false);
         totalAmountField.setBackground(new java.awt.Color(255, 255, 255));
         totalAmountField.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        totalAmountField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalAmountFieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -585,11 +535,6 @@ public class orderForm extends javax.swing.JPanel {
             }
         });
         tableDetail.setFont(new java.awt.Font("Sitka Small", 1, 13)); // NOI18N
-        tableDetail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableDetailMouseClicked(evt);
-            }
-        });
         detailSpTable.setViewportView(tableDetail);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -740,17 +685,9 @@ public class orderForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
         this.refreshtable();
     }//GEN-LAST:event_txtSearchKeyTyped
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-
-    }//GEN-LAST:event_jLabel2MouseClicked
 
     private void insertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertBtnActionPerformed
         if (im==null) {
@@ -762,7 +699,7 @@ public class orderForm extends javax.swing.JPanel {
                         public void windowClosed(WindowEvent e) {
                             im = null;
                             refreshtable();
-                            refreshDetail();//// Đặt lại thành null khi cửa sổ đóng
+                            refreshDetail();
                         }
                     });
             } else {
@@ -775,18 +712,6 @@ public class orderForm extends javax.swing.JPanel {
         int index = this.table.getSelectedRow() ;
         updateDetail(invoiceList.get(index));
     }//GEN-LAST:event_tableMouseClicked
-
-    private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCustomerNameActionPerformed
-
-    private void totalAmountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalAmountFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalAmountFieldActionPerformed
-
-    private void tableDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDetailMouseClicked
-
-    }//GEN-LAST:event_tableDetailMouseClicked
 
     private void returnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBtnActionPerformed
         if (table.getSelectedRow() < 0) {
@@ -870,7 +795,7 @@ public class orderForm extends javax.swing.JPanel {
                         public void windowClosed(WindowEvent e) {
                             um = null;
                             refreshtable();
-                            refreshDetail();//// Đặt lại thành null khi cửa sổ đóng
+                            refreshDetail();
                         }
                     });
             } else {
