@@ -84,11 +84,11 @@ public class controller_Staff {
             cs.setInt(6, staff.getPrevilege());
             cs.setString(7, staff.getUsername());
             cs.setString(8, staff.getPassword());
-            cs.registerOutParameter(8, Types.INTEGER);
+            cs.registerOutParameter(9, Types.INTEGER);
 
             int rowsAffected = cs.executeUpdate();
 
-            int returnValue = cs.getInt(8);
+            int returnValue = cs.getInt(9);
 
             return returnValue;
         } catch (Exception ex) {
